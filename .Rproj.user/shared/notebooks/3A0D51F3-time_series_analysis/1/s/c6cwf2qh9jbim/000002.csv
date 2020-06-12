@@ -1,0 +1,8 @@
+"0","## monthly mean temperature"
+"0","monthly.temperature = temperature %>% "
+"0","  group_by(month, year) %>% "
+"0","  summarise(sst = median(sst, na.rm = T))%>%"
+"0","  ungroup() %>% "
+"0","  arrange(year, month)"
+"0",""
+"0","monthly.temperature %>% FSA::headtail()"

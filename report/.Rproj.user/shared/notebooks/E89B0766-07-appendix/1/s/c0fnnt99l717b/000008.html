@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+<script src="lib/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="lib/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="lib/kePrint-0.0.1/kePrint.js"></script>
+
+</head>
+<body>
+<table class="table" style="font-size: 16px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">Sampled 100 observation of the fisheries catch in RUMAKI and Non--RUMAKI Areas between 2014 and 2018</caption>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> Year </th>
+   <th style="text-align:left;"> Zone </th>
+   <th style="text-align:left;"> Districts </th>
+   <th style="text-align:left;"> Family </th>
+   <th style="text-align:left;"> English Name </th>
+   <th style="text-align:left;"> Swahili Name </th>
+   <th style="text-align:left;"> Catch </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;vertical-align: middle !important;" rowspan="9"> 2014 </td>
+   <td style="text-align:left;width: .5in; vertical-align: middle !important;" rowspan="6"> OTHER </td>
+   <td style="text-align:left;width: .5in; "> Bagamoyo </td>
+   <td style="text-align:left;width: .5in; "> Hemiramphidae </td>
+   <td style="text-align:left;width: .5in; "> Hemiramphus far </td>
+   <td style="text-align:left;width: .5in; "> Chuchunge </td>
+   <td style="text-align:left;width: .5in; "> 27.5 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Bagamoyo </td>
+   <td style="text-align:left;width: .5in; "> Sphyraenidae </td>
+   <td style="text-align:left;width: .5in; "> Sphyraena obtusata </td>
+   <td style="text-align:left;width: .5in; "> Msusa, Mzia </td>
+   <td style="text-align:left;width: .5in; "> 44.3 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Ilala </td>
+   <td style="text-align:left;width: .5in; "> Penaeidae </td>
+   <td style="text-align:left;width: .5in; "> Penaeus Monodon </td>
+   <td style="text-align:left;width: .5in; "> Kamba mti </td>
+   <td style="text-align:left;width: .5in; "> 26.7 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kindondoni </td>
+   <td style="text-align:left;width: .5in; "> Siganidae </td>
+   <td style="text-align:left;width: .5in; "> Siganus Canaliculatus </td>
+   <td style="text-align:left;width: .5in; "> Tasi </td>
+   <td style="text-align:left;width: .5in; "> 179 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kindondoni </td>
+   <td style="text-align:left;width: .5in; "> Haemulidae </td>
+   <td style="text-align:left;width: .5in; "> Pomadasys multimaculatum </td>
+   <td style="text-align:left;width: .5in; "> Karamamba </td>
+   <td style="text-align:left;width: .5in; "> 0.2 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Muheza </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Mwatiko </td>
+   <td style="text-align:left;width: .5in; "> 16.1 </td>
+  </tr>
+  <tr>
+   
+   <td style="text-align:left;width: .5in; vertical-align: middle !important;" rowspan="3"> RUMAKI </td>
+   <td style="text-align:left;width: .5in; "> Kilwa </td>
+   <td style="text-align:left;width: .5in; "> Penaeidae </td>
+   <td style="text-align:left;width: .5in; "> Penaeus Monodon </td>
+   <td style="text-align:left;width: .5in; "> Kamba mti </td>
+   <td style="text-align:left;width: .5in; "> 14.2 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kilwa </td>
+   <td style="text-align:left;width: .5in; "> Ariidae </td>
+   <td style="text-align:left;width: .5in; "> Netuma thalassina </td>
+   <td style="text-align:left;width: .5in; "> Hongwe </td>
+   <td style="text-align:left;width: .5in; "> 0.6 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Rufiji </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Mwatiko </td>
+   <td style="text-align:left;width: .5in; "> 0.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;vertical-align: middle !important;" rowspan="12"> 2015 </td>
+   <td style="text-align:left;width: .5in; vertical-align: middle !important;" rowspan="8"> OTHER </td>
+   <td style="text-align:left;width: .5in; "> Kindondoni </td>
+   <td style="text-align:left;width: .5in; "> Caesionidae </td>
+   <td style="text-align:left;width: .5in; "> Caesio xanthonota </td>
+   <td style="text-align:left;width: .5in; "> Mbono </td>
+   <td style="text-align:left;width: .5in; "> 63.1 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi </td>
+   <td style="text-align:left;width: .5in; "> Hemiramphidae </td>
+   <td style="text-align:left;width: .5in; "> Hemiramphus far </td>
+   <td style="text-align:left;width: .5in; "> Chuchunge </td>
+   <td style="text-align:left;width: .5in; "> 11.3 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Muheza </td>
+   <td style="text-align:left;width: .5in; "> Istiophoridae </td>
+   <td style="text-align:left;width: .5in; "> Istiompax indica </td>
+   <td style="text-align:left;width: .5in; "> Samsuri </td>
+   <td style="text-align:left;width: .5in; "> 42 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Muheza </td>
+   <td style="text-align:left;width: .5in; "> Octopodidae </td>
+   <td style="text-align:left;width: .5in; "> Octopus cyanea </td>
+   <td style="text-align:left;width: .5in; "> Pweza </td>
+   <td style="text-align:left;width: .5in; "> 44 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Muheza </td>
+   <td style="text-align:left;width: .5in; "> Penaeidae </td>
+   <td style="text-align:left;width: .5in; "> Penaeus Monodon </td>
+   <td style="text-align:left;width: .5in; "> Kamba mti </td>
+   <td style="text-align:left;width: .5in; "> 5.9 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Tanga </td>
+   <td style="text-align:left;width: .5in; "> Scombridae(N) </td>
+   <td style="text-align:left;width: .5in; "> Scomberomorus plurilineatus </td>
+   <td style="text-align:left;width: .5in; "> Nguru- kanadi </td>
+   <td style="text-align:left;width: .5in; "> 67.5 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Tanga </td>
+   <td style="text-align:left;width: .5in; "> Rachycentridae </td>
+   <td style="text-align:left;width: .5in; "> Rachycentron canadum </td>
+   <td style="text-align:left;width: .5in; "> Songoro </td>
+   <td style="text-align:left;width: .5in; "> 76.6 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Temeke </td>
+   <td style="text-align:left;width: .5in; "> Carcharhinidae /Sharks </td>
+   <td style="text-align:left;width: .5in; "> Carcharhinus falciformis </td>
+   <td style="text-align:left;width: .5in; "> Papa </td>
+   <td style="text-align:left;width: .5in; "> 162.6 </td>
+  </tr>
+  <tr>
+   
+   <td style="text-align:left;width: .5in; vertical-align: middle !important;" rowspan="4"> RUMAKI </td>
+   <td style="text-align:left;width: .5in; "> Kilwa </td>
+   <td style="text-align:left;width: .5in; "> Mullidae </td>
+   <td style="text-align:left;width: .5in; "> Upeneus tragula </td>
+   <td style="text-align:left;width: .5in; "> Mkundaji </td>
+   <td style="text-align:left;width: .5in; "> 0.5 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mafia </td>
+   <td style="text-align:left;width: .5in; "> Acanthuridae </td>
+   <td style="text-align:left;width: .5in; "> Naso hexacanthus </td>
+   <td style="text-align:left;width: .5in; "> Puju </td>
+   <td style="text-align:left;width: .5in; "> 360 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mafia </td>
+   <td style="text-align:left;width: .5in; "> Chirocentridae </td>
+   <td style="text-align:left;width: .5in; "> Chirocentrus nudus </td>
+   <td style="text-align:left;width: .5in; "> Mkonge </td>
+   <td style="text-align:left;width: .5in; "> 66.2 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Rufiji </td>
+   <td style="text-align:left;width: .5in; "> Loliginidae </td>
+   <td style="text-align:left;width: .5in; "> Uroteuthis duvaucelii </td>
+   <td style="text-align:left;width: .5in; "> Ngisi </td>
+   <td style="text-align:left;width: .5in; "> 2.6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;vertical-align: middle !important;" rowspan="26"> 2016 </td>
+   <td style="text-align:left;width: .5in; vertical-align: middle !important;" rowspan="22"> OTHER </td>
+   <td style="text-align:left;width: .5in; "> Bagamoyo </td>
+   <td style="text-align:left;width: .5in; "> Rachycentridae </td>
+   <td style="text-align:left;width: .5in; "> Rachycentron canadum </td>
+   <td style="text-align:left;width: .5in; "> Songoro </td>
+   <td style="text-align:left;width: .5in; "> 52.54 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Ilala </td>
+   <td style="text-align:left;width: .5in; "> Hemiramphidae </td>
+   <td style="text-align:left;width: .5in; "> Hemiramphus far </td>
+   <td style="text-align:left;width: .5in; "> Chuchunge </td>
+   <td style="text-align:left;width: .5in; "> 187.24 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Ilala </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Mwatiko </td>
+   <td style="text-align:left;width: .5in; "> 219.14 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Ilala </td>
+   <td style="text-align:left;width: .5in; "> Rachycentridae </td>
+   <td style="text-align:left;width: .5in; "> Rachycentron canadum </td>
+   <td style="text-align:left;width: .5in; "> Songoro </td>
+   <td style="text-align:left;width: .5in; "> 87.74 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kindondoni </td>
+   <td style="text-align:left;width: .5in; "> Dasyatidae/ Rays </td>
+   <td style="text-align:left;width: .5in; "> Pastinachus sephen </td>
+   <td style="text-align:left;width: .5in; "> Taa usinga </td>
+   <td style="text-align:left;width: .5in; "> 155.94 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kindondoni </td>
+   <td style="text-align:left;width: .5in; "> Mugilidae </td>
+   <td style="text-align:left;width: .5in; "> Valamugil buchanani </td>
+   <td style="text-align:left;width: .5in; "> Mkizi </td>
+   <td style="text-align:left;width: .5in; "> 0.44 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi </td>
+   <td style="text-align:left;width: .5in; "> Octopodidae </td>
+   <td style="text-align:left;width: .5in; "> Octopus cyanea </td>
+   <td style="text-align:left;width: .5in; "> Pweza </td>
+   <td style="text-align:left;width: .5in; "> 59.7 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi Rural </td>
+   <td style="text-align:left;width: .5in; "> Clariidae </td>
+   <td style="text-align:left;width: .5in; "> clarias macrocephalus </td>
+   <td style="text-align:left;width: .5in; "> Kambale </td>
+   <td style="text-align:left;width: .5in; "> 6.93 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi Rural </td>
+   <td style="text-align:left;width: .5in; "> Acanthuridae </td>
+   <td style="text-align:left;width: .5in; "> Naso hexacanthus </td>
+   <td style="text-align:left;width: .5in; "> Puju </td>
+   <td style="text-align:left;width: .5in; "> 4.11 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi Rural </td>
+   <td style="text-align:left;width: .5in; "> Carcharhinidae /Sharks </td>
+   <td style="text-align:left;width: .5in; "> Carcharhinus falciformis </td>
+   <td style="text-align:left;width: .5in; "> Papa </td>
+   <td style="text-align:left;width: .5in; "> 103.23 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mkuranga </td>
+   <td style="text-align:left;width: .5in; "> Scombridae (v) </td>
+   <td style="text-align:left;width: .5in; "> Rastrelliger kanagurta </td>
+   <td style="text-align:left;width: .5in; "> Vibua </td>
+   <td style="text-align:left;width: .5in; "> 106.84 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mkuranga </td>
+   <td style="text-align:left;width: .5in; "> Mullidae </td>
+   <td style="text-align:left;width: .5in; "> Upeneus tragula </td>
+   <td style="text-align:left;width: .5in; "> Mkundaji </td>
+   <td style="text-align:left;width: .5in; "> 16.24 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mkuranga </td>
+   <td style="text-align:left;width: .5in; "> Ariidae </td>
+   <td style="text-align:left;width: .5in; "> Netuma thalassina </td>
+   <td style="text-align:left;width: .5in; "> Hongwe </td>
+   <td style="text-align:left;width: .5in; "> 286.74 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mkuranga </td>
+   <td style="text-align:left;width: .5in; "> Palinuridae </td>
+   <td style="text-align:left;width: .5in; "> Panulirus ornatus </td>
+   <td style="text-align:left;width: .5in; "> Kamba koche </td>
+   <td style="text-align:left;width: .5in; "> 9.64 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mkuranga </td>
+   <td style="text-align:left;width: .5in; "> Haemulidae </td>
+   <td style="text-align:left;width: .5in; "> Pomadasys multimaculatum </td>
+   <td style="text-align:left;width: .5in; "> Karamamba </td>
+   <td style="text-align:left;width: .5in; "> 0.74 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Muheza </td>
+   <td style="text-align:left;width: .5in; "> Scombridae(N) </td>
+   <td style="text-align:left;width: .5in; "> Scomberomorus plurilineatus </td>
+   <td style="text-align:left;width: .5in; "> Nguru- kanadi </td>
+   <td style="text-align:left;width: .5in; "> 59.64 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Pangani </td>
+   <td style="text-align:left;width: .5in; "> Loliginidae </td>
+   <td style="text-align:left;width: .5in; "> Uroteuthis duvaucelii </td>
+   <td style="text-align:left;width: .5in; "> Ngisi </td>
+   <td style="text-align:left;width: .5in; "> 5.84 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Pangani </td>
+   <td style="text-align:left;width: .5in; "> Haemulidae </td>
+   <td style="text-align:left;width: .5in; "> Pomadasys multimaculatum </td>
+   <td style="text-align:left;width: .5in; "> Karamamba </td>
+   <td style="text-align:left;width: .5in; "> 3.44 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Pangani </td>
+   <td style="text-align:left;width: .5in; "> Chirocentridae </td>
+   <td style="text-align:left;width: .5in; "> Chirocentrus nudus </td>
+   <td style="text-align:left;width: .5in; "> Mkonge </td>
+   <td style="text-align:left;width: .5in; "> 4.64 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Pangani </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Mwatiko </td>
+   <td style="text-align:left;width: .5in; "> 8.84 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Temeke </td>
+   <td style="text-align:left;width: .5in; "> Scombridae(J) / </td>
+   <td style="text-align:left;width: .5in; "> Gymnosarda unicolor </td>
+   <td style="text-align:left;width: .5in; "> Jodari </td>
+   <td style="text-align:left;width: .5in; "> 9.67 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Temeke </td>
+   <td style="text-align:left;width: .5in; "> Clariidae </td>
+   <td style="text-align:left;width: .5in; "> clarias macrocephalus </td>
+   <td style="text-align:left;width: .5in; "> Kambale </td>
+   <td style="text-align:left;width: .5in; "> 0.08 </td>
+  </tr>
+  <tr>
+   
+   <td style="text-align:left;width: .5in; vertical-align: middle !important;" rowspan="4"> RUMAKI </td>
+   <td style="text-align:left;width: .5in; "> Kibiti </td>
+   <td style="text-align:left;width: .5in; "> Istiophoridae </td>
+   <td style="text-align:left;width: .5in; "> Istiompax indica </td>
+   <td style="text-align:left;width: .5in; "> Samsuri </td>
+   <td style="text-align:left;width: .5in; "> 3.04 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kibiti </td>
+   <td style="text-align:left;width: .5in; "> Siganidae </td>
+   <td style="text-align:left;width: .5in; "> Siganus Canaliculatus </td>
+   <td style="text-align:left;width: .5in; "> Tasi </td>
+   <td style="text-align:left;width: .5in; "> 2.64 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kigamboni </td>
+   <td style="text-align:left;width: .5in; "> Carangidae </td>
+   <td style="text-align:left;width: .5in; "> carenx tille </td>
+   <td style="text-align:left;width: .5in; "> Karambizi </td>
+   <td style="text-align:left;width: .5in; "> 90.85 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mtwara Rural </td>
+   <td style="text-align:left;width: .5in; "> Sphyraenidae </td>
+   <td style="text-align:left;width: .5in; "> Sphyraena obtusata </td>
+   <td style="text-align:left;width: .5in; "> Msusa, Mzia </td>
+   <td style="text-align:left;width: .5in; "> 1.05 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;vertical-align: middle !important;" rowspan="23"> 2017 </td>
+   <td style="text-align:left;width: .5in; vertical-align: middle !important;" rowspan="14"> OTHER </td>
+   <td style="text-align:left;width: .5in; "> Bagamoyo </td>
+   <td style="text-align:left;width: .5in; "> Sphyraenidae </td>
+   <td style="text-align:left;width: .5in; "> Sphyraena obtusata </td>
+   <td style="text-align:left;width: .5in; "> Msusa, Mzia </td>
+   <td style="text-align:left;width: .5in; "> 84.19 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Bagamoyo </td>
+   <td style="text-align:left;width: .5in; "> Caesionidae </td>
+   <td style="text-align:left;width: .5in; "> Caesio xanthonota </td>
+   <td style="text-align:left;width: .5in; "> Mbono </td>
+   <td style="text-align:left;width: .5in; "> 101.19 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi Rural </td>
+   <td style="text-align:left;width: .5in; "> Carcharhinidae /Sharks </td>
+   <td style="text-align:left;width: .5in; "> Carcharhinus falciformis </td>
+   <td style="text-align:left;width: .5in; "> Papa </td>
+   <td style="text-align:left;width: .5in; "> 45.79 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi urban </td>
+   <td style="text-align:left;width: .5in; "> Rachycentridae </td>
+   <td style="text-align:left;width: .5in; "> Rachycentron canadum </td>
+   <td style="text-align:left;width: .5in; "> Songoro </td>
+   <td style="text-align:left;width: .5in; "> 4.2 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi urban </td>
+   <td style="text-align:left;width: .5in; "> Chirocentridae </td>
+   <td style="text-align:left;width: .5in; "> Chirocentrus nudus </td>
+   <td style="text-align:left;width: .5in; "> Mkonge </td>
+   <td style="text-align:left;width: .5in; "> 27.52 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi urban </td>
+   <td style="text-align:left;width: .5in; "> Siganidae </td>
+   <td style="text-align:left;width: .5in; "> Siganus Canaliculatus </td>
+   <td style="text-align:left;width: .5in; "> Tasi </td>
+   <td style="text-align:left;width: .5in; "> 189.12 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mkuranga </td>
+   <td style="text-align:left;width: .5in; "> Lethrinidae </td>
+   <td style="text-align:left;width: .5in; "> Lethrinus harak </td>
+   <td style="text-align:left;width: .5in; "> Changu doa </td>
+   <td style="text-align:left;width: .5in; "> 106.19 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Muheza </td>
+   <td style="text-align:left;width: .5in; "> Caesionidae </td>
+   <td style="text-align:left;width: .5in; "> Caesio xanthonota </td>
+   <td style="text-align:left;width: .5in; "> Mbono </td>
+   <td style="text-align:left;width: .5in; "> 4 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Muheza </td>
+   <td style="text-align:left;width: .5in; "> Haemulidae </td>
+   <td style="text-align:left;width: .5in; "> Pomadasys multimaculatum </td>
+   <td style="text-align:left;width: .5in; "> Karamamba </td>
+   <td style="text-align:left;width: .5in; "> 6.2 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Muheza </td>
+   <td style="text-align:left;width: .5in; "> Mullidae </td>
+   <td style="text-align:left;width: .5in; "> Upeneus tragula </td>
+   <td style="text-align:left;width: .5in; "> Mkundaji </td>
+   <td style="text-align:left;width: .5in; "> 5 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Pangani </td>
+   <td style="text-align:left;width: .5in; "> Chirocentridae </td>
+   <td style="text-align:left;width: .5in; "> Chirocentrus nudus </td>
+   <td style="text-align:left;width: .5in; "> Mkonge </td>
+   <td style="text-align:left;width: .5in; "> 5.2 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Pangani </td>
+   <td style="text-align:left;width: .5in; "> Clariidae </td>
+   <td style="text-align:left;width: .5in; "> clarias macrocephalus </td>
+   <td style="text-align:left;width: .5in; "> Kambale </td>
+   <td style="text-align:left;width: .5in; "> 3.4 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Tanga </td>
+   <td style="text-align:left;width: .5in; "> Penaeidae </td>
+   <td style="text-align:left;width: .5in; "> Penaeus Monodon </td>
+   <td style="text-align:left;width: .5in; "> Kamba mti </td>
+   <td style="text-align:left;width: .5in; "> 1.3 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Temeke </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Mwatiko </td>
+   <td style="text-align:left;width: .5in; "> 2.36 </td>
+  </tr>
+  <tr>
+   
+   <td style="text-align:left;width: .5in; vertical-align: middle !important;" rowspan="9"> RUMAKI </td>
+   <td style="text-align:left;width: .5in; "> Kibiti </td>
+   <td style="text-align:left;width: .5in; "> Ariidae </td>
+   <td style="text-align:left;width: .5in; "> Netuma thalassina </td>
+   <td style="text-align:left;width: .5in; "> Hongwe </td>
+   <td style="text-align:left;width: .5in; "> 68.99 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kigamboni </td>
+   <td style="text-align:left;width: .5in; "> Labridae </td>
+   <td style="text-align:left;width: .5in; "> Halichoeres nigrescens </td>
+   <td style="text-align:left;width: .5in; "> pono </td>
+   <td style="text-align:left;width: .5in; "> 45.19 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kigamboni </td>
+   <td style="text-align:left;width: .5in; "> Ariidae </td>
+   <td style="text-align:left;width: .5in; "> Netuma thalassina </td>
+   <td style="text-align:left;width: .5in; "> Hongwe </td>
+   <td style="text-align:left;width: .5in; "> 32.38 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kilwa </td>
+   <td style="text-align:left;width: .5in; "> Sphyraenidae </td>
+   <td style="text-align:left;width: .5in; "> Sphyraena obtusata </td>
+   <td style="text-align:left;width: .5in; "> Msusa, Mzia </td>
+   <td style="text-align:left;width: .5in; "> 697.59 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mafia </td>
+   <td style="text-align:left;width: .5in; "> Ariidae </td>
+   <td style="text-align:left;width: .5in; "> Netuma thalassina </td>
+   <td style="text-align:left;width: .5in; "> Hongwe </td>
+   <td style="text-align:left;width: .5in; "> 26.99 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mtwara Rural </td>
+   <td style="text-align:left;width: .5in; "> Scombridae(J) </td>
+   <td style="text-align:left;width: .5in; "> Gymnosarda unicolor </td>
+   <td style="text-align:left;width: .5in; "> Jodari  meno </td>
+   <td style="text-align:left;width: .5in; "> 51.19 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mtwara Urban </td>
+   <td style="text-align:left;width: .5in; "> Ariidae </td>
+   <td style="text-align:left;width: .5in; "> Netuma thalassina </td>
+   <td style="text-align:left;width: .5in; "> Hongwe </td>
+   <td style="text-align:left;width: .5in; "> 10.95 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mtwara Urban </td>
+   <td style="text-align:left;width: .5in; "> Mugilidae </td>
+   <td style="text-align:left;width: .5in; "> Valamugil buchanani </td>
+   <td style="text-align:left;width: .5in; "> Mkizi </td>
+   <td style="text-align:left;width: .5in; "> 5.19 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mtwara Urban </td>
+   <td style="text-align:left;width: .5in; "> Siganidae </td>
+   <td style="text-align:left;width: .5in; "> Siganus Canaliculatus </td>
+   <td style="text-align:left;width: .5in; "> Tasi </td>
+   <td style="text-align:left;width: .5in; "> 334.19 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;vertical-align: middle !important;" rowspan="30"> 2018 </td>
+   <td style="text-align:left;width: .5in; vertical-align: middle !important;" rowspan="13"> OTHER </td>
+   <td style="text-align:left;width: .5in; "> Bagamoyo </td>
+   <td style="text-align:left;width: .5in; "> Scombridae(B) </td>
+   <td style="text-align:left;width: .5in; "> Thunnus obesus </td>
+   <td style="text-align:left;width: .5in; "> Jodari macho makubwa </td>
+   <td style="text-align:left;width: .5in; "> 99.51 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Ilala </td>
+   <td style="text-align:left;width: .5in; "> Caesionidae </td>
+   <td style="text-align:left;width: .5in; "> Caesio xanthonota </td>
+   <td style="text-align:left;width: .5in; "> Mbono </td>
+   <td style="text-align:left;width: .5in; "> 226.21 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kinondoni </td>
+   <td style="text-align:left;width: .5in; "> Gerridae </td>
+   <td style="text-align:left;width: .5in; "> Gerres oblongus </td>
+   <td style="text-align:left;width: .5in; "> Chaa </td>
+   <td style="text-align:left;width: .5in; "> 1.11 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kinondoni </td>
+   <td style="text-align:left;width: .5in; "> Penaeidae </td>
+   <td style="text-align:left;width: .5in; "> Penaeus Monodon </td>
+   <td style="text-align:left;width: .5in; "> Kamba mti </td>
+   <td style="text-align:left;width: .5in; "> 6.51 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi Rural </td>
+   <td style="text-align:left;width: .5in; "> Carcharhinidae /Sharks </td>
+   <td style="text-align:left;width: .5in; "> Carcharhinus falciformis </td>
+   <td style="text-align:left;width: .5in; "> Papa </td>
+   <td style="text-align:left;width: .5in; "> 44.11 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi Rural </td>
+   <td style="text-align:left;width: .5in; "> Lethrinidae </td>
+   <td style="text-align:left;width: .5in; "> Lethrinus harak </td>
+   <td style="text-align:left;width: .5in; "> Changu doa </td>
+   <td style="text-align:left;width: .5in; "> 4.11 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Lindi Urban </td>
+   <td style="text-align:left;width: .5in; "> Nemipteridae </td>
+   <td style="text-align:left;width: .5in; "> Nemipterus japonicus </td>
+   <td style="text-align:left;width: .5in; "> Koana </td>
+   <td style="text-align:left;width: .5in; "> 5.89 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mkinga </td>
+   <td style="text-align:left;width: .5in; "> Chirocentridae </td>
+   <td style="text-align:left;width: .5in; "> Chirocentrus nudus </td>
+   <td style="text-align:left;width: .5in; "> Mkonge </td>
+   <td style="text-align:left;width: .5in; "> 33.71 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mkuranga </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Chanidae </td>
+   <td style="text-align:left;width: .5in; "> Mwatiko </td>
+   <td style="text-align:left;width: .5in; "> 1.71 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Muheza </td>
+   <td style="text-align:left;width: .5in; "> Chirocentridae </td>
+   <td style="text-align:left;width: .5in; "> Chirocentrus nudus </td>
+   <td style="text-align:left;width: .5in; "> Mkonge </td>
+   <td style="text-align:left;width: .5in; "> 22.31 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Muheza </td>
+   <td style="text-align:left;width: .5in; "> Scombridae (v) </td>
+   <td style="text-align:left;width: .5in; "> Rastrelliger kanagurta </td>
+   <td style="text-align:left;width: .5in; "> Vibua </td>
+   <td style="text-align:left;width: .5in; "> 0.67 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Tanga </td>
+   <td style="text-align:left;width: .5in; "> Scombridae </td>
+   <td style="text-align:left;width: .5in; "> Euthynus affinis </td>
+   <td style="text-align:left;width: .5in; "> Sehewa </td>
+   <td style="text-align:left;width: .5in; "> 0.67 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Temeke </td>
+   <td style="text-align:left;width: .5in; "> Scombridae </td>
+   <td style="text-align:left;width: .5in; "> Euthynus affinis </td>
+   <td style="text-align:left;width: .5in; "> Sehewa </td>
+   <td style="text-align:left;width: .5in; "> 48.51 </td>
+  </tr>
+  <tr>
+   
+   <td style="text-align:left;width: .5in; vertical-align: middle !important;" rowspan="17"> RUMAKI </td>
+   <td style="text-align:left;width: .5in; "> Kibiti </td>
+   <td style="text-align:left;width: .5in; "> Gerridae </td>
+   <td style="text-align:left;width: .5in; "> Gerres oblongus </td>
+   <td style="text-align:left;width: .5in; "> Chaa </td>
+   <td style="text-align:left;width: .5in; "> 2.51 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kibiti </td>
+   <td style="text-align:left;width: .5in; "> Siganidae </td>
+   <td style="text-align:left;width: .5in; "> Siganus Canaliculatus </td>
+   <td style="text-align:left;width: .5in; "> Tasi </td>
+   <td style="text-align:left;width: .5in; "> 3.31 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kibiti </td>
+   <td style="text-align:left;width: .5in; "> Dasyatidae/ Rays </td>
+   <td style="text-align:left;width: .5in; "> Pastinachus sephen </td>
+   <td style="text-align:left;width: .5in; "> Taa usinga </td>
+   <td style="text-align:left;width: .5in; "> 3.31 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kigamboni </td>
+   <td style="text-align:left;width: .5in; "> Hemiramphidae </td>
+   <td style="text-align:left;width: .5in; "> Hemiramphus far </td>
+   <td style="text-align:left;width: .5in; "> Chuchunge </td>
+   <td style="text-align:left;width: .5in; "> 3.1 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kigamboni </td>
+   <td style="text-align:left;width: .5in; "> Nemipteridae </td>
+   <td style="text-align:left;width: .5in; "> Nemipterus japonicus </td>
+   <td style="text-align:left;width: .5in; "> Koana </td>
+   <td style="text-align:left;width: .5in; "> 33.71 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kigamboni </td>
+   <td style="text-align:left;width: .5in; "> Scombridae(J) </td>
+   <td style="text-align:left;width: .5in; "> Scomberomorus plurilineatus </td>
+   <td style="text-align:left;width: .5in; "> Nguru- kanadi </td>
+   <td style="text-align:left;width: .5in; "> 147.81 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kilwa </td>
+   <td style="text-align:left;width: .5in; "> Carangidae </td>
+   <td style="text-align:left;width: .5in; "> carenx tille </td>
+   <td style="text-align:left;width: .5in; "> Karambizi </td>
+   <td style="text-align:left;width: .5in; "> 141.81 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kilwa </td>
+   <td style="text-align:left;width: .5in; "> Scombridae (v) </td>
+   <td style="text-align:left;width: .5in; "> Rastrelliger kanagurta </td>
+   <td style="text-align:left;width: .5in; "> Vibua </td>
+   <td style="text-align:left;width: .5in; "> 2.61 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Kilwa </td>
+   <td style="text-align:left;width: .5in; "> Loliginidae </td>
+   <td style="text-align:left;width: .5in; "> Uroteuthis duvaucelii </td>
+   <td style="text-align:left;width: .5in; "> Ngisi </td>
+   <td style="text-align:left;width: .5in; "> 29.91 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mafia </td>
+   <td style="text-align:left;width: .5in; "> Ariidae </td>
+   <td style="text-align:left;width: .5in; "> Netuma thalassina </td>
+   <td style="text-align:left;width: .5in; "> Hongwe </td>
+   <td style="text-align:left;width: .5in; "> 25.31 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mafia </td>
+   <td style="text-align:left;width: .5in; "> Octopodidae </td>
+   <td style="text-align:left;width: .5in; "> Panulirus ornatus </td>
+   <td style="text-align:left;width: .5in; "> Kamba koche </td>
+   <td style="text-align:left;width: .5in; "> 114.61 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mafia </td>
+   <td style="text-align:left;width: .5in; "> Istiophoridae </td>
+   <td style="text-align:left;width: .5in; "> Istiompax indica </td>
+   <td style="text-align:left;width: .5in; "> Samsuri </td>
+   <td style="text-align:left;width: .5in; "> 63.31 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mafia </td>
+   <td style="text-align:left;width: .5in; "> Siganidae </td>
+   <td style="text-align:left;width: .5in; "> Siganus Canaliculatus </td>
+   <td style="text-align:left;width: .5in; "> Tasi </td>
+   <td style="text-align:left;width: .5in; "> 228.61 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mtwara Rural </td>
+   <td style="text-align:left;width: .5in; "> Nemipteridae </td>
+   <td style="text-align:left;width: .5in; "> Nemipterus japonicus </td>
+   <td style="text-align:left;width: .5in; "> Koana </td>
+   <td style="text-align:left;width: .5in; "> 26.21 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mtwara Rural </td>
+   <td style="text-align:left;width: .5in; "> Gerridae </td>
+   <td style="text-align:left;width: .5in; "> Gerres oblongus </td>
+   <td style="text-align:left;width: .5in; "> Chaa </td>
+   <td style="text-align:left;width: .5in; "> 302.86 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mtwara Rural </td>
+   <td style="text-align:left;width: .5in; "> Labridae </td>
+   <td style="text-align:left;width: .5in; "> Halichoeres nigrescens </td>
+   <td style="text-align:left;width: .5in; "> pono </td>
+   <td style="text-align:left;width: .5in; "> 33.51 </td>
+  </tr>
+  <tr>
+   
+   
+   <td style="text-align:left;width: .5in; "> Mtwara Urban </td>
+   <td style="text-align:left;width: .5in; "> Hemiramphidae </td>
+   <td style="text-align:left;width: .5in; "> Hemiramphus far </td>
+   <td style="text-align:left;width: .5in; "> Chuchunge </td>
+   <td style="text-align:left;width: .5in; "> 1.28 </td>
+  </tr>
+</tbody>
+</table>
+</body>
+</html>

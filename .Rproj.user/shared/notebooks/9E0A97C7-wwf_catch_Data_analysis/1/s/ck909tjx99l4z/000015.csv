@@ -1,0 +1,34 @@
+"0","library(ggpubr)"
+"2","Loading required package: magrittr
+"
+"2","
+Attaching package: ‘magrittr’
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    set_names
+
+"
+"2","The following object is masked from ‘package:tidyr’:
+
+    extract
+
+"
+"2","
+Attaching package: ‘ggpubr’
+
+"
+"2","The following object is masked from ‘package:forecast’:
+
+    gghistogram
+
+"
+"0","# Data: Create some data"
+"0","# +++++++++++++++++++++++++++++++"
+"0",""
+"0","df <- data.frame("
+"0"," group = c(""Male"", ""Female"", ""Child""),"
+"0","  value = c(25, 25, 50))"
+"0",""
+"0","head(df)"

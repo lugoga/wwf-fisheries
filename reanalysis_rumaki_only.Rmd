@@ -1,0 +1,599 @@
+---
+title: "Fisheries performance in Rumaki and Non-Rumaki Areas"
+author: 
+- Baraka Kuguru
+- Mathias Igulu
+- Masumbuko Semba
+# date: "3/16/2020"
+header-includes:
+  - \usepackage{titling}
+  - \posttitle{\end{center}}
+  - \usepackage{float}
+  - \floatplacement{figure}{H}  ##make every figure with caption = h, this was the fix
+  - \usepackage{fontspec}
+  - \setmainfont{Adobe Caslon Pro} ## set fornt to Time New Roman
+output: 
+      bookdown::pdf_document2:
+        latex_engine: xelatex
+        # includes:
+        #   in_header: preamble.tex
+        #   before_body: frontpage.tex
+        #   after_body: endpage.tex
+        toc: true
+        toc_depth: 2
+        # number_sections: true
+        # fig_caption: yes
+        # keep_tex: yes
+indent: false
+# toc: false
+lof: true
+lot: true
+fontsize: 12pt
+linestretch: 1.2
+# geometry: "left=4cm, right=2.5cm, top=2.5cm, bottom=2.5cm"
+# bibliography: mahale.bib
+# csl: elsevier.csl
+# link-citations: yes
+# fig_width: 2.0
+# fig_height: 2.0
+css: report_style.css
+colorlinks: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, comment = "")
+
+require(tidyverse)
+require(ggpubr)
+require(sf)
+require(ggspatial)
+```
+
+# Fisheries in Rumaki Areas
+
+```{r}
+species = read_csv("./data_update/rumakitu.csv") 
+
+species = species %>% select(1:5)
+
+
+# species = species %>% 
+  # separate(Species, c("Genus", "Species"), sep = " ", remove = FALSE)
+
+# species %>% distinct(Species) %>% arrange(Species)
+```
+
+```{r}
+
+dominant.group = bind_rows(
+      species%>%
+        filter(Species %in% c("Serranidae spp( CEW )","Lutjanus spp( LDW )", "Lutjanus ssp( LTJ )","Red snapper( RDS )","Changu( CHN )", "Carrotomus carolinus( ULG )","Lethrinus borbonicus( LHB )", "Lethrinus harak( LHH )", "Lethrinus lentjan( LHL )", "Lethrinus nebulosus( LHN )", "Lethrinus rubrioperculatus( LHR )", "Lethrinus spp( LH )")) %>%
+        mutate(group = "Reef fish"),
+      
+      species%>%
+        filter(Species %in% c("Auxis thazard( FRI )", "Euthynnus affinis( KAW )", "Istiophorus platypterus( SFA )", "Katsuwonus pelamis( SKJ )", "Other tuna( JDR )", "Scomberomorus commerson( COM )", "Scomberomorus guttatus( GUT )", "Scomberomorus plurilineatus( KAK )", "Thunnus albacares( YFT )", "Thunnus obesus( BET )", "Tuna( NGR )")) %>%
+        mutate(group = "Tuna fish"),
+      
+      species%>%
+        filter(Species == "Octopus cyanea( OCC )") %>%
+        mutate(group = "Octopus"),
+      species %>% 
+  filter(Species %in% c("Aetobatus ocellatus( MAE )", "Carcharhinus albimarginatus( ALS )", "Carcharhinus plumbeus( CCP )", "Carcharhinus sorrah( CCQ )", "Himantura uarnak( DHV )", "Maculabatis ambigua( RAJ )", "Manta alfredi( TNG )", "Rhynchobatus sp.( RCD )", "Taa( NYG )", "Taa( NYG )", "Papa mavongoroa( PMV )", "Papa( PP )"))%>%
+        mutate(group = "Elasmobranch"),
+      
+      species%>%
+        filter(Species %in% c("Mackerel(scomber)( KB )", "Mackerel(scomber)( VB )", "Sardine( DA )","Sardine( DA )" ,"Dagaa ( DPP )","Dagaa ( DPP )", "Amblygaster sirm( AMS )", "Decapterus russelli( RUS )", "Dussumieria acuta( DSA )")) %>%
+        mutate(group = "Small pelagic")
+) %>%
+  rename(catch = 5)
+
+
+```
+
+```{r}
+species.groups = dominant.group %>% 
+  group_by(group, Location) %>% 
+  summarise(weight = mean(catch, na.rm = TRUE)) %>% 
+  ungroup() 
+
+
+ggpubr::ggarrange(
+  species.groups %>%
+  filter(Location == "Kigamboni")%>%
+  mutate(percentage = (weight/sum(weight)*100) %>% round(digits = 1),
+         labs = paste(percentage, "%"))%>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "percentage",
+                       fill = "group", color = "white", lab.pos = "in")+
+  theme(legend.position = "none")+
+  # scale_fill_viridis_d()+
+  ggsci::scale_fill_jama(name = "Dominant\nFish Groups") +  
+  labs(subtitle = "Temeke")
+  ,
+  
+    species.groups %>%
+  filter(Location == "Kilwa")%>%
+  mutate(percentage = (weight/sum(weight)*100) %>% round(digits = 1),
+         labs = paste(percentage))%>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "percentage",
+                       fill = "group", color = "white", lab.pos = "in")+
+  theme(legend.position = "right")+
+  # scale_fill_viridis_d()+
+  ggsci::scale_fill_jama(name = "Dominant\nFish Groups") +  
+  labs(subtitle = "Kilwa"),
+  nrow = 1, common.legend = TRUE, legend = "right")
+
+# ggsave(filename = "ecas_catch_composition_temeke_kilwa.png", dpi = 600)
+```
+
+
+```{r}
+
+ggpubr::ggarrange(
+
+ species.groups %>%
+  filter(Location == "Mtwara Rural")%>%
+  mutate(percentage = (weight/sum(weight)*100) %>% round(digits = 1),
+         labs = paste(percentage, "%"))%>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "percentage",
+                       fill = "group", color = "white", lab.pos = "in")+
+  theme(legend.position = "none")+
+  # scale_fill_viridis_d()+
+  ggsci::scale_fill_jama(name = "Dominant\nFish Groups") +  
+  labs(subtitle = "Mtwara Rural"),
+  
+  
+   species.groups %>%
+  filter(Location == "Mafia")%>%
+  mutate(percentage = (weight/sum(weight)*100) %>% round(digits = 1),
+         labs = paste(percentage, "%"))%>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "percentage",
+                       fill = "group", color = "white", lab.pos = "in")+
+  theme(legend.position = "right")+
+  # scale_fill_viridis_d()+
+  ggsci::scale_fill_jama(name = "Dominant\nFish Groups") +  
+  labs(subtitle = "Mafia"),
+  
+ nrow = 1, common.legend = TRUE, legend = "right"
+  )
+
+#ggsave(filename = "ecas_catch_composition_mtwara_mafia.png", dpi = 600)
+```
+
+
+```{r}
+
+  species.groups %>%
+  filter(Location == "Kibiti")%>%
+  mutate(percentage = (weight/sum(weight)*100) %>% round(digits = 1),
+         labs = paste(percentage, "%")) %>%
+    arrange(group)%>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "percentage",
+                       fill = "group", color = "white", lab.pos = "in")+
+  theme(legend.position = "right")+
+  # scale_fill_viridis_d()+
+  # ggsci::scale_fill_jama(name = "Dominant\nFish Groups") + 
+  scale_fill_manual(values = c("#374E55", "#00A1D5"),name = "Dominant\nFish Groups")+
+  labs(subtitle = "Rufiji")
+
+#ggsave(filename = "ecas_catch_composition_rufiji.png", dpi = 600)
+
+```
+
+
+
+```{r fig101, fig.cap="Trend of error free catch data per each site"}
+
+catch.clean.group.outlierfree = list()
+sites = dominant.group %>% distinct(Location) %>% pull()
+
+for (i in 1:length(sites)){
+  
+  dummy = dominant.group %>% filter(Location == sites[i])
+    q = quantile(dummy$catch, na.rm = TRUE)
+    iqr = IQR(dummy$catch, na.rm = TRUE) # alternative: iqr = q[4]-q[2]
+    
+    lower = q[2] - (1.5 * iqr)
+    upper = q[4] + (1.5 * iqr)
+    
+ catch.clean.group.outlierfree[[i]] = dummy %>% 
+   filter(catch > lower & catch <= upper)
+  
+}
+
+catch.clean.group.outlierfree = catch.clean.group.outlierfree %>% 
+  bind_rows() 
+
+
+```
+
+
+```{r}
+tz = st_read("e:/GIS/tanzania-latest.shp/nbs/Districts.shp", quiet = TRUE )
+
+# tz %>% arrange(District_N) %>% pull(District_N)
+```
+
+```{r}
+
+catch.clean.join = catch.clean.group.outlierfree %>% 
+  # filter(group == "Reef fish") %>% 
+  mutate(Location = replace(Location, Location == "Kigamboni", "Temeke"),
+         Location = replace(Location, Location == "Kibiti", "Rufiji"), 
+         Location = replace(Location, Location == "Lindi Rural", "Lindi"),
+         Location = replace(Location, Location == "Mtwara Rural", "Mtwara")) %>%
+  group_by(Location, group) %>% summarise(catch = mean(catch, na.rm = TRUE)) %>%
+  ungroup() %>%
+  rename(District = Location)
+
+
+rumaki.districts = catch.clean.join %>% distinct(District) %>% pull()
+
+
+coastal = tz %>% filter(District_N %in% rumaki.districts)
+
+# coastal %>% mapview::mapview()
+
+
+
+catch.clean.join.spatial = coastal %>% 
+  rename(District = District_N)  %>% 
+  full_join(catch.clean.join, by = c("District")) %>%
+  mutate(catch = round(catch, digits = 2),class = cut(catch, breaks = seq(0,400,75), 
+                     labels = c("Below 75", "75-150", "150-225", "225-300", "above 300")))
+
+ 
+```
+
+
+```{r}
+coordinates = catch.clean.join.spatial %>% 
+                  # filter(Zone == "OTHER" & group == "Tuna fish") %>%
+  select(District, group) %>% 
+  st_centroid() %>% 
+  st_coordinates() %>% 
+  as_tibble() %>% 
+  rename(lon = 1, lat = 2) %>%
+  bind_cols(
+    catch.clean.join.spatial %>% 
+      # filter(Zone == "OTHER" & group == "Tuna fish") %>%
+      select(District, group) %>% st_drop_geometry()
+  )
+
+
+```
+
+```{r, eval=FALSE}
+ggplot() +
+  layer_spatial(data = catch.clean.join.spatial %>% filter(Zone == "OTHER")%>% 
+                  st_simplify(dTolerance = .015),
+                aes(fill = class), col = NA)+
+   # ggrepel::geom_label_repel(data = coordinates %>% filter(lat >= -7.6), 
+   #                          aes(x = lon, y = lat, label = Districts),point.padding = 2.2) +
+  coord_sf(xlim = c(37.5,40), ylim = c(-7.6,-4.5), crs = 4326)+
+  facet_wrap(~group, nrow = 1) +
+  ggsci::scale_fill_locuszoom() +
+  scale_x_continuous(breaks = c(38.1,39.7))+
+  scale_y_continuous(breaks = c(-7.25,-4.75)) +
+   cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        legend.position = "right", 
+        legend.key.width = unit(.5,"cm"))
+```
+
+
+## Spatial catch variation in Rumaki
+
+```{r fig1, fig.cap="Octopus catch variation accross Rumaki Area"}
+
+ ggplot() +
+  layer_spatial(data = catch.clean.join.spatial %>% 
+                  drop_na() %>% filter(group == "Octopus"),
+          aes(fill = catch %>%as.factor()), col = "ivory")+
+  ggrepel::geom_label_repel(data = coordinates %>% 
+                              filter(lat <= -6.0 & group == "Octopus"), 
+                            aes(x = lon, y = lat, label = District),
+                            point.padding = 2.2) +
+  coord_sf(xlim = c(37.5,40.5), ylim = c(-11.1,-6.0), crs = 4326)+
+  # ggsci::scale_fill_locuszoom() +
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_y_continuous(breaks = c(-10.5,-8.25)) +
+  scale_x_continuous(breaks = c(38.2,39.85))+
+  cowplot::theme_minimal_grid() +
+  theme(panel.grid = element_line(linetype = 3))+
+  ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .85)+
+  labs(x = "", y = "")
+ 
+ # ggsave("octopus.png", dpi = 650)
+
+```
+
+
+
+```{r fig2, fig.cap="Reef fish catch variation accross Rumaki Area"}
+
+ ggplot() +
+  layer_spatial(data = catch.clean.join.spatial %>% 
+                  drop_na() %>% filter(group == "Reef fish"),
+          aes(fill = catch %>%as.factor()), col = "ivory")+
+  ggrepel::geom_label_repel(data = coordinates %>% 
+                              filter(lat <= -6 & group == "Octopus"), 
+                            aes(x = lon, y = lat, label = District),
+                            point.padding = 2.2) +
+  coord_sf(xlim = c(37.5,40.5), ylim = c(-11.1,-6.5), crs = 4326)+
+  # ggsci::scale_fill_locuszoom() +
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_y_continuous(breaks = c(-10.5,-8.25)) +
+  scale_x_continuous(breaks = c(38.2,39.85))+
+  cowplot::theme_minimal_grid() +
+  theme(panel.grid = element_line(linetype = 3))+
+  ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .85)+
+  labs(x = "", y = "")
+ 
+ # ggsave("reefFish.png", dpi = 650)
+
+```
+
+
+
+```{r fig3, fig.cap="Elasmobrach catch variation accross Rumaki Area"}
+
+ ggplot() +
+  layer_spatial(data = catch.clean.join.spatial %>% 
+                  drop_na() %>% filter(group == "Elasmobranch"),
+          aes(fill = catch %>%as.factor()), col = "ivory")+
+  ggrepel::geom_label_repel(data = coordinates %>% 
+                              filter(lat <= -6 & group == "Octopus"), 
+                            aes(x = lon, y = lat, label = District),
+                            point.padding = 2.2) +
+  coord_sf(xlim = c(37.5,40.5), ylim = c(-11.1,-6.5), crs = 4326)+
+  # ggsci::scale_fill_locuszoom() +
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_y_continuous(breaks = c(-10.5,-8.25)) +
+  scale_x_continuous(breaks = c(38.2,39.85))+
+  cowplot::theme_minimal_grid() +
+  theme(panel.grid = element_line(linetype = 3))+
+  ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .85)+
+  labs(x = "", y = "")
+ 
+ # ggsave("elasmobracnch.png", dpi = 650)
+
+```
+
+
+```{r fig104, fig.cap="Small pelagic catch variation accross Rumaki Area"}
+
+ ggplot() +
+  layer_spatial(data = catch.clean.join.spatial %>% 
+                  drop_na() %>% filter(group == "Small pelagic"),
+          aes(fill = catch %>%as.factor()), col = "ivory")+
+  ggrepel::geom_label_repel(data = coordinates %>% 
+                              filter(lat <= -6 & group == "Octopus"), 
+                            aes(x = lon, y = lat, label = District),
+                            point.padding = 2.2) +
+  coord_sf(xlim = c(37.5,40.5), ylim = c(-11.1,-6.5), crs = 4326)+
+  # ggsci::scale_fill_locuszoom() +
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_y_continuous(breaks = c(-10.5,-8.25)) +
+  scale_x_continuous(breaks = c(38.2,39.85))+
+  cowplot::theme_minimal_grid() +
+  theme(panel.grid = element_line(linetype = 3))+
+  ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .85)+
+  labs(x = "", y = "")
+ 
+ # ggsave("pelagic.png", dpi = 650)
+
+
+
+```
+
+```{r}
+catch.clean.group.outlierfree = catch.clean.group.outlierfree %>% rename(Districts = Location)
+
+catch.clean.group.outlierfree = catch.clean.group.outlierfree %>%
+  mutate(Month = replace(Month, Month== "January",1),
+         Month = replace(Month, Month== "February",2),
+         Month = replace(Month, Month== "March",3),
+         Month = replace(Month, Month== "April",4),
+         Month = replace(Month, Month== "May",5),
+         Month = replace(Month, Month== "June",6),
+         Month = replace(Month, Month== "July",7),
+         Month = replace(Month, Month== "August",8),
+         Month = replace(Month, Month== "Augast",8),
+         Month = replace(Month, Month== "September",9),
+         Month = replace(Month, Month== "september",9),
+         Month = replace(Month, Month== "October",10),
+         Month = replace(Month, Month== "November",11),
+         Month = replace(Month, Month== "December",12),
+         Month = replace(Month, Month== "december",12),
+         Month = Month %>% as.integer(),
+         Day = 14, 
+         date = lubridate::make_date(year = Year, month = Month, day = Day))
+
+# catch.clean.group.outlierfree %>% distinct(Month)
+```
+
+
+## Regression and correlation of annual fish catches over study period
+
+```{r fig11, fig.cap="District in Rumaki areas with relatively stable annual catches"}
+
+formula1 <- y ~ x
+
+ggplot(data = catch.clean.group.outlierfree , 
+       aes(x = date %>%as.numeric() , y = catch, col = Districts, fill = Districts))+
+  geom_point()+
+  geom_smooth(se = TRUE, alpha = .2, method = "lm", formula = formula1)+
+  # ggpmisc::stat_fit_tb(method = "lm",
+  #             method.args = list(formula = formula1),
+  #             tb.vars = c(Parameter = "term", 
+  #                         Estimate = "estimate", 
+  #                         "s.e." = "std.error", 
+  #                         "italic(t)" = "statistic", 
+  #                         "italic(P)" = "p.value"),
+  #             label.y = "top", label.x = "right",
+  #             parse = TRUE)+
+  ggpmisc::stat_poly_eq(aes(label = paste0("atop(", ..eq.label.., ",", ..rr.label.., ")")), 
+               formula = formula1, rr.digits = 2,
+               parse = TRUE) +
+  # ggrepel::geom_text_repel(data = now, aes(x = date, y = catch, label = label)) +
+  scale_x_continuous(breaks = c(17200,17600,18000),labels =  c(2017,2018,2019)) +
+  # scale_y_continuous(breaks = seq(100,600,100))+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), legend.position = "none")+
+  facet_wrap(~Districts)+
+  labs(x = "", y = "Fish catch (Tonnes)")
+
+# ggsave("trends.png", dpi = 650)
+
+```
+
+
+## Catches of common fish groups
+
+
+```{r fig15, fig.cap="Catches of four common fish group in Rumaki area", fig.height=3.5, fig.width=8}
+catch.clean.group.outlierfree %>%
+  ggplot(aes(x = Year %>% as_factor(), y = catch, fill = Districts, col = Districts))+
+  geom_boxplot(alpha = .4)+
+  facet_wrap(~group, scales = "free_y")+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), legend.position = "bottom")+
+  labs(x = "", y = "Fish catch (Tonnes)")+
+  scale_fill_discrete(name = "")+
+  scale_color_discrete(name = "")
+
+# ggsave("catch_site_years.png", dpi = 650)
+```
+
+
+```{r fig16, fig.cap="Catches pooled for the four common fish group in Rumaki area"}
+catch.zone = catch.clean.group.outlierfree %>% group_by(Year, group) %>% 
+  summarise(n = n(),
+            catch.mean = mean(catch, na.rm = TRUE),
+            catch.median = median(catch, na.rm = TRUE),
+            catch.sd = sd(catch, na.rm = TRUE),
+            catch.se = catch.sd/sqrt(n)) %>%
+  ungroup() 
+
+catch.zone %>% 
+  ggplot(aes(x = Year, y = catch.median,col = group)) +
+  geom_line() +
+  geom_errorbar(aes(ymin = catch.median - catch.se, 
+                    ymax = catch.median + catch.se), width = 0.075)+
+  geom_point(size = 3)+
+  # facet_wrap(~group, strip.position = "top" )+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        legend.position = "none", 
+        legend.key.width = unit(2,"cm"))+
+  labs(x = "", y = "Total Catch (Tonnes)")+
+   ggsci::scale_color_d3(name = "")+
+  facet_wrap(~group, scales = "free_y")
+
+# ggsave("catch_site_year_group.png", dpi = 650)
+
+```
+
+```{r fig17, fig.cap="Mean Catches and standard error for the four common fish group in Rumaki area"}
+
+catch.stats = catch.clean.group.outlierfree %>% group_by(Year,Districts, group) %>% 
+  summarise(n = n(),
+            catch.mean = mean(catch, na.rm = TRUE),
+            catch.median = median(catch, na.rm = TRUE),
+            catch.sd = sd(catch, na.rm = TRUE),
+            catch.se = catch.sd/sqrt(n)) %>%
+  ungroup() 
+
+
+catch.stats %>% 
+  ggplot(aes(x = Year, y = catch.median, col = group)) +
+  geom_line() +
+  geom_errorbar(aes(ymin = catch.median - catch.se, 
+                    ymax = catch.median + catch.se), width = 0.075)+  
+  geom_point(size = 3)+
+  facet_wrap(~Districts, strip.position = "top", scales = "free_y" )+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        legend.position = "right", 
+        legend.key.width = unit(1.2,"cm"))+
+  labs(x = "", y = "Total Catch (Tonnes)")+
+   ggsci::scale_color_d3(name = "")+
+  scale_x_continuous(breaks = 2016:2020)
+
+ggsave("dominant_catch_site.png", dpi = 650)
+
+```
+
+
+```{r fig20, fig.cap="Rate of change of catches in percentage for Rumaki area"}
+
+
+percentage.rumaki = catch.stats %>% select(year = Year, Districts, group, catch.median) %>% 
+    mutate(day = 15, month = 6, date = lubridate::make_date(year, month, day)) %>%
+  spread(key = group, value = catch.median) %>% 
+  arrange(date) %>%
+  select(-c(day, month)) %>%
+  select(date, everything()) %>%
+  # filter(zone == "RUMAKI")%>%
+  mutate(octopus.lead = Octopus/sum(Octopus, na.rm = TRUE)*100,
+         reef.lead = `Reef fish`/sum(`Reef fish`, na.rm = TRUE)*100,
+         pelagic.lead = `Small pelagic`/sum(`Small pelagic`, na.rm = TRUE)*100,
+         tuna.lead = `Tuna fish`/sum(`Tuna fish`, na.rm = TRUE)*100,
+         elasmobranch = Elasmobranch/sum(Elasmobranch, na.rm = TRUE)*100) %>%
+  select(date, year, Districts, Octopus = octopus.lead, Reef = reef.lead, 
+         Pelagic = pelagic.lead, Tuna = tuna.lead, Elasmobranch = elasmobranch) %>%
+  pivot_longer(cols = 4:8, names_to = "group")
+
+
+
+percentage.rumaki %>% 
+  ggplot(aes(x = year, y = value, col = group)) +
+  geom_line() +
+  geom_point(size = 3)+
+  facet_wrap(~Districts, strip.position = NULL, scales = "free_y" )+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        legend.position = "bottom", 
+        legend.key.width = unit(1.2,"cm"))+
+  labs(x = "", y = "Catch Rate (%)")+
+   ggsci::scale_color_d3(name = "")+
+  scale_x_continuous(breaks = 2014:2020)
+
+# ggsave("percentage_change.png", dpi = 650)
+```
+
+
+
+
+```{r}
+
+catch.clean.group.season = catch.clean.group.outlierfree %>%
+mutate(season = Month,
+       season = replace(season, season %in% c(10,11,12,1,2,3), "NE"),
+       season = replace(season, season %in% c(4,5,6,7,8,9), "SE"))
+
+catch.clean.group.season %>%
+  ggplot(aes(x = season, y = catch , fill = group))+
+  geom_boxplot() +
+  facet_wrap(~Districts, scales = "free_y")+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        legend.position = "right", 
+        legend.key.width = unit(.5,"cm"))+
+  labs(x = "", y = "Fish catches (Tonnes)")+
+  ggsci::scale_fill_jama(name = "Dominant \nSpecies")
+
+# ggsave("seasonal_variation.png", dpi = 650)
+```
+
+
+
+## references
+

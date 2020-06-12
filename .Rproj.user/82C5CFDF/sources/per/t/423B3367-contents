@@ -1,0 +1,434 @@
+---
+title: "generate report"
+author: "Masumbuko Semba"
+header-includes:
+  - \usepackage{titling}
+  - \posttitle{\end{center}}
+  - \usepackage{float}
+  - \floatplacement{figure}{H}  ##make every figure with caption = h, this was the fix
+  - \usepackage{fontspec}
+  - \setmainfont{Adobe Caslon Pro} ## set fornt to Time New Roman
+date: "1/21/2020"
+output: 
+      bookdown::pdf_document2:
+        latex_engine: xelatex
+        # includes:
+        #   in_header: preamble.tex
+        #   before_body: frontpage.tex
+        #   after_body: endpage.tex
+        # toc: true
+        # toc_depth: 2
+        # number_sections: true
+        # fig_caption: yes
+        # keep_tex: yes
+indent: false
+toc: false
+lof: true
+lot: true
+fontsize: 12pt
+linestretch: 1.2
+# geometry: "left=4cm, right=2.5cm, top=2.5cm, bottom=2.5cm"
+# bibliography: mahale.bib
+# csl: elsevier.csl
+link-citations: yes
+# fig_width: 2.0
+# fig_height: 2.0
+# css: style.css
+colorlinks: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+## Activities proposed includes: 
+
+i. Analyze CAS data collected from 2014 - 2018 and report trends in total catch, catch per unit effort, species composition and stock health 
+i. Analyze catch in terms of species, size CPUE different between FISHCOM area and the rest of the area along the cost.
+i. Assess any reappearance of fish species in the study area and its link to conservation
+i. Assess any appearance of new fish species in the area and its link to conservation 
+i. Identify gaps in the current statistical system and give recommendations on how to improve
+
+\newpage
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE, message=FALSE, comment="")
+# options(tinytex.verbose = TRUE)
+
+
+```
+
+```{r, include=FALSE}
+require(tidyverse)
+require(astsa)
+require(ggpmisc)
+require(ggfortify)
+require(forecast)
+require(kableExtra)
+require(knitr)
+```
+
+
+```{r fig102, fig.cap="Total catch per location using raw data. Spot the outlier from all sites except Mtwara Rural"}
+catch = readxl::read_excel(path = "All data combined.xlsx",sheet = 3, col_names = TRUE )
+
+catch.clean = catch %>% 
+  select(Location, Year, Month, Species,catch = 5)
+
+catch.clean = catch.clean %>% 
+  mutate(Month = replace(Month, Month == "Augast", "August"),
+         Month = replace(Month, Month == "december", "December"),
+         Month = replace(Month, Month == "september", "September"),
+         Year = as.integer(Year)) %>%
+  mutate(day = 15,
+         Month = replace(Month, Month == "January", 1),
+         Month = replace(Month, Month == "February", 2),
+         Month = replace(Month, Month == "March", 3),
+         Month = replace(Month, Month == "April", 4),
+         Month = replace(Month, Month == "May", 5),
+         Month = replace(Month, Month == "June", 6),
+         Month = replace(Month, Month == "July", 7),
+         Month = replace(Month, Month == "August", 8),
+         Month = replace(Month, Month == "September", 9),
+         Month = replace(Month, Month == "October", 10),
+         Month = replace(Month, Month == "November", 11),
+         Month = replace(Month, Month == "December", 12),
+         Month = as.integer(Month),
+         date = lubridate::make_date(year = Year, month = Month, day = day),
+         catch =   catch %>% oce::despike())
+
+catch.clean.group = catch.clean %>% 
+  group_by(Location, date) %>% 
+  summarise(catch = median(catch, na.rm = TRUE)) %>%
+  ungroup() 
+
+catch.clean.group  %>% ggplot(aes(x = Location, y = catch, fill = Location)) + 
+  geom_boxplot(outlier.colour = "red", outlier.shape = 8, outlier.size = 3, alpha = .4)+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), legend.position = "none")
+```
+
+
+```{r}
+## correct for outliers
+q = quantile(catch.clean.group$catch, na.rm = TRUE)
+iqr = IQR(catch.clean.group$catch, na.rm = TRUE)
+
+lower = q[2] - 1.5*iqr
+upper = q[4]+ 1.5*iqr
+```
+
+```{r fig1, fig.cap="Trend of raw catch data per each site"}
+catch.clean.group = catch.clean.group %>% 
+  arrange(date)
+
+ now= catch.clean.group %>% 
+   filter(catch > 250 & catch < 420) %>%
+   mutate(mwezi = lubridate::month(date, abbr = TRUE, label = TRUE),
+          year = lubridate::year(date) %>% as.integer(),
+          label = paste(mwezi, ", ",year))
+
+formula1 <- y ~ x
+
+ggplot(data = catch.clean.group , 
+       aes(x = date, y = catch, col = Location, fill = Location))+
+  geom_point()+
+  geom_smooth(se = TRUE, alpha = .2, method = "lm", formula = formula1)+
+  # stat_fit_tb(method = "lm",
+  #             method.args = list(formula = formula1),
+  #             tb.vars = c(Parameter = "term", 
+  #                         Estimate = "estimate", 
+  #                         "s.e." = "std.error", 
+  #                         "italic(t)" = "statistic", 
+  #                         "italic(P)" = "p.value"),
+  #             label.y = "top", label.x = "right",
+  #             parse = TRUE)+
+  stat_poly_eq(aes(label = paste0("atop(", ..eq.label.., ",", ..rr.label.., ")")), 
+               formula = formula1, rr.digits = 2,
+               parse = TRUE) +
+  # ggrepel::geom_text_repel(data = now, aes(x = date, y = catch, label = label)) +
+  scale_x_date(date_minor_breaks = "1 month") +
+  # scale_y_continuous(breaks = seq(100,600,100))+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), legend.position = "none")+
+  facet_wrap(~Location, scales = "free_y")+
+  labs(x = "", y = "Fish catch (Tonnes)")
+# ggsave("fig1.pdf")
+```
+
+```{r fig101, fig.cap="Trend of error free catch data per each site"}
+
+catch.clean.group.outlierfree = list()
+sites = catch.clean.group %>% distinct(Location) %>% pull()
+
+for (i in 1:length(sites)){
+  
+  dummy = catch.clean.group %>% filter(Location == sites[i])
+    q = quantile(dummy$catch, na.rm = TRUE)
+    iqr = IQR(dummy$catch, na.rm = TRUE) # alternative: iqr = q[4]-q[2]
+    
+    lower = q[2] - (1.5 * iqr)
+    upper = q[4] + (1.5 * iqr)
+    
+ catch.clean.group.outlierfree[[i]] = dummy %>% 
+   filter(catch > lower & catch <= upper)
+  
+}
+
+catch.clean.group.outlierfree = catch.clean.group.outlierfree %>% bind_rows()
+
+formula1 <- y ~ x
+
+ggplot(data = catch.clean.group.outlierfree , 
+       aes(x = date, y = catch, col = Location, fill = Location))+
+  geom_point()+
+  geom_smooth(se = TRUE, alpha = .2, method = "lm", formula = formula1)+
+  # stat_fit_tb(method = "lm",
+  #             method.args = list(formula = formula1),
+  #             tb.vars = c(Parameter = "term", 
+  #                         Estimate = "estimate", 
+  #                         "s.e." = "std.error", 
+  #                         "italic(t)" = "statistic", 
+  #                         "italic(P)" = "p.value"),
+  #             label.y = "top", label.x = "right",
+  #             parse = TRUE)+
+  stat_poly_eq(aes(label = paste0("atop(", ..eq.label.., ",", ..rr.label.., ")")), 
+               formula = formula1, rr.digits = 2,
+               parse = TRUE) +
+  # ggrepel::geom_text_repel(data = now, aes(x = date, y = catch, label = label)) +
+  scale_x_date(date_minor_breaks = "2 year") +
+  # scale_y_continuous(breaks = seq(100,600,100))+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), legend.position = "none")+
+  facet_wrap(~Location, scales = "free_y")+
+  labs(x = "", y = "Fish catch (Tonnes)")
+```
+
+
+```{r fig2, fig.cap="Trend of catch for all sites"}
+
+catch.clean.group.wide = catch.clean.group %>% ungroup() %>% select(date, Location, catch) %>% pivot_wider(names_from = "Location", values_from = "catch") %>% arrange(date) 
+
+
+ts.series = ts.intersect(
+  Kibiti = ts(data = catch.clean.group.wide %>% pull(Kibiti),start = c(2016,6), frequency = 12),
+  Kilwa = ts(data = catch.clean.group.wide %>% pull(Kilwa),start = c(2016,6), frequency = 12),
+  Mafia = ts(data = catch.clean.group.wide %>% pull(Mafia),start = c(2016,6), frequency = 12),
+  Mtwara = ts(data = catch.clean.group.wide %>% pull(`Mtwara Rural`),start = c(2016,6), frequency = 12),
+  Kigamboni = ts(data = catch.clean.group.wide %>% pull(Kigamboni),start = c(2016,6), frequency = 12)
+  ) 
+
+ts.series %>% 
+  autoplot() +  
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), legend.position = c(.80,.75))+
+  scale_y_continuous(breaks = seq(100,600,100))+
+  labs(x = "", y = "Fish catch (Tonnes)")
+
+# ggsave("fig2.pdf")
+```
+
+
+
+We notice that only the catch data has few missing values. Then we use it to represent the trend of cath. Because the data ends in september 2019, we extended for two more years and forecast the catches of fish in this site until september 2021. We add six months moving average on the plot
+```{r fig3, fig.cap="Projected catch data beyond the collected period"}
+ts.series[,2] %>% 
+  window(start = c(2016,11)) %>%
+  autoplot() +
+  autolayer(snaive(y = ts.series[,2]%>% window(start = c(2018,1)), h = 24), 
+            series = "Future Catch", PI = FALSE, showgap = FALSE)+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), legend.position = c(.80,.75),)+
+  scale_y_continuous(breaks = seq(100,600,100))+
+  labs(x = "", y = "Fish catch (Tonnes)")+
+  tidyquant::geom_ma(ma_fun = SMA,n=6, na.rm = TRUE) # for six moths moving average
+
+```
+
+
+```{r fig4, fig.cap="Species Composition at Mtwara"}
+Mtwara = catch.clean %>% 
+  group_by(Species, Location) %>% 
+  tally() %>% 
+  arrange(desc(n)) %>% ungroup() %>% 
+  filter(Location == "Mtwara Rural") %>%
+  separate(col = Species, into = c("Species", "others"), sep = " " )%>% 
+  mutate(percentage = (n/sum(n) * 100) %>% round(2), cumsum = cumsum(percentage),
+         labs = paste(percentage,"%")) %>%
+  filter(percentage >= 5) 
+
+kesho = Mtwara %>% bind_rows(
+tibble(Species = "Others") %>%
+  mutate(others = "Others",  Location = "Others", n = 89, percentage = 47.71, cumsum = NULL, labs = paste(percentage,"%"))) 
+
+kesho%>% 
+    ggpubr::ggdonutchart(x = "n", 
+                       label = "labs", 
+                       fill = "Species", color = "white", lab.pos = "in", lab.font = c(4, "bold", "ivory"))+
+  # scale_fill_viridis_d() +
+    scale_fill_brewer(palette = "Set3")+
+  # ggsci::scale_color_jama() +
+  theme(legend.position = "none")  +
+    theme(legend.position = "right")
+```
+
+\newpage
+
+```{r}
+catch.districts = readxl::read_excel(path = "data_revised.xlsx",sheet = 2, col_names = TRUE ) %>% 
+  select(year = 1, family = 2, english.name = 3, swahili.name = 4, district = 5, catch = 6, zone = 7) %>%
+  mutate(year = as.integer(year), zone = as_factor(zone), english.name = as_factor(english.name), 
+         swahili.name = as_factor(swahili.name), family = as_factor(family), district = as_factor(district),
+         catch = as.numeric(catch))
+
+
+```
+
+
+```{r fig97, fig.cap="Catch comparison between Rumaki and other fishing areas. This figure is before removing outliers"}
+
+catch.districts%>% 
+  # filter(catch < 1000) %>%
+  group_by(year, zone) %>% 
+  summarise(n = n(),
+            mean.catch = median(catch, na.rm = TRUE),
+            sd = sd(catch, na.rm = TRUE),
+            se = sd/sqrt(n)) %>%
+  ungroup() %>% 
+  ggplot(aes(x = year, y = mean.catch, col = zone)) +
+  geom_line() +
+  geom_point(size = 5)+
+  geom_errorbar(aes(ymin = mean.catch-se, ymax = mean.catch+se), width = 0.075)+
+  ggsci::scale_color_jco(name = "Fishing area", label = c("Non Rumaki", "Rumaki")) +
+  scale_x_continuous(breaks = seq(2014,2016,1)) +
+  scale_y_continuous(breaks = seq(0,95,15))+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        legend.position = "right", 
+        legend.key.width = unit(2,"cm"))+
+  labs(x = "", y = "Total Catch (Tonnes)")
+
+# catch.districts %>% filter(catch < 1000) %>% ggplot(aes(x = year, y = catch, col = zone)) + geom_point()
+```
+
+```{r}
+## correct for outliers
+q = quantile(catch.districts$catch, na.rm = TRUE)
+iqr = IQR(catch.districts$catch, na.rm = TRUE)
+
+lower = q[2] - 1.5*iqr
+upper = q[4]+ 1.5*iqr
+```
+
+```{r fig99, fig.cap="Catch comparison between Rumaki and other fishing areas. This figure is after removing outliers"}
+
+catch.districts%>% 
+  # filter(catch < 1000) %>%
+  filter(catch < upper) %>%
+  group_by(year, zone) %>% 
+  summarise(n = n(),
+            mean.catch = median(catch, na.rm = TRUE),
+            sd = sd(catch, na.rm = TRUE),
+            se = sd/sqrt(n)) %>%
+  ungroup() %>% 
+  ggplot(aes(x = year, y = mean.catch, col = zone)) +
+  geom_line() +
+  geom_point(size = 5)+
+  geom_errorbar(aes(ymin = mean.catch-se, ymax = mean.catch+se), width = 0.075)+
+  ggsci::scale_color_jco(name = "Fishing area", label = c("Non Rumaki", "Rumaki")) +
+  scale_x_continuous(breaks = seq(2014,2016,1)) +
+  scale_y_continuous(breaks = seq(0,95,15))+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        legend.position = "right", 
+        legend.key.width = unit(2,"cm"))+
+  labs(x = "", y = "Total Catch (Tonnes)")
+
+# catch.districts %>% filter(catch < 1000) %>% ggplot(aes(x = year, y = catch, col = zone)) + geom_point()
+```
+
+
+
+```{r fig98, fig.cap="Common species caught in both Rumaki and other areas"}
+catch.districts%>% 
+  filter(catch > 50) %>%
+  group_by(family, zone, year)  %>% 
+  count() %>% ungroup() %>% 
+  filter(family != "Others") %>%
+  # arrange((english.name)) %>% 
+  ggplot(aes(x = family, y = n, fill = zone)) + 
+  geom_col(position = "dodge")+ 
+  coord_flip()+ 
+  facet_wrap(~year)+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"))+
+  ggsci::scale_fill_jco(name = "Fishing area", label = c("Non Rumaki", "Rumaki"))+
+  scale_y_continuous(breaks = seq(2,9,2)) +
+  labs(x = "Family group", y = "Number of appearance")+
+  theme(axis.text.y = element_text(size = 10))
+  
+
+
+
+```
+
+\newpage
+
+```{r}
+catch.districts  %>%
+  filter(english.name != "Others", catch > 300)  %>%
+  group_by(english.name, zone, year)  %>%
+  count() %>% ungroup() %>%
+  pivot_wider(names_from = zone, values_from = n)%>%
+  mutate(OTHER = replace(OTHER, !is.na(OTHER),"present"),
+         OTHER = replace(OTHER, is.na(OTHER),"absent"),
+         RUMAKI = replace(RUMAKI, !is.na(RUMAKI),"present"),
+         RUMAKI = replace(RUMAKI, is.na(RUMAKI),"absent")) %>%
+  filter(OTHER == "absent" & RUMAKI == "present") %>% pivot_wider(names_from = year, values_from = 3:4) %>%
+  kableExtra::kable(format = "latex",booktabs = T,
+                    caption = "Species found in Rumaki fishing area",
+                    col.names = c("Species", "2015", "2016", "2015", "2016")) %>%
+  kableExtra::add_header_above(c("", "Non Rumaki" = 2, "Rumaki" = 2)) %>%
+  kableExtra::column_spec(column = 1, width = "5cm")%>%
+  kableExtra::column_spec(column = 2:5, width = "2cm")
+```
+
+
+```{r}
+catch.districts  %>%
+  filter(english.name != "Others", catch > 300)  %>%
+  group_by(english.name, zone, year)  %>%
+  count() %>% ungroup() %>%
+  pivot_wider(names_from = zone, values_from = n)%>%
+  mutate(OTHER = replace(OTHER, !is.na(OTHER),"present"),
+         OTHER = replace(OTHER, is.na(OTHER),"absent"),
+         RUMAKI = replace(RUMAKI, !is.na(RUMAKI),"present"),
+         RUMAKI = replace(RUMAKI, is.na(RUMAKI),"absent")) %>%
+  filter(OTHER == "present" & RUMAKI == "absent") %>% pivot_wider(names_from = year, values_from = 3:4) %>%
+  knitr::kable(format = "latex", booktabs = T,
+               caption = "Species found in Non Rumaki fishing area",
+               col.names = c("Species", "2015", "2016", "2015", "2016")) %>%
+  kableExtra::add_header_above(c("", "Non Rumaki" = 2, "Rumaki" = 2))%>%
+  kableExtra::column_spec(column = 1, width = "5cm")%>%
+  kableExtra::column_spec(column = 2:5, width = "2cm")
+
+```
+
+
+```{r}
+catch.districts  %>%
+  filter(english.name != "Others", catch > 300)  %>%
+  group_by(english.name, zone, year)  %>%
+  count() %>% ungroup() %>%
+  pivot_wider(names_from = zone, values_from = n)%>%
+  mutate(OTHER = replace(OTHER, !is.na(OTHER),"present"),
+         OTHER = replace(OTHER, is.na(OTHER),"absent"),
+         RUMAKI = replace(RUMAKI, !is.na(RUMAKI),"present"),
+         RUMAKI = replace(RUMAKI, is.na(RUMAKI),"absent")) %>%
+  filter(OTHER == "present" & RUMAKI == "present") %>% pivot_wider(names_from = year, values_from = 3:4)  %>%
+  knitr::kable(format = "latex",booktabs = T,
+               caption = "Species found in Rumaki and Non-Rumaki fishing areas",
+               col.names = c("Species", "2015", "2016", "2015", "2016")) %>%
+  kableExtra::add_header_above(c("", "Non Rumaki" = 2, "Rumaki" = 2)) %>%
+  kableExtra::column_spec(column = 1, width = "5cm")%>%
+  kableExtra::column_spec(column = 2:5, width = "2cm")
+```

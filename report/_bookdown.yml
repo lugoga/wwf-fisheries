@@ -1,0 +1,29 @@
+book_filename: "report"
+delete_merged_file: true
+new_session: yes
+rmd_files:
+  html: [
+    "index.Rmd",
+    "01-intro.Rmd",
+    "03-method.Rmd",
+    "04-results.Rmd",
+    "05-summary.Rmd",
+    "06-references.Rmd",
+    "07-appendix.Rmd"
+    ]
+  latex: [
+   "index.Rmd",
+    "01-intro.Rmd",
+    "03-method.Rmd",
+    "04-results.Rmd",
+    "05-summary.Rmd",
+    "06-references.Rmd",
+    "07-appendix.Rmd"
+    ]
+language:
+  label:
+    fig: "FIGURE "
+    tab: "TABLE "
+  ui:
+    edit: "Edit"
+    chapter_name: "Chapter "

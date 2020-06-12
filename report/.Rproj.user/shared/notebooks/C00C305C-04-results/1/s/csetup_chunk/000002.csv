@@ -1,0 +1,48 @@
+"0","knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, comment = """")"
+"0",""
+"0","require(tidyverse)"
+"0","require(ggpubr)"
+"2","Loading required package: ggpubr
+"
+"0","require(sf)"
+"2","Loading required package: sf
+"
+"2","Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1
+"
+"0","require(ggspatial)"
+"2","Loading required package: ggspatial
+"
+"0","require(magrittr)"
+"2","Loading required package: magrittr
+"
+"2","
+Attaching package: ‘magrittr’
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    set_names
+
+"
+"2","The following object is masked from ‘package:tidyr’:
+
+    extract
+
+"
+"0","library(kableExtra)"
+"2","
+Attaching package: ‘kableExtra’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    group_rows
+
+"
+"0","require(cartography)"
+"2","Loading required package: cartography
+"
+"0","library(sp)"
+"0","require(patchwork)"
+"2","Loading required package: patchwork
+"

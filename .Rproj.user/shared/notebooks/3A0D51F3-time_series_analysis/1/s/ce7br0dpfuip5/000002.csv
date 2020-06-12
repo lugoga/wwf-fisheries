@@ -1,0 +1,5 @@
+"0",""
+"0","temperature.ts %>% "
+"0","  window(start = 2013) %>% "
+"0","  ggAcf(type = ""correlation"", lag=100, plot = T)"
+"0",""

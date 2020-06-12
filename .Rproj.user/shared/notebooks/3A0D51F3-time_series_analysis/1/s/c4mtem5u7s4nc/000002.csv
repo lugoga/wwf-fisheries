@@ -1,0 +1,8 @@
+"0",""
+"0","co2 %>% "
+"0","  autoplot() +"
+"0","  autolayer(meanf(y = co2, h = 120), series = ""Mean"", PI = FALSE, showgap = TRUE) +"
+"0","  autolayer(naive(y = co2, h = 120), series = ""Naive"", PI = FALSE, showgap = FALSE) +"
+"0","  autolayer(snaive(y = co2, h = 120), series = ""Seasonal naive"", PI = FALSE, showgap = FALSE)+"
+"0","  theme(legend.position = c(.85,.2))"
+"0",""

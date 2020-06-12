@@ -1,0 +1,450 @@
+---
+title: "catch data"
+author: "Mathias Msafiri Igulu"
+date: "1/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+yoU can learn the usage of tidyverse package in detail in a book R for data science written by Hadley Wickham. You can access an online book, which is free at this [link](https://r4ds.had.co.nz/data-import.html)
+
+
+We need to load the packages that contains function required for this processes. Use the `require()` function to load the packages in the session
+```{r}
+require(tidyverse)
+require(astsa)
+require(ggpmisc)
+require(ggfortify)
+require(forecast)
+```
+
+Our data is stored in Excel spreadsheet, and tidyverse packages lack the function to import or export excel file. However, there **readxl** package that contains tools to read and export files in Excell format.
+
+```{r}
+
+catch = readxl::read_excel(path = "data_revised.xlsx",sheet = 1, col_names = TRUE )
+```
+
+we noticed that column 6 and 7 have been renamed, but we know these columns data were removed from the files. therefore, we also need to trim them off from the dataset.
+```{r}
+catch.clean = catch %>% 
+  select(Location, Year, Month, Species,catch = 5)
+```
+
+trend in fish catch
+Clean months with typos to correct Month names
+```{r}
+# catch.clean %>% group_by(Month) %>% tally()
+
+catch.clean = catch.clean %>% 
+  mutate(Month = replace(Month, Month == "Augast", "August"),
+         Month = replace(Month, Month == "december", "December"),
+         Month = replace(Month, Month == "september", "September"),
+         Year = as.integer(Year)) %>%
+  mutate(day = 15,
+         Month = replace(Month, Month == "January", 1),
+         Month = replace(Month, Month == "February", 2),
+         Month = replace(Month, Month == "March", 3),
+         Month = replace(Month, Month == "April", 4),
+         Month = replace(Month, Month == "May", 5),
+         Month = replace(Month, Month == "June", 6),
+         Month = replace(Month, Month == "July", 7),
+         Month = replace(Month, Month == "August", 8),
+         Month = replace(Month, Month == "September", 9),
+         Month = replace(Month, Month == "October", 10),
+         Month = replace(Month, Month == "November", 11),
+         Month = replace(Month, Month == "December", 12),
+         Month = as.integer(Month),
+         date = lubridate::make_date(year = Year, month = Month, day = day),
+         catch =   catch %>% oce::despike())
+```
+
+Clean species but seems ok
+```{r}
+
+kigamboni = catch.clean %>% 
+  group_by(Species, Location) %>% 
+  tally() %>% 
+  arrange(desc(n)) %>% ungroup() %>% 
+  filter(Location == "Kigamboni") %>%
+  separate(col = Species, into = c("Species", "others"), sep = " " )%>% 
+  mutate(percentage = (n/sum(n) * 100) %>% round(2), cumsum = cumsum(percentage),
+         labs = paste(percentage,"%", Species)) %>%
+  filter(cumsum <= 50) 
+  
+  
+    
+  kigamboni %>% 
+    ggpubr::ggdonutchart(x = "n", 
+                       label = "labs", 
+                       fill = "Species", color = "white", lab.pos = "in")+
+  # scale_fill_viridis_d() +
+    scale_fill_brewer(palette = "Paired")+
+  theme(legend.position = "none")  
+
+```
+
+
+```{r}
+library(ggpubr)
+
+# Data: Create some data
+# +++++++++++++++++++++++++++++++
+
+df <- data.frame(
+ group = c("Male", "Female", "Child"),
+  value = c(25, 25, 50))
+
+head(df)
+
+
+# Basic pie charts
+# ++++++++++++++++++++++++++++++++
+
+ggdonutchart(df, "value", label = "group")
+
+
+# Change color
+# ++++++++++++++++++++++++++++++++
+
+# Change fill color by group
+# set line color to white
+# Use custom color palette
+ ggdonutchart(df, "value", label = "group",
+      fill = "group", color = "white",
+       palette = c("#00AFBB", "#E7B800", "#FC4E07") )
+
+
+# Change label
+# ++++++++++++++++++++++++++++++++
+
+# Show group names and value as labels
+labs <- paste0(df$group, " (", df$value, "%)")
+ggdonutchart(df, "value", label = labs,
+   fill = "group", color = "white",
+   palette = c("#00AFBB", "#E7B800", "#FC4E07"))
+
+# Change the position and font color of labels
+ggdonutchart(df, "value", label = labs,
+   lab.pos = "in", lab.font = "white",
+   fill = "group", color = "white",
+   palette = c("#00AFBB", "#E7B800", "#FC4E07"))
+
+```
+
+
+```{r}
+catch.clean.group = catch.clean %>% 
+  group_by(Location, date) %>% 
+  summarise(catch = median(catch, na.rm = TRUE)) %>%
+  ungroup() 
+```
+
+## Fish catch trends
+```{r}
+catch.clean.group = catch.clean.group %>% 
+  arrange(date)
+
+ now= catch.clean.group %>% filter(catch > 250 & catch < 420) %>% 
+   mutate(mwezi = lubridate::month(date, abbr = TRUE, label = TRUE),
+          year = lubridate::year(date) %>% as.integer(),
+          label = paste(mwezi, ", ",year))
+
+formula1 <- y ~ x
+
+ggplot(data = catch.clean.group , 
+       aes(x = date, y = catch, col = Location, fill = Location))+
+  geom_point()+
+  geom_smooth(se = TRUE, alpha = .2, method = "lm", formula = formula1)+
+  # stat_fit_tb(method = "lm",
+  #             method.args = list(formula = formula1),
+  #             tb.vars = c(Parameter = "term", 
+  #                         Estimate = "estimate", 
+  #                         "s.e." = "std.error", 
+  #                         "italic(t)" = "statistic", 
+  #                         "italic(P)" = "p.value"),
+  #             label.y = "top", label.x = "right",
+  #             parse = TRUE)+
+  stat_poly_eq(aes(label = paste0("atop(", ..eq.label.., ",", ..rr.label.., ")")), 
+               formula = formula1, rr.digits = 2,
+               parse = TRUE) +
+  # ggrepel::geom_text_repel(data = now, aes(x = date, y = catch, label = label)) +
+  scale_x_date(date_minor_breaks = "1 month") +
+  scale_y_continuous(breaks = seq(100,600,100))+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), legend.position = "none")+
+  facet_wrap(~Location, scales = "free_y")+
+  labs(x = "", y = "Fish catch (Tonnes)")
+# ggsave("fig1.pdf")
+```
+
+
+
+
+```{r}
+
+catch.clean.group.wide = catch.clean.group %>% ungroup() %>% select(date, Location, catch) %>% pivot_wider(names_from = "Location", values_from = "catch") %>% arrange(date) 
+
+
+ts.series = ts.intersect(
+  Kibiti = ts(data = catch.clean.group.wide %>% pull(Kibiti),start = c(2016,6), frequency = 12),
+  Kilwa = ts(data = catch.clean.group.wide %>% pull(Kilwa),start = c(2016,6), frequency = 12),
+  Mafia = ts(data = catch.clean.group.wide %>% pull(Mafia),start = c(2016,6), frequency = 12),
+  Mtwara = ts(data = catch.clean.group.wide %>% pull(`Mtwara Rural`),start = c(2016,6), frequency = 12),
+  Kigamboni = ts(data = catch.clean.group.wide %>% pull(Kigamboni),start = c(2016,6), frequency = 12)
+  ) 
+
+ts.series %>% 
+  autoplot() +  
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), legend.position = c(.80,.75))+
+  scale_y_continuous(breaks = seq(100,600,100))+
+  labs(x = "", y = "Fish catch (Tonnes)")
+
+# ggsave("fig2.pdf")
+```
+
+We notice that only the catch data has few missing values. Then we use it to represent the trend of cath. Because the data ends in september 2019, we extended for two more years and forecast the catches of fish in this site until september 2021. We add six months moving average on the plot
+```{r}
+ts.series[,2] %>% 
+  window(start = c(2016,11)) %>%
+  autoplot() +
+  autolayer(snaive(y = ts.series[,2]%>% window(start = c(2018,1)), h = 24), 
+            series = "Future Catch", PI = FALSE, showgap = FALSE)+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), legend.position = c(.80,.75),)+
+  scale_y_continuous(breaks = seq(100,600,100))+
+  labs(x = "", y = "Fish catch (Tonnes)")+
+  tidyquant::geom_ma(ma_fun = SMA,n=6, na.rm = TRUE) # for six moths moving average
+
+```
+
+general trend--catch sites pool together
+```{r}
+catch.clean.group
+```
+
+rumaki and non rumaki
+```{r}
+
+```
+
+Rumaki---
+
+composition
+general 
+rumaki and non-rumaki
+
+change of specied dominance per year
+
+
+
+```{r}
+catch.districts = readxl::read_excel(path = "data_revised.xlsx",sheet = 2, col_names = TRUE ) %>% 
+  select(year = 1, family = 2, english.name = 3, swahili.name = 4, district = 5, catch = 6, zone = 7) %>%
+  mutate(year = as.integer(year), zone = as_factor(zone), english.name = as_factor(english.name), 
+         swahili.name = as_factor(swahili.name), family = as_factor(family), district = as_factor(district),
+         catch = as.numeric(catch))
+
+```
+
+```{r}
+## check and remove outlier in the dataset
+
+ggplot(data = catch.districts , aes(zone, catch, fill = year)) + geom_boxplot()
+q = quantile(catch.districts$catch, na.rm = TRUE)
+iqr = IQR(catch.districts$catch, na.rm = TRUE)
+
+lower = q[2] - 1.5*iqr; upper = q[4]+ 1.5*iqr
+ggplot(data = catch.districts %>% filter(catch <= upper) , 
+       aes(zone, catch, fill = year)) + geom_boxplot()
+```
+
+```{r}
+catch.districts%>% 
+  # filter(catch < 1000) %>%
+  filter(catch <= upper) %>%
+  group_by(year, zone) %>% 
+  summarise(n = n(),
+            mean.catch = median(catch, na.rm = TRUE),
+            sd = sd(catch, na.rm = TRUE),
+            se = sd/sqrt(n)) %>%
+  ungroup() %>% 
+  ggplot(aes(x = year, y = mean.catch, col = zone)) +
+  geom_line() +
+  geom_point(size = 5)+
+  geom_errorbar(aes(ymin = mean.catch-se, ymax = mean.catch+se), width = 0.075)+
+  ggsci::scale_color_jco(name = "Fishing area", label = c("Non Rumaki", "Rumaki")) +
+  scale_x_continuous(breaks = seq(2014,2016,1)) +
+  scale_y_continuous(breaks = seq(0,95,15))+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        legend.position = "right", 
+        legend.key.width = unit(2,"cm"))+
+  labs(x = "", y = "Total Catch (Tonnes)")
+
+# catch.districts %>% filter(catch < 1000) %>% ggplot(aes(x = year, y = catch, col = zone)) + geom_point()
+```
+
+```{r}
+catch.districts%>% 
+  # filter(catch > 50) %>%
+  filter(catch <= upper) %>%
+  group_by(family, zone, year)  %>% 
+  count() %>% ungroup() %>% 
+  filter(family != "Others") %>%
+  # arrange((english.name)) %>% 
+  ggplot(aes(x = family, y = n, fill = zone)) + 
+  geom_col(position = "dodge")+ 
+  coord_flip()+ 
+  facet_wrap(~year)+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"))+
+  ggsci::scale_fill_jco(name = "Fishing area", label = c("Non Rumaki", "Rumaki"))+
+  scale_y_continuous(breaks = seq(2,9,2)) +
+  labs(x = "Family group", y = "Number of appearance")+
+  theme(axis.text.y = element_text(size = 10))
+  
+
+
+
+```
+
+
+
+
+
+```{r}
+
+catch.districts  %>% 
+  filter(english.name != "Others", catch > 300)  %>% 
+  group_by(english.name, zone, year)  %>% 
+  count() %>% ungroup() %>% 
+  pivot_wider(names_from = zone, values_from = n)%>% 
+  mutate(OTHER = replace(OTHER, !is.na(OTHER),"present"),
+         OTHER = replace(OTHER, is.na(OTHER),"absent"),
+         RUMAKI = replace(RUMAKI, !is.na(RUMAKI),"present"),
+         RUMAKI = replace(RUMAKI, is.na(RUMAKI),"absent")) %>%
+  pivot_longer(names_to = "zone", values_to = "present.absent", cols = 3:4, ) %>% filter(present.absent == "present") %>% group_by(zone, english.name,year) %>% tally()
+
+
+catch.districts  %>% 
+  filter(english.name != "Others", catch > 300)  %>% 
+  group_by(english.name, zone, year)  %>% 
+  count() %>% ungroup() %>% 
+  pivot_wider(names_from = zone, values_from = n)%>% 
+  mutate(OTHER = replace(OTHER, !is.na(OTHER),"present"),
+         OTHER = replace(OTHER, is.na(OTHER),"absent"),
+         RUMAKI = replace(RUMAKI, !is.na(RUMAKI),"present"),
+         RUMAKI = replace(RUMAKI, is.na(RUMAKI),"absent")) %>%
+  filter(OTHER == "absent" & RUMAKI == "present") %>% 
+  pivot_wider(names_from = year, values_from = 3:4) %>%
+  kableExtra::kable(format = "html", caption = "Species found in Rumaki fishing area", 
+                    col.names = c("Species", "2015", "2016", "2015", "2016")) %>%
+  kableExtra::add_header_above(c("", "Non Rumaki" = 2, "Rumaki" = 2)) %>%
+  kableExtra::column_spec(column = 1:5, width = "5cm")
+```
+
+
+```{r}
+catch.districts  %>% 
+  filter(english.name != "Others", catch > 300)  %>% 
+  group_by(english.name, zone, year)  %>% 
+  count() %>% ungroup() %>% 
+  pivot_wider(names_from = zone, values_from = n)%>% 
+  mutate(OTHER = replace(OTHER, !is.na(OTHER),"present"),
+         OTHER = replace(OTHER, is.na(OTHER),"absent"),
+         RUMAKI = replace(RUMAKI, !is.na(RUMAKI),"present"),
+         RUMAKI = replace(RUMAKI, is.na(RUMAKI),"absent")) %>%
+  filter(OTHER == "present" & RUMAKI == "absent") %>% pivot_wider(names_from = year, values_from = 3:4) %>%
+  kableExtra::kable(format = "html", caption = "Species found in Non Rumaki fishing area", 
+                    col.names = c("Species", "2015", "2016", "2015", "2016")) %>%
+  kableExtra::add_header_above(c("", "Non Rumaki" = 2, "Rumaki" = 2)) %>%
+  kableExtra::column_spec(column = 1:5, width = "5cm")
+```
+
+
+```{r}
+catch.districts  %>% 
+  filter(english.name != "Others", catch > 300)  %>% 
+  group_by(english.name, zone, year)  %>% 
+  count() %>% ungroup() %>% 
+  pivot_wider(names_from = zone, values_from = n)%>% 
+  mutate(OTHER = replace(OTHER, !is.na(OTHER),"present"),
+         OTHER = replace(OTHER, is.na(OTHER),"absent"),
+         RUMAKI = replace(RUMAKI, !is.na(RUMAKI),"present"),
+         RUMAKI = replace(RUMAKI, is.na(RUMAKI),"absent")) %>%
+  filter(OTHER == "present" & RUMAKI == "present") %>% pivot_wider(names_from = year, values_from = 3:4)  %>%
+  kableExtra::kable(format = "html", caption = "Species found in Rumaki and Non-Rumaki fishing areas", 
+                    col.names = c("Species", "2015", "2016", "2015", "2016")) %>%
+  kableExtra::add_header_above(c("", "Non Rumaki" = 2, "Rumaki" = 2)) %>%
+  kableExtra::column_spec(column = 1:5, width = "5cm")
+```
+
+```{r}
+phyto = readxl::read_excel("c:/Users/Semba/Desktop/working/Maggie/Manuscripts/phytoplankton_combined.xls", sheet = 1) %>% mutate(date = lubridate::dmy(Date)) %>% select(date, Date, Station, everything())
+
+phyto.pa = phyto %>% 
+  dplyr::group_by(Station, Season, Diatoms) %>% 
+  tally() %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = Station, values_from = n) %>% 
+  mutate(Mwaboza = replace(Mwaboza, !is.na(Mwaboza),"present"),
+         Mwaboza = replace(Mwaboza, is.na(Mwaboza),"absent"),
+         Sahare = replace(Sahare, !is.na(Sahare),"present"),
+         Sahare = replace(Sahare, is.na(Sahare),"absent"),
+         Vyeru = replace(Vyeru, !is.na(Vyeru),"present"),
+         Vyeru = replace(Vyeru, is.na(Vyeru),"absent")) %>%
+  pivot_longer(names_to = "sites", values_to = "present.absent", cols = 3:5) %>% filter(present.absent == "present") %>% group_by(sites, Season) %>% tally()
+
+
+vyeru = phyto.pa%>%
+  filter(sites == "Vyeru") %>% 
+  mutate(percentage = (n/sum(n) * 100) %>% round(2), labs = paste(percentage, "%")) %>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "labs",
+                       fill = "Season", color = "white", lab.pos = "in")+
+  ggsci::scale_fill_jco()+
+  theme(legend.position = "none")+
+  labs(subtitle = "Vyeru")
+
+mwabo = phyto.pa%>%
+  filter(sites == "Mwaboza") %>% 
+  mutate(percentage = (n/sum(n) * 100) %>% round(2), labs = paste(percentage, "%")) %>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "labs",
+                       fill = "Season", color = "white", lab.pos = "in")+
+  ggsci::scale_fill_jco()+
+  theme(legend.position = "none")+
+  labs(subtitle = "Mwaboza")
+
+sahare = phyto.pa%>%
+  filter(sites == "Sahare") %>% 
+  mutate(percentage = (n/sum(n) * 100) %>% round(2), labs = paste(percentage, "%")) %>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "labs",
+                       fill = "Season", color = "white", lab.pos = "in")+
+  ggsci::scale_fill_jco()+
+  theme(legend.position = "right")+
+  labs(subtitle = "Sahare")
+
+egg::ggarrange(mwabo,vyeru,  sahare, nrow = 1)
+```
+
+```{r}
+catch.districts %>% group_by(english.name, zone) %>% tally()%>% ungroup() %>% 
+  pivot_wider(names_from = zone, values_from = n)
+
+```
+
+```{r}
+catch.districts %>% group_by(english.name,zone) %>% count() %>% arrange(desc(n))
+```
+
+```{r}
+
+```
+

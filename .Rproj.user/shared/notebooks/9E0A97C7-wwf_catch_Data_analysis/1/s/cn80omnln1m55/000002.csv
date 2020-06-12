@@ -1,0 +1,6 @@
+"0","catch.districts %>% group_by(english.name,zone) %>% count() %>% arrange(desc(n))
+"
+"2","Factor `english.name` contains implicit NA, consider using `forcats::fct_explicit_na`"
+"2","Factor `english.name` contains implicit NA, consider using `forcats::fct_explicit_na`"
+"2","Factor `english.name` contains implicit NA, consider using `forcats::fct_explicit_na`"
+"2","Factor `english.name` contains implicit NA, consider using `forcats::fct_explicit_na`"

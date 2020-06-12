@@ -1,0 +1,7 @@
+"0","catch.districts = readxl::read_excel(path = ""data_revised.xlsx"",sheet = 2, col_names = TRUE ) %>% "
+"0","  select(year = 1, family = 2, english.name = 3, swahili.name = 4, district = 5, catch = 6, zone = 7) %>%"
+"0","  mutate(year = as.integer(year), zone = as_factor(zone), english.name = as_factor(english.name), "
+"0","         swahili.name = as_factor(swahili.name), family = as_factor(family), district = as_factor(district),"
+"0","         catch = as.numeric(catch))"
+"0",""
+"0",""

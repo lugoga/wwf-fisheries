@@ -1,0 +1,4 @@
+"0","temperature.ts %>% "
+"0","  naive(h = 60) %>% "
+"0","  autoplot()+"
+"0","  ggtitle("""")"

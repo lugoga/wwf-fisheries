@@ -1,0 +1,11 @@
+"0","setwd(""E:/Data Manipulation/Temperature data/"")"
+"0","temperature = read_csv(""semba_daily_temperature_interpolated.csv"")"
+"2","Parsed with column specification:
+cols(
+  date = [34mcol_date(format = """")[39m,
+  week = [32mcol_double()[39m,
+  month = [32mcol_double()[39m,
+  year = [32mcol_double()[39m,
+  sst = [32mcol_double()[39m
+)
+"

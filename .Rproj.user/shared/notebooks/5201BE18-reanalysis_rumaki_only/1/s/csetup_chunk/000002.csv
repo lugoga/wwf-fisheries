@@ -1,0 +1,6 @@
+"0","knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, comment = """")"
+"0",""
+"0","require(tidyverse)"
+"0","require(ggpubr)"
+"0","require(sf)"
+"0","require(ggspatial)"

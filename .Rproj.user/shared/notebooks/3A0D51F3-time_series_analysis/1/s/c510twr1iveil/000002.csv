@@ -1,0 +1,6 @@
+"0",""
+"0","temperature.ts %>% "
+"0","  rwf(h = 60, drift = TRUE) %>% "
+"0","  autoplot()+"
+"0","  ggtitle("""")"
+"0",""

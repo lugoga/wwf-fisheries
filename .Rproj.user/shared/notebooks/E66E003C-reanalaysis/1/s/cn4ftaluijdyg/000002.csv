@@ -1,0 +1,13 @@
+"0","require(tsbox)"
+"2","Loading required package: tsbox
+"
+"0","reef.rumaki = catch.stats %>% "
+"0","  filter(group == ""Reef fish"" & Zone == ""RUMAKI"") %$% "
+"0","  ts(catch.median, start = 2014, frequency = 1) "
+"0",""
+"0","reef.other = catch.stats %>% "
+"0","  filter(group == ""Reef fish"" & Zone == ""OTHER"") %$% "
+"0","  ts(catch.median, start = 2014, frequency = 1) "
+"0",""
+"0","## bind the ts together"
+"0"," ts_c(Rumaki = reef.rumaki, Other = reef.other) %>% ts_plot()"

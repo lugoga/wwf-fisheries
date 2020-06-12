@@ -1,0 +1,25 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">A Report on Fisheries Statistics at RUMAKI Seascape </a></li>
+      after: |
+        <li><a href="https://lugoga.github.com/kagera" target="blank">Published with bookdown</a></li>
+    download: ["pdf", "epub", "html"]
+
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+    before_body: frontpage.tex
+    after_body: endpage.tex
+    toc: true
+    toc_depth: 3
+    indent: false
+    number_sections: true
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+ # template: template.tex
+ 
+bookdown::epub_book: default

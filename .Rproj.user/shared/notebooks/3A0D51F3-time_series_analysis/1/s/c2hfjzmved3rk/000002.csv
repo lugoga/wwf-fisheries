@@ -1,0 +1,8 @@
+"0",""
+"0","co2 %>% "
+"0","  autoplot() +"
+"0","  autolayer(meanf(y = co2, h = 120), series = ""Historical Mean"", PI = FALSE, showgap = TRUE) +"
+"0","  autolayer(rwf(y = co2, h = 120), series = ""Random Walk Factor"", PI = FALSE, showgap = FALSE) +"
+"0","  autolayer(rwf(y = co2,drift = TRUE, h = 120), series = ""Seasonal naive"", PI = FALSE, showgap = FALSE)+"
+"0","  theme(legend.position = c(.85,.2))"
+"0",""

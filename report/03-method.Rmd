@@ -1,0 +1,316 @@
+# Methods {#method}
+
+```{r setup3, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, comment = FALSE)
+
+require(sf)
+require(tidyverse)
+require(ggrepel)
+require(ggspatial)
+require(magrittr)
+library(kableExtra)
+require(cartography)
+library(sp)
+require(patchwork)
+```
+
+## Approach
+The current assignment was on secondary data. Fisheries archives and statistics annual reports from 2014 to 2018 were the sources of data used in this report. The  Department of Fisheries \index{Institutes!Department of Fisheries} publishes these reports. The e-CAS\index{Tools!e--CAS}---an online fisheries data platform was also accessed to retrieve data \index{Fisheries!data} for mainland Tanzania. The platform is still at early stage of development and contains data from 2016-2019. The Department of Fisheries hosts e--CAS database TAFIRI \index{Institutes!TAFIRI} periodically update the database.
+
+Although the e--CAS cover all coastal districts in Mainland Tanzania, this reports covers districts that fall under the RUMAKI Seascape. The RUMAKI seascape has five districts of Kibiti\index{RUMAKI!Kibiti}, Mafia\index{RUMAKI!Mafia}, Kilwa\index{RUMAKI!Kilwa}, Kigamboni\index{RUMAKI!Kigamboni} and Mtwara Rural\index{RUMAKI!Mtwara Rural}. These districts located in the south of Dar es salaam (Figure \@ref(fig:fig31)). The other districts north of Dar es Salaam are outside the RUMAKI seascape and include includes, Mkinga \index{Non--RUMAKI!Mkinga}, Mheza \index{Non--RUMAKI!Mheza}, Pangani \index{Non--RUMAKI!Pangani}, Bagamoyo \index{Non--RUMAKI!Bagamoyo}, Kinondoni \index{Non--RUMAKI!Kinondoni}, Ilala \index{Non--RUMAKI!Ilala} and Mkuranga \index{Non--RUMAKI!Mkuranga}. Although Mtwara urban \index{Non--RUMAKI!Mtwara urban}, Lindi rural \index{Non--RUMAKI!Lindi rural} and urban \index{Non--RUMAKI!Lindi urban} districts are located in the southern region, but are also outside the RUMAKI Seascape.
+
+
+
+
+
+```{r}
+## bathymetry
+## read the ascii file
+tz.bath = raster::raster("e:/GIS/ROADMAP/Etopo 1/Tanzania_etopo1/tanz1_-3432.asc")
+
+
+## convert raster to data frame
+tz.bath.df = tz.bath %>% 
+  raster::as.data.frame(xy = TRUE) %>%
+  dplyr::as_tibble()
+
+## rename the variable
+tz.bath.df = tz.bath.df %>% 
+  dplyr::rename(lon = x, lat = y, depth = 3)%>% 
+  dplyr::mutate(depth = as.integer(depth))
+
+## chop the area of interest 
+study.area.bath= tz.bath.df %>% 
+  dplyr::filter(lon > 38.5 & lon < 41.5 & 
+           lat > -14 & lat < - -2 & depth < 0 )
+
+```
+
+
+```{r}
+africa = st_read("e:/Data Manipulation/Deep sea/data/africa.shp", quiet = TRUE) 
+
+tz.ke.mo = africa %>% 
+  filter(CNTRY_NAME %in% c("Tanzania", "Kenya", "Mozambique"))
+
+# tz.ke.mo %>% st_bbox()
+
+tz.district = st_read("e:/GIS/tanzania-latest.shp/nbs/Districts.shp", quiet = TRUE)
+
+coastal.districts = tz.district %>%
+  filter(District_N %in% c("Mkinga", "Tanga Urban", "Muheza", "Pangani", "Bagamoyo",
+                           "Kinondoni", "Ilala", "Temeke", "Mkuranga", "Rufiji", 
+                           "Mafia", "Kilwa", "Lindi", "Lindi Urban", "Mtwara", 
+                           "Mtwara Urban"))
+
+rumaki = c("Mafia", "Rufiji", "Kilwa", "Mtwara", "Lindi")
+
+coastal.districts.zones = rbind(coastal.districts %>% 
+  filter(District_N %in% rumaki) %>%
+  mutate(zone = "RUMAKI"),
+  coastal.districts %>% 
+  filter(!District_N %in% rumaki) %>%
+  mutate(zone = "Non-RUMAKI"))
+
+
+# coastal.districts %>% 
+#   mapview::mapview()
+
+```
+
+
+
+```{r}
+
+
+north.map = ggplot() +
+    metR::geom_contour_fill(data = study.area.bath %>% filter(depth > -1600),
+               aes(x = lon, y = lat, z=depth), binwidth = 200,na.fill = TRUE, show.legend = FALSE)+
+  metR::geom_contour_tanaka(data = study.area.bath,
+               aes(x = lon, y = lat, z=depth), binwidth = 200, col = "grey70", 
+               size = 0.25, lineend = "round", linemitre = 6)+
+  metR::geom_text_contour(data = study.area.bath,
+               aes(x = lon, y = lat, z=depth*-1),
+               binwidth = 200, rotate = TRUE, check_overlap = TRUE, parse = TRUE, size = 2.5,
+               stroke = 0, col = "black")+
+  metR::geom_contour2(data = study.area.bath %>% filter(depth > -90),
+               aes(x = lon, y = lat, z=depth*-1), binwidth = 50, col = "grey70", 
+               size = 0.25, lineend = "round", linemitre = 6)+
+  metR::geom_text_contour(data = study.area.bath%>% filter(depth > -90),
+               aes(x = lon, y = lat, z=depth*-1),
+               binwidth = 50, rotate = TRUE, check_overlap = TRUE, parse = TRUE, size = 2.5,
+               stroke = 0, col = "black")+
+  geom_sf(data = tz.ke.mo, col = "#ED6300", fill = "#FBE1CB",size = .30) +
+  ggspatial::layer_spatial(data = coastal.districts.zones, 
+                           col = "#ED6300", fill = "green",size = .30, alpha = 0.2) +
+  coord_sf(xlim = c(38.7, 40.4), ylim = c(-7, -4.4),crs = 4326)+ #robinson projection
+  labs(x = "", y = "")+
+  cowplot::theme_minimal_grid()+
+  theme_bw() %+%
+  theme(panel.background = element_rect(fill = NA, colour = "black", size = .75),
+        panel.grid.major = element_line(linetype = 3, colour = "grey60"),
+        axis.text = element_text(colour = 1, size = 10),
+        legend.background = element_rect(fill = "white", colour = "black", size = .25),
+        legend.key = element_blank(),
+       legend.position = c(.1,.14),
+       legend.key.width = unit(.9,"cm"))+
+  scale_x_continuous(breaks = c(38.9, 40.2))+
+  scale_y_continuous(breaks = c(-6.8,-4.5))+
+  ggspatial::annotation_scale(location = "bl", text_cex = .95)+
+  ggspatial::annotation_north_arrow(location = "tl", height = unit(1.5, "lines"), 
+                                    width = unit(1, "lines"))+
+  # annotate(geom = "text", x = 39.45, y = -5.2, label = "Pemba\nChannel", size = 4, col = "black")+
+  annotate(geom = "text", x = 39.7, y = -5.38, label = "Pemba\nIsland", size = 4, col = "black")+
+  annotate(geom = "text", x = 39.05, y = -5.1, label = "Tanga", size = 4, col = "black")+
+  ggsci::scale_color_aaas(name = "Transects")+
+  scale_fill_gradientn(colours = oce::oce.colorsGebco(120))
+
+# ggsave("reporting/first report/map2.png", width = 6.5, height = 7)
+
+```
+
+
+
+
+```{r }
+
+
+south.map = ggplot() +
+    metR::geom_contour_fill(data = study.area.bath %>% filter(depth > -2500),
+               aes(x = lon, y = lat, z=depth), binwidth = 200,na.fill = TRUE, show.legend = FALSE)+
+  metR::geom_contour_tanaka(data = study.area.bath,
+               aes(x = lon, y = lat, z=depth), binwidth = 400, col = "grey70", 
+               size = 0.25, lineend = "round", linemitre = 6)+
+  metR::geom_text_contour(data = study.area.bath,
+               aes(x = lon, y = lat, z=depth*-1),
+               binwidth = 400, rotate = TRUE, check_overlap = TRUE, parse = TRUE, size = 2.5,
+               stroke = 0, col = "black")+
+  metR::geom_contour2(data = study.area.bath %>% filter(depth > -90),
+               aes(x = lon, y = lat, z=depth*-1), binwidth = 50, col = "grey70", 
+               size = 0.25, lineend = "round", linemitre = 6)+
+  metR::geom_text_contour(data = study.area.bath%>% filter(depth > -90),
+               aes(x = lon, y = lat, z=depth*-1),
+               binwidth = 50, rotate = TRUE, check_overlap = TRUE, parse = TRUE, size = 2.5,
+               stroke = 0, col = "black")+
+  geom_sf(data = tz.ke.mo, col = "#ED6300", fill = "#FBE1CB",size = .30) +
+  ggspatial::layer_spatial(data = coastal.districts.zones,fill = "green", alpha = 0.2,
+                           col = "#ED6300",size = .30) +
+  ggspatial::layer_spatial(data = coastal.districts.zones %>% filter(zone == "RUMAKI"),
+                           fill = "maroon", alpha = 0.2,
+                           col = "#ED6300",size = .30) +
+  coord_sf(xlim = c(39.2, 40.6), ylim = c(-10.5, -7.5),crs = 4326)+ #robinson projection
+  labs(x = "", y = "")+
+  cowplot::theme_minimal_grid()+
+  theme_bw() %+%
+  theme(panel.background = element_rect(fill = NA, colour = "black", size = .75),
+        panel.grid.major = element_line(linetype = 3, colour = "grey60"),
+        axis.text = element_text(colour = 1, size = 10),
+        legend.background = element_rect(fill = "white", colour = "black", size = .25),
+        legend.key = element_blank(),
+       legend.position = c(.1,.14),
+       legend.key.width = unit(.9,"cm"))+
+  scale_x_continuous(breaks = c(39.4,40.4))+
+  scale_y_continuous(breaks = c(-10.3,-7.5))+
+  ggspatial::annotation_scale(location = "bl", text_cex = .95)+
+  ggspatial::annotation_north_arrow(location = "tl", height = unit(1.5, "lines"), 
+                                    width = unit(1, "lines"))+
+  # annotate(geom = "text", x = 39.45, y = -5.2, label = "Pemba\nChannel", size = 4, col = "black")+
+  annotate(geom = "text", x = 39.7, y = -5.38, label = "Pemba\nIsland", size = 4, col = "black")+
+  annotate(geom = "text", x = 39.05, y = -5.1, label = "Tanga", size = 4, col = "black")+
+  ggsci::scale_color_aaas(name = "Transects")+
+  scale_fill_gradientn(colours = oce::oce.colorsGebco(120))
+```
+
+
+
+```{r fig31, fig.cap="A Map of Coastal Tanzania split into north (left panel) and south (right panel). The contour lines are drawn based on Tanaka technique"}
+
+north.map + south.map
+
+# ggsave("map.pdf")
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r rumaki, fig.cap="A map showing the  districts in Rumaki Seascape", eval=FALSE}
+
+
+data("nuts2006")
+# Plot a layer with the extent of the EU28 countries with only a background color
+plot(nuts0.spdf, border = NA, col = NA, bg = "#A6CAE0")
+# Plot non european space
+plot(world.spdf, col  = "#E3DEBF", border = NA, add = TRUE)
+# Plot Nuts2 regions
+plot(nuts0.spdf, col = "grey60",border = "white", lwd = 0.4, add = TRUE)
+# plot the countries population
+propSymbolsLayer(
+  spdf = nuts0.spdf, 
+  df = nuts0.df, 
+  spdfid = "id", 
+  dfid = "id", 
+  var = "pop2008", 
+  legend.pos = "topright", 
+  col = "red4", 
+  border = "white", 
+  legend.title.txt = "Population" 
+)
+# layout
+layoutLayer(title = "Population in Europe, 2008",
+            sources = "Data: Eurostat, 2008",
+            author =  paste0("cartography ", packageVersion("cartography")),
+            scale = 500, frame = TRUE, col = "#688994") 
+# north arrow
+north("topleft")
+```
+
+
+
+
+```{r, eval=FALSE}
+world = spData::world %>% 
+  # filter(continent == "Africa") %>% 
+  dplyr::select(name = name_long, pop) %>% 
+  mutate(id = 1:n()) %>% 
+  # st_transform(4326) %>% 
+  as("Spatial") %>%
+  spTransform(CRS("+proj=longlat +datum=WGS84"))
+
+africa = spData::world %>% 
+  filter(continent == "Africa") %>% 
+  dplyr::select(name = name_long, pop, area = area_km2) %>% 
+  mutate(id = 1:n(), pop.density = pop/area) %>% 
+  # st_transform(4326) %>% 
+  as("Spatial") %>%
+  spTransform(CRS("+proj=longlat +datum=WGS84"))
+
+
+
+
+
+# Plot a layer with the extent of the EU28 countries with only a background color
+plot(africa, border = NA, col = NA, bg = "#A6CAE0")
+# Plot non european space
+plot(world, col  = "#E3DEBF", border = NA, add = TRUE)
+# Plot Nuts2 regions
+plot(africa, col = "grey60",border = "ivory", lwd = 0.2, add = TRUE)
+# plot the countries population
+propSymbolsLayer(
+  spdf = africa, 
+  df = africa, 
+  spdfid = "id", 
+  dfid = "id", 
+  var = "pop.density", 
+  legend.pos = "bottomright", 
+  col = "red4", 
+  border = "white", 
+  legend.title.txt = "Population\nDensity" 
+)
+# layout
+layoutLayer(title = "Population  Density in Africa, 2014",
+            sources = "Data: Wordl, 2014",
+            author =  paste0("cartography ", packageVersion("cartography")),
+            scale = 500, frame = FALSE, col = "#688994") 
+# north arrow
+north("topleft")
+
+africa %>% df_spatial()
+```
+
+
+
+## Data collection
+The current assignment used the official Catch Assessment Survey (CAS) data spanning from the year 2014 to 2018. In addition, we also extracted data collected by BMUs members from the RUMAKI districts, this additional data span from 2016-2019. The database is currently hosted by the Department of Fisheries and available online upon permission. Once the data needed was gathered and stored in Excel spreadsheet. 
+
+Before the analysis, the data was cleaned and checked for any inconsistency. Specifically, we removed all duplicated, wrongly recorded observations. We then convert all the species to the proper case, and stem the species name--harmonize different species name found in the records. Finally, we checked for major fisheries groups that have appeared consistently over the years. 
+
+Because species varied from districts and over the study period, the dataset was grouped according to six major  fishery groups with few common representative species where available (Table \@ref(tab:tab1)). The groups/priority fisheries are Octopus \index{Family!octopus}, Small pelagic \index{Family!pelagic}, Tuna and tuna-like \index{Family!tuna}, Reef fishes \index{Family!reef fishes}, Elasmobranch \index{Family!elasmobrach} and Prawns \index{Family!prawns}. These groups were adopted from priority fisheries under the SWIOFish\index{SWIOFish} Project with an addition of Elasmobranch.  
+
+
+```{r tab1}
+
+data = read_csv("table1.csv")
+
+data %>% 
+  rename(category =1)  %>% 
+  # mutate(species = str_replace(string = Species, 
+  #                              pattern = "Octopus cyanea", 
+  #                              replacement = "Octopus cyanea \\textit{italics}")) %>%
+  kableExtra::kable(format = "latex", booktabs = T, align = "l",escape = FALSE,
+                    caption = "Priority fisheries Category and corresponding  fish species retrieved from e--CAS database and Annual CAS reports", col.names = c("Fisheries Category", "Species")) %>%
+  column_spec(1, bold=T, width = "3.5in")%>%
+  column_spec(2, italic=T) %>%
+  collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>% 
+  kable_styling(font_size = ifelse(knitr:::is_latex_output(), 10, 16), 
+                latex_options = c("hold_position"))
+```

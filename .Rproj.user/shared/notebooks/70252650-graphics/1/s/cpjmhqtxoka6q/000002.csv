@@ -1,0 +1,6 @@
+"0","## correct for outliers"
+"0","q = quantile(catch.districts$catch, na.rm = TRUE)"
+"0","iqr = IQR(catch.districts$catch, na.rm = TRUE)"
+"0",""
+"0","lower = q[2] - 1.5*iqr"
+"0","upper = q[4]+ 1.5*iqr"

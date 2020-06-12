@@ -1,0 +1,4 @@
+"0","ggsubseriesplot(x = temperature.ts)+"
+"0","  scale_y_continuous(limits = c(24.3,30.7),breaks = seq(24.5,31,1))+"
+"0","  # coord_cartesian(expand = FALSE)+"
+"0","  labs( y = expression(Temperature~(degree*C)))"

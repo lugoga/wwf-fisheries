@@ -1,0 +1,1400 @@
+--- 
+title: "RUMAKI Seascape"
+subtitle: "Five Year Small Scale Fisheries Statistics (2014-2018)"
+author: "Baraka Kuguru"
+header-includes:
+  - \usepackage{titling}
+  - \pretitle{\begin{center}
+    \includegraphics[width=6in,height=6in]{front.pdf}\LARGE\\}
+  - \usepackage{float}
+  - \floatplacement{figure}{H}  ##make every figure with caption = h, this was the fix
+  - \renewcommand{\topfraction}{.85}
+  - \renewcommand{\bottomfraction}{.7}
+  - \renewcommand{\textfraction}{.15}
+  - \renewcommand{\floatpagefraction}{.66}
+  - \setcounter{topnumber}{3}
+  - \setcounter{bottomnumber}{3}
+  - \setcounter{totalnumber}{4}
+  - \usepackage{fontspec}
+  - \setmainfont{Adobe Caslon Pro} ## set font to Times New Roman
+  # - \setlength\abovecaptionskip{-20pt}
+  # - \usepackage{fancyhdr}
+  # - \pagestyle{fancy}
+  # - \fancyhead[LO,RE]{Kuguru B.}
+  - \usepackage[utf8]{inputenc}
+  - \hypersetup{unicode=true,pdfusetitle,bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,breaklinks=false,backref=false,colorlinks=true,linkcolor=blue}
+# date: paste0("Last updated: `r format(Sys.time(), '%d %B, %Y')`")
+date: "`r format(Sys.time(), '%B %Y')`"
+site: bookdown::bookdown_site
+documentclass: book
+classoption: oneside
+bibliography: [biblio.bib, packages.bib]
+biblio-style: apalike # elsevier.csl
+link-citations: yes
+linkcolor: NavyBlue
+links-as-notes: true
+fontsize: 12pt
+linestretch: 1.2
+geometry: "left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm"
+# favicon: "introduction/favicon.ico"
+# cover-image: "introduction/data_science_live_book_cover.png"
+description: ""
+always_allow_html: true
+lof: true
+lot: true
+toc: true
+toc_depth: 3
+---
+
+# Executive Summary {-}
+It is widely recognized that knowledge of the status and trends of capture fisheries, including socio--economic aspects, is a key to sound policy--development, better decision--making and responsible fisheries management. For the fisheries to contribute to food security it is important that information related to a particular stock or entire fisheries is available on an instant basis.\index{knowledge}
+
+Countries in coastal East Africa have taken up a scheme to decentralized management of the fisheries. These countries have introduced fisheries co--management systems---approach to manage coastal and marine resources. It was anticipated that participation of BMUs in the data collection would improve coverage and timely collection of the fisheries data.\index{fisheries!statistics}
+
+In 2016, TAFIRI in collaboration with WWF conducted a pilot study to explore the use of the mobile application as a tool in fisheries data collection (e--CAS). The initiative started with  five (5) selected BMUs. Members were trained on the use of mobile application in fisheries data collection. It was through this initiative species of tuna and tuna-like were recorded for the first time [@kuguru]. As of today, the initiative was expanded to to all coastal districts landing sites in Mainland Tanzania and endorsed by the Government. The current assignment aimed to analyze data collected from the e-CAS and regular CAS survey collected from 2014 to 2018 to assess stock healthiness and quality of small-scale fisheries landings in Rufiji \index{RUMAKI!Rufiji}, Mafia \index{RUMAKI!Mafia}, and Kilwa \index{RUMAKI!Kilwa} districts (RUMAKI). \index{RUMAKI} 
+
+The status of fish stock healthiness in the RUMAKI and Non--RUMAKI districts was assessed based on the data from CAS spanning from 2014 to 2018 and additional data from the e--CAS \index{Tools!e--CAS} spanning from 2016 to 2019 respectively. Fisheries catch\index{fisheries!catch} variation spatial maps, total catch and catch trends  of  the six priority fishery categories were used to assess the status of fish stock healthiness in the RUMAKI districts. The report focus on major five priority fisheries groups due the reasons that there was inconsistent in the data collection in terms of specific species or particular family groups. The groups were drawn from the ongoing SWIOFISH project. These include *Octopus*\index{Family!octopus}, *Small pelagics*\index{Family!pelagics}, *tuna and tuna* like species\index{Family!tuna}, *Reef* \index{Family!reef} and *Elasmobranch*\index{Family!elasmobrach} species.\index{Non--RUMAKI}
+
+The average annual total catch for the octopus fishery was found to be (xx-xx tones per year) in the non-RUMAKI and (xx-xx tones per year) in the RUMAKI districts; the district of xx and xx had higher landings in the RUMAKI and no-RUMAKI respectively. For tuna and tuna-like, the average total annual catch for the tuna and tuna-like species was found to be (xx-xx tones per year) in the non-RUMAKI and (xx-xx tones per year) in the RUMAKI districts. The average annual total catch for the Small pelagic fishery was found to be (xx-xx tones per year) in the non-RUMAKI and (xx-xx tones per year) in the RUMAKI districts; the district of xx and xx had higher landings in the RUMAKI and no-RUMAKI respectively. In addition, for reef species the average annual landing was found to be (xx-xx tones per year) in the non-RUMAKI and (xx-xx tones per year) in the RUMAKI districts; the district of xx and xx had higher landings in the RUMAKI and no-RUMAKI respectively. Finally, for elasmobranch, annual average catch was (xx-xx tones per year) in the non-RUMAKI and (xx-xx tones per year) in the RUMAKI districts; the district of xx and xx had higher landings in the RUMAKI and no-RUMAKI respectively.
+
+In general, findings indicate there is a decrease in total catch from artisanal fishers in the RUMAKI districts for all major fisheries groups with the exception of small pelagic based on the data collected by BMUs from 2016-2019. Data collection is improving, in terms of timely submission of the data, but there is inconsistency in the data collection and little focus on the species of interest. 
+
+Among others, the current report recommended the following: The Department of Fisheries (DoF) \index{Institutes!Department of Fisheries} in collaboration with TAFIRI \index{Institutes!TAFIRI} should consider identifying representative species for all priority (major) fisheries groups and consistency follow up the data collection on the identified species. The DoF should consider adapting and upscaling the eCAS as the main data collection tool. Promote timely preparation of fishery statistics through the application of the databases. This should go along with the timely sharing of the statistics with relevant stakeholders.  In addition, promote capacity development to all levels in the area of data collection, processing, analysis, interpretation and reporting. This should go hand in hand with periodic strategic planning/system review of marine fisheries as data collection should be in a position to answer some of the management questions of the time.
+
+The collection and analysis of fishery data and information is a costly and timely exercise. To be relevant and cost-effective, fishery data and information collection systems must have a clear set of objectives and appropriate strategies to collect data, which should be based on priorities and requirements of data users. However, chronic problems of insufficient human and financial resources allocated for data collection often resulted in the poor quality of information that further led to no- or limited use of statistics for fishery management and policy development. Consequently only dwindling support was given to the systematic improvement of national fishery data and information collection systems. There is an urgent need to terminate this vicious cycle of problems. The previous budget allocated by the Government for data collection during CAS\index{Tools!CAS} should be more than enough if re-allocated to the used in the improved e--CAS\index{Tools!e--CAS} data collection system.
+
+\newpage
+
+## Acknowledgements {-}
+
+This work was supported by many individuals from various institutions.  Thank you to everyone who contributed code, suggested changes, asked questions, filed issues, and even designed a logo for us: Daniel Anderson, Abi Aryan, Jason Becker, William Bork, Jon Duan, Erin Grand, Ellis Hughes, Ludmila Janda, Jake Kaupp, Nathan Kenner, Zuhaib Mahmood, David Ranzolin, Kris Stevens, Bret Staudt Willet, and Gustavo Velásquez.
+
+Thank you to the data scientists in education that took time to share their stories with us: Isabella Fante, LaCole Foots, Tobie Irvine, Arpi Karapetyan, John LaPlante, and Andrew Morozov. 
+
+Thank you to the editor of this book at Routledge, Hannah Shakespeare. We appreciated Hannah’s incisive, constructive feedback, interest, and support for the book and our unique approach to writing it - one which involved writing the book "in the open" (through GitHub) and sharing it on a freely-available website.
+
+The report is written in [RMarkdown](https://rmarkdown.rstudio.com) with [bookdown](https://bookdown.org). It is automatically rebuilt from [source](https://github.com/hadley/r4ds) by [travis](http://travis-ci.org/).
+
+\newpage
+
+## How this Report is organised {-}
+
+The previous description of the tools of data science is organised roughly according to the order in which you use them in an analysis (although of course you'll iterate through them multiple times). In our experience, however, this is not the best way to learn them:
+
+* Starting with data ingest and tidying is sub-optimal because 80% of the time 
+  it's routine and boring, and the other 20% of the time it's weird and
+  frustrating. That's a bad place to start learning a new subject! Instead, 
+  we'll start with visualisation and transformation of data that's already been
+  imported and tidied. That way, when you ingest and tidy your own data, your
+  motivation will stay high because you know the pain is worth it.
+  
+* Some topics are best explained with other tools. For example, we believe that
+  it's easier to understand how models work if you already know about 
+  visualisation, tidy data, and programming.
+  
+* Programming tools are not necessarily interesting in their own right, 
+  but do allow you to tackle considerably more challenging problems. We'll
+  give you a selection of programming tools in the middle of the book, and 
+  then you'll see how they can combine with the data science tools to tackle 
+  interesting modelling problems.
+
+Within each chapter, we try and stick to a similar pattern: start with some motivating examples so you can see the bigger picture, and then dive into the details. Each section of the book is paired with exercises to help you practice what you've learned. While it's tempting to skip the exercises, there's no better way to learn than practicing on real problems.
+
+
+
+## Citation {-}
+
+If you would like to cite this book, please use the below:
+
+> Baraka Kuguru (2020). *Analysis of fisheries data collected from small scale fishers with focus on RUMAKI seascape*. Dar es Salaam, Tanzania. 
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+<!--chapter:end:index.Rmd-->
+
+# Background {#intro}
+
+Tanzania\index{Tanzania} coastal marine fisheries are largely dominated by artisanal\index{Fisheries!artisanal} fishers [@sobo04], catches are used for subsistence purpose while few species are traded for internal and external markets [@pandu]. The fishery contributes to the social-economic development of the coastal community \index{coastal community} and beyond [@pandu], However, proper management \index{management} of the fishery resource is yet to be realized [@berachi; @pandu; @jacquet]. 
+
+It is widely recognized that knowledge of the status and trends of capture fisheries, including socio-economic aspects, is a key to sound policy-development, better decision-making and responsible fisheries management. For the fisheries to contribute to food security it is important that information related to a particular stock or entire fisheries is available on an instant basis. Fisheries information can be used to validate the policy in place and track the performance of fisheries management. Therefore, the importance of fisheries data collection can not be overemphasized.
+
+Management measures for small-scale fisheries must also account for strategies to collect and analyze data [@robertson]. In many data-poor countries, full stock assessment \index{assessment} is hardly conducted, scientists are forced to use data-poor methods to come up with estimated stock \index{Fisheries!stock} status which in many cases does not reflect the actual situation. For instance, landings of coastal fisheries in Tanzania are chronically under-reported (landings are at least 1.7 times higher than the actual reported landing) and catch rates appear to be maintained by a continual increase in effort [@jacquet; @bush]. Improvement in data collection systems is therefore essential to ensure proper management of the fisheries resource \index{Fisheries!resources}. 
+
+Countries in coastal East Africa have taken up a scheme to decentralized management of the fisheries. The countries have introduced fisheries co-management systems as an approach to manage coastal and marine resources. It is in this context, more accurate and timely information should reach to relevant stakeholders and result in a better-informed decision at all levels. In Tanzania, the system was introduced in the year 2003, it entails establishments of community-based co-management groups commonly known as BMUs (Beach Management Units; Sobo, 2012). Since the inception of the BMUs \index{BMU}, the government, in collaboration with the World Wildlife Fund (WWF) \index{Institutes!WWF} has established more than 204 BMUs along the coast [@kanyange]. One of the major tasks of the BMUs is to participate in fisheries data collection, particularly data related to the Catch Assessment Survey (CAS). The outputs of the CAS are the estimation of the total fish production by weight and value, catch per unit effort, and to conduct stock assessments. 
+
+It was anticipated that participation of BMUs in the data collection would improve coverage and timely collection of the fisheries data. This has been true but challenges are inevitable. One o f the challenges is related to the systems itself, the use of hard copies. BMUs had to collect and send back filled forms to the centralized offices (department of fisheries statistics) for compilation and analysis. This process involved a number of human resources and is time-consuming. However, feedback to the community has been a steep mountain. Following the introduction of smart mobile phones, it was thought, the use of mobile applications in fisheries data collection will facilitate instant submission of catch data to a centralized database, reduce backlog and cost related to the transportation of hard copies and finally facilitate timely feedback to the communities and other stakeholders.  In this context, WWF and Tanzania Fisheries Research Institute (TAFIRI) have been working to realize this concept in the RUMAKI seascape.
+
+In the year 2016, TAFIRI \index{Institutes!TAFIRI} in collaboration with WWF conducted a pilot study on the use of the mobile application in fisheries data collection (e--CAS). The initiative started with selected 5 BMUs, selected members were trained on the use of the mobile application in fisheries data collection. Initial analysis suggested the proof of concept is possible. It was through this initiative species of tuna and tuna-like were recorded for the first time. As of today, the initiative has been rolled out to all coastal districts landing sites and endorsed by the government. 
+
+Monitoring and evaluation of the mobile data collection system have been a work in progress over the years. The monitoring program is meant to fine-tune the application, quality check and provide a recommendation to different stakeholders. At this end, WWF has assigned TAFIRI to undertake analysis of e--CAS and CAS \index{Tools!CAS} fisheries data collected from 2014 to 2018 to assess stock healthiness and quality of the collected fisheries collected from small-scale fisheries landings. Specific tasks under the current agreement are: 
+
+1. To review the status of stock healthiness in the RUMAKI districts based on the data collected from 2014 to 2018. 
+2. Compare stock healthiness between RUMAKI and the rest of the coastal districts outside the RUMAKI area. 
+3. To provide recommendations on the quality of e--CAS \index{Tools!e--CAS} fisheries data. 
+4. To assess the reappearance of fish species in the study area and its link to conservation initiatives. 
+5. To prepare a brief summary of the findings for local artisanal fisher communities. 
+6. To develop a statistical fact sheet based on the findings 
+7. To develop a manual for e--CAS mobile system 
+8. To prepare documentation for a stakeholders’ workshop.
+
+The current report is prepared based on the above agreements particularly number 1-4, other deliverables (5-8)  will be submitted as independent documents.
+
+<!--chapter:end:01-intro.Rmd-->
+
+# Methods {#method}
+
+```{r setup3, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, comment = FALSE)
+
+require(sf)
+require(tidyverse)
+require(ggrepel)
+require(ggspatial)
+require(magrittr)
+library(kableExtra)
+require(cartography)
+library(sp)
+```
+
+## Approach
+The current assignment was on secondary data. Fisheries archives and statistics annual reports from 2014 to 2018 were the sources of data used in this report. The  Department of Fisheries \index{Institutes!Department of Fisheries} publishes these reports. The e-CAS\index{Tools!e--CAS}---an online fisheries data platform was also accessed to retrieve data \index{Fisheries!data} for mainland Tanzania. The platform is still at early stage of development and contains data from 2016-2019. The Department of Fisheries hosts e--CAS database TAFIRI \index{Institutes!TAFIRI} periodically update the database.
+
+Although the e--CAS cover all coastal districts in Mainland Tanzania, this reports covers districts that fall under the RUMAKI Seascape. The RUMAKI seascape has five districts of Kibiti\index{RUMAKI!Kibiti}, Mafia\index{RUMAKI!Mafia}, Kilwa\index{RUMAKI!Kilwa}, Kigamboni\index{RUMAKI!Kigamboni} and Mtwara Rural\index{RUMAKI!Mtwara Rural}. These districts located in the south of Dar es salaam (Figure \@ref(fig:rumaki). The other districts north of Dar es Salaam are outside the RUMAKI seascape and include includes, Mkinga \index{Non--RUMAKI!Mkinga}, Mheza \index{Non--RUMAKI!Mheza}, Pangani \index{Non--RUMAKI!Pangani}, Bagamoyo \index{Non--RUMAKI!Bagamoyo}, Kinondoni \index{Non--RUMAKI!Kinondoni}, Ilala \index{Non--RUMAKI!Ilala} and Mkuranga \index{Non--RUMAKI!Mkuranga}. Although Mtwara urban \index{Non--RUMAKI!Mtwara urban}, Lindi rural \index{Non--RUMAKI!Lindi rural} and urban \index{Non--RUMAKI!Lindi urban} districts are located in the southern region, but are also outside the RUMAKI Seascape.
+
+```{r rumaki, fig.cap="A map showing the  districts in Rumaki Seascape"}
+
+
+data("nuts2006")
+# Plot a layer with the extent of the EU28 countries with only a background color
+plot(nuts0.spdf, border = NA, col = NA, bg = "#A6CAE0")
+# Plot non european space
+plot(world.spdf, col  = "#E3DEBF", border = NA, add = TRUE)
+# Plot Nuts2 regions
+plot(nuts0.spdf, col = "grey60",border = "white", lwd = 0.4, add = TRUE)
+# plot the countries population
+propSymbolsLayer(
+  spdf = nuts0.spdf, 
+  df = nuts0.df, 
+  spdfid = "id", 
+  dfid = "id", 
+  var = "pop2008", 
+  legend.pos = "topright", 
+  col = "red4", 
+  border = "white", 
+  legend.title.txt = "Population" 
+)
+# layout
+layoutLayer(title = "Population in Europe, 2008",
+            sources = "Data: Eurostat, 2008",
+            author =  paste0("cartography ", packageVersion("cartography")),
+            scale = 500, frame = TRUE, col = "#688994") 
+# north arrow
+north("topleft")
+```
+
+```{r, eval=FALSE}
+world = spData::world %>% 
+  # filter(continent == "Africa") %>% 
+  dplyr::select(name = name_long, pop) %>% 
+  mutate(id = 1:n()) %>% 
+  # st_transform(4326) %>% 
+  as("Spatial") %>%
+  spTransform(CRS("+proj=longlat +datum=WGS84"))
+
+africa = spData::world %>% 
+  filter(continent == "Africa") %>% 
+  dplyr::select(name = name_long, pop, area = area_km2) %>% 
+  mutate(id = 1:n(), pop.density = pop/area) %>% 
+  # st_transform(4326) %>% 
+  as("Spatial") %>%
+  spTransform(CRS("+proj=longlat +datum=WGS84"))
+
+
+
+
+
+# Plot a layer with the extent of the EU28 countries with only a background color
+plot(africa, border = NA, col = NA, bg = "#A6CAE0")
+# Plot non european space
+plot(world, col  = "#E3DEBF", border = NA, add = TRUE)
+# Plot Nuts2 regions
+plot(africa, col = "grey60",border = "ivory", lwd = 0.2, add = TRUE)
+# plot the countries population
+propSymbolsLayer(
+  spdf = africa, 
+  df = africa, 
+  spdfid = "id", 
+  dfid = "id", 
+  var = "pop.density", 
+  legend.pos = "bottomright", 
+  col = "red4", 
+  border = "white", 
+  legend.title.txt = "Population\nDensity" 
+)
+# layout
+layoutLayer(title = "Population  Density in Africa, 2014",
+            sources = "Data: Wordl, 2014",
+            author =  paste0("cartography ", packageVersion("cartography")),
+            scale = 500, frame = FALSE, col = "#688994") 
+# north arrow
+north("topleft")
+
+africa %>% df_spatial()
+```
+
+
+
+## Data collection
+The current assignment used the official Catch Assessment Survey (CAS) data spanning from the year 2014 to 2018. In addition, we also extracted data collected by BMUs members from the RUMAKI districts, this additional data span from 2016-2019. The database is currently hosted by the Department of Fisheries and available online upon permission. Once the data needed was gathered and stored in Excel spreadsheet. 
+
+Before the analysis, the data was cleaned and checked for any inconsistency. Specifically, we removed all dublicated, wrongly recorded observations. We then convert all the species to the proper case, and stem the species name--harmonize different species name found in the records. Finally, we checked for major fisheries groups that have appeared consistently over the years. 
+
+Because species varied from districts and over the study period, the dataset was grouped according to six major  fishery groups with few common representative species where available (Table \@ref(tab:tab1)). The groups/priority fisheries are Octopus \index{Family!octopus}, Small pelagic \index{Family!pelagic}, Tuna and tuna-like \index{Family!tuna}, Reef fishes \index{Family!reef fishes}, Elasmobranch \index{Family!elasmobrach} and Prawns \index{Family!prawns}. These groups were adopted from priority fisheries under the SWIOFish\index{SWIOFish} Project with an addition of Elasmobranch.  
+
+
+```{r tab1, fig.cap="A map of southern Tanzania showing the districts within the RUMAKI Seascape"}
+
+data = read_csv("table1.csv")
+
+data %>% 
+  rename(category =1)  %>% 
+  # mutate(species = str_replace(string = Species, 
+  #                              pattern = "Octopus cyanea", 
+  #                              replacement = "Octopus cyanea \\textit{italics}")) %>%
+  kableExtra::kable(format = "latex", booktabs = T, align = "l",escape = FALSE,
+                    caption = "Priority fisheries Category and corresponding  fish species retrieved from e--CAS database and Annual CAS reports", col.names = c("Fisheries Category", "Species")) %>%
+  column_spec(1, bold=T, width = "3.5in")%>%
+  column_spec(2, italic=T) %>%
+  collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>% 
+  kable_styling(font_size = ifelse(knitr:::is_latex_output(), 10, 16), 
+                latex_options = c("hold_position"))
+```
+
+<!--chapter:end:03-method.Rmd-->
+
+# Result and Discussion
+
+
+```{r setup4, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, comment = "")
+
+require(tidyverse)
+require(ggpubr)
+require(sf)
+require(ggspatial)
+require(magrittr)
+library(kableExtra)
+require(cartography)
+library(sp)
+require(patchwork)
+```
+
+
+```{r}
+species = read_csv("../data_update/rumakitu.csv") 
+
+species = species %>% select(1:5)
+
+
+# species = species %>% 
+  # separate(Species, c("Genus", "Species"), sep = " ", remove = FALSE)
+
+# species %>% distinct(Species) %>% arrange(Species)
+```
+
+```{r}
+
+dominant.group = bind_rows(
+      species%>%
+        filter(Species %in% c("Serranidae spp( CEW )","Lutjanus spp( LDW )", "Lutjanus ssp( LTJ )","Red snapper( RDS )","Changu( CHN )", "Carrotomus carolinus( ULG )","Lethrinus borbonicus( LHB )", "Lethrinus harak( LHH )", "Lethrinus lentjan( LHL )", "Lethrinus nebulosus( LHN )", "Lethrinus rubrioperculatus( LHR )", "Lethrinus spp( LH )")) %>%
+        mutate(group = "Reef fish"),
+      
+      species%>%
+        filter(Species %in% c("Auxis thazard( FRI )", "Euthynnus affinis( KAW )", "Istiophorus platypterus( SFA )", "Katsuwonus pelamis( SKJ )", "Other tuna( JDR )", "Scomberomorus commerson( COM )", "Scomberomorus guttatus( GUT )", "Scomberomorus plurilineatus( KAK )", "Thunnus albacares( YFT )", "Thunnus obesus( BET )", "Tuna( NGR )")) %>%
+        mutate(group = "Tuna fish"),
+      
+      species%>%
+        filter(Species == "Octopus cyanea( OCC )") %>%
+        mutate(group = "Octopus"),
+      species %>% 
+  filter(Species %in% c("Aetobatus ocellatus( MAE )", "Carcharhinus albimarginatus( ALS )", "Carcharhinus plumbeus( CCP )", "Carcharhinus sorrah( CCQ )", "Himantura uarnak( DHV )", "Maculabatis ambigua( RAJ )", "Manta alfredi( TNG )", "Rhynchobatus sp.( RCD )", "Taa( NYG )", "Taa( NYG )", "Papa mavongoroa( PMV )", "Papa( PP )"))%>%
+        mutate(group = "Elasmobranch"),
+      
+      species%>%
+        filter(Species %in% c("Mackerel(scomber)( KB )", "Mackerel(scomber)( VB )", "Sardine( DA )","Sardine( DA )" ,"Dagaa ( DPP )","Dagaa ( DPP )", "Amblygaster sirm( AMS )", "Decapterus russelli( RUS )", "Dussumieria acuta( DSA )")) %>%
+        mutate(group = "Small pelagic")
+) %>%
+  rename(catch = 5)
+
+
+```
+
+
+
+```{r fig.cap="Trend of error free catch data per each site"}
+
+catch.clean.group.outlierfree = list()
+
+sites = dominant.group %>% distinct(Location) %>% pull()
+
+for (i in 1:length(sites)){
+  
+  dummy = dominant.group %>% filter(Location == sites[i])
+    q = quantile(dummy$catch, na.rm = TRUE)
+    iqr = IQR(dummy$catch, na.rm = TRUE) # alternative: iqr = q[4]-q[2]
+    
+    lower = q[2] - (1.5 * iqr)
+    upper = q[4] + (1.5 * iqr)
+    
+ catch.clean.group.outlierfree[[i]] = dummy %>% 
+   filter(catch > lower & catch <= upper)
+  
+}
+
+catch.clean.group.outlierfree = catch.clean.group.outlierfree %>% 
+  bind_rows() 
+
+
+```
+
+
+```{r}
+tz = st_read("e:/GIS/tanzania-latest.shp/nbs/Districts.shp", quiet = TRUE )
+
+# tz %>% arrange(District_N) %>% pull(District_N)
+```
+
+```{r}
+
+catch.clean.join = catch.clean.group.outlierfree %>% 
+  # filter(group == "Reef fish") %>% 
+  mutate(Location = replace(Location, Location == "Kigamboni", "Temeke"),
+         Location = replace(Location, Location == "Kibiti", "Rufiji"), 
+         Location = replace(Location, Location == "Lindi Rural", "Lindi"),
+         Location = replace(Location, Location == "Mtwara Rural", "Mtwara")) %>%
+  group_by(Location, group) %>% summarise(catch = mean(catch, na.rm = TRUE)) %>%
+  ungroup() %>%
+  rename(District = Location)
+
+
+rumaki.districts = catch.clean.join %>% distinct(District) %>% pull()
+
+
+coastal = tz %>% filter(District_N %in% rumaki.districts)
+
+# coastal %>% mapview::mapview()
+
+
+
+catch.clean.join.spatial = coastal %>% 
+  rename(District = District_N)  %>% 
+  full_join(catch.clean.join, by = c("District")) %>%
+  mutate(catch = round(catch, digits = 2),class = cut(catch, breaks = seq(0,400,75), 
+                     labels = c("Below 75", "75-150", "150-225", "225-300", "above 300")))
+
+ 
+```
+
+
+```{r}
+
+coordinates = catch.clean.join.spatial %>% 
+                  # filter(Zone == "OTHER" & group == "Tuna fish") %>%
+  select(District, group) %>% 
+  st_centroid() %>% 
+  st_coordinates() %>% 
+  as_tibble() %>% 
+  rename(lon = 1, lat = 2) %>%
+  bind_cols(
+    catch.clean.join.spatial %>% 
+      # filter(Zone == "OTHER" & group == "Tuna fish") %>%
+      select(District, group) %>% st_drop_geometry()
+  )
+
+
+# catch.clean.join.spatial %>% df_spatial()
+```
+
+This report present the fishery statistics in RUMAKI seascape for the five family. The availability of these group varies among the RUMAKI seascape's districts (Table \@ref(tab:tab31)). For instance, while Kilwa \index{RUMAKI!Kilwa} and Kigamboni \index{RUMAKI!Kigamboni} are the district with catches of all five priority group, Mafia \index{RUMAKI!Mafia} and Mtwara \index{RUMAKI!Mtwara} had all four group except small pelagic and Kibiti \index{RUMAKI!Kibiti} is the only district in RUMAKI seascape with only *Elasmobranch* and *Reef fish*. This were the group with dominant catches and were mostly common in the areas. Therefore, we report the and discuss the statistics of these five priority fishery groups (Table \@ref(tab:tab31). First, we are providing a general picture of areas with high and low catches along the coast. Second, we zoom in into specific group performance in each coastal district. 
+
+
+```{r tab31}
+
+priority.group = coordinates %>%
+  group_by(District) %>%
+  summarise(count = n()) %>%
+  ungroup() %>%
+  mutate(Group = c("Elasmobranch,Octopus,Reef fish,Small pelagic,Tuna fish", 
+                   "Octopus,Reef fish,Small pelagic,Tuna fish", 
+                   "Elasmobranch,Octopus,Reef fish,Tuna fish", 
+                   "Elasmobranch,Reef fish", 
+                   "Elasmobranch,Octopus,Reef fish,Small pelagic,Tuna fish")) %>%
+  select(-count)%>%
+  mutate(District = replace(District, District == "Temeke", "Kigamboni"),
+         District = replace(District, District == "Rufiji", "Kibiti")) 
+
+
+priority.group %>%
+  kableExtra::kable(format = "latex", 
+                    col.names = c("RUMAKI District", "Fishery Group"),
+                    booktabs = TRUE,
+                    caption = "Five priority fishery groups found at each RUMAKI district") %>%
+  kableExtra::column_spec(column = 1, bold = FALSE)%>%
+  kableExtra::column_spec(column = 1, width = "2.5in")%>%
+  kableExtra::column_spec(column = 2, italic = TRUE)%>% 
+  kable_styling(font_size = ifelse(knitr:::is_latex_output(), 10, 16), 
+                latex_options = c("hold_position"))
+
+```
+
+## Status of stock healthiness in RUMAKI and Non-RUMAKI districts. 
+The status of fish stock healthiness in the RUMAKI and Non-RUMAKI  (area outside FISHCOM project) districts was assessed based on the data from CAS spanning from 2014 to 2018 and additional data from the e--CAS spanning from 2016 to 2019 respectively. To visualize the magnitude of fisheries landing from each district spatial maps were developed (Figure 1-5) for the five priority fishery groups (Table \@ref(tab:tab31). 
+
+
+
+##  Spatial variation of fisheries total landings in the RUMAKI and non-RUMAKI districts for selected major fisheries groups.
+
+
+
+```{r}
+species = read_csv("../data_update/All data combined_cleaned.csv")
+
+species = species %>% separate(Eng_name, c("Genus", "Species"), sep = " ", remove = FALSE)
+
+# species %>% distinct(Genus) %>% arrange(Genus)
+```
+
+```{r}
+
+dominant.group = bind_rows(
+      species%>%
+        filter(Genus == "Lethrinus") %>%
+        mutate(group = "Reef fish"),
+      
+      species%>%
+        filter(Genus %in% c("Euthynus", "Scomberomorus", "Thunnus", "Tuna", "Xiphias ")) %>%
+        mutate(group = "Tuna fish"),
+      
+      species%>%
+        filter(Genus == "Octopus") %>%
+        mutate(group = "Octopus"),
+      
+      species%>%
+        filter(Genus %in% c("Mackerel", "Sardinella")) %>%
+        mutate(group = "Small pelagic")
+) %>%
+  mutate(catch = as.numeric(`Catch(t)`))
+
+
+```
+
+```{r}
+catch.clean.group.outlierfree = list()
+sites = dominant.group %>% distinct(Districts) %>% pull()
+
+for (i in 1:length(sites)){
+  
+  dummy = dominant.group %>% filter(Districts == sites[i])
+    q = quantile(dummy$catch, na.rm = TRUE)
+    iqr = IQR(dummy$catch, na.rm = TRUE) # alternative: iqr = q[4]-q[2]
+    
+    lower = q[2] - (1.5 * iqr)
+    upper = q[4] + (1.5 * iqr)
+    
+ catch.clean.group.outlierfree[[i]] = dummy %>% 
+   filter(catch > lower & catch <= upper)
+  
+}
+
+catch.clean.group.outlierfree = catch.clean.group.outlierfree %>% 
+  bind_rows() %>%
+  mutate(Districts = replace(Districts, Districts=="Kindondoni", "Kinondoni"),
+         Districts = replace(Districts, Districts=="Lindi urban","Lindi Urban"),
+         Districts = replace(Districts, Districts=="Lindi", "Lindi Urban"))
+```
+
+
+```{r}
+tz = st_read("e:/GIS/tanzania-latest.shp/nbs/Districts.shp", quiet = TRUE )
+
+
+```
+
+```{r}
+rumaki.districts = catch.clean.group.outlierfree %>% 
+  distinct(Districts) %>% 
+  pull()
+
+rumaki.districts[3] = "Tanga Urban"
+rumaki.districts[16] = "Lindi"
+
+coastal = tz %>% filter(District_N %in% rumaki.districts)
+
+# coastal %>% mapview::mapview()
+
+catch.clean.join = catch.clean.group.outlierfree %>% 
+  # filter(group == "Reef fish") %>% 
+  mutate(Year = as.integer(Year),
+         # Districts = replace(Districts, Districts == "Temeke", "Kigamboni"),
+         Districts = replace(Districts, Districts == "Rufiji", "Kibiti"), 
+         Districts = replace(Districts, Districts == "Lindi Rural", "Lindi"),
+         Districts = replace(Districts, Districts == "Mtwara Rural", "Mtwara")) %>%
+  group_by(Districts, Zone, group, Year) %>% 
+  summarise(catch = mean(catch, na.rm = TRUE)) %>%
+  ungroup()
+
+
+catch.clean.join.spatial = coastal %>% 
+  rename(Districts = District_N)  %>% 
+  right_join(catch.clean.join) %>%
+  mutate(class = cut(catch, breaks = seq(0,400,75), 
+                     labels = c("Below 75", "75-150", "150-225", "225-300", "above 300")))
+
+
+```
+
+```{r}
+coordinates = catch.clean.join.spatial %>% 
+                  # filter(Zone == "OTHER" & group == "Tuna fish") %>%
+  select(Districts, group) %>% 
+  st_centroid() %>% 
+  st_coordinates() %>% 
+  as_tibble() %>% 
+  rename(lon = 1, lat = 2) %>%
+  bind_cols(
+    catch.clean.join.spatial %>% 
+      # filter(Zone == "OTHER" & group == "Tuna fish") %>%
+      select(Districts, group) %>% st_drop_geometry()
+  )
+```
+
+```{r tab32}
+catch.summarized = catch.clean.join.spatial %>% 
+  st_drop_geometry()%>% 
+  mutate(Districts = replace(Districts, Districts == "Temeke", "Kigamboni"),
+         Districts = replace(Districts, Districts == "Rufiji", "Kibiti"), 
+         Districts = replace(Districts, Districts == "Lindi Rural", "Lindi"),
+         Districts = replace(Districts, Districts == "Mtwara Rural", "Mtwara")) %>% 
+  group_by(Zone, group) %>% 
+  summarise(count = n(), 
+            annual.catch = mean(catch, na.rm = TRUE)/length(n), 
+            standardized.catch = annual.catch/count) %>%
+  ungroup() %>%
+  drop_na() %>%
+  mutate_if(is.character, as.factor) %>%
+  mutate_if(is.numeric, round, digits = 2)
+
+catch.summarized %>% 
+  arrange(Zone, group) %>% select(-count) %>% 
+  kableExtra::kable(format = "latex", booktabs = TRUE, align = "c", caption = "Annual mean catch and annual catch rate of four priority fishery for RUMAKI and Non--RUMAKI fishing areas",
+                    col.names = c("Fishing\n Zone", "Priority\nFish", "Mean Catch\n (Tones)",
+                                  "Catch Rate\n (Tones/year/district)")) %>%
+  kableExtra::collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>%
+  kableExtra::column_spec(column = 1:3, width = "1.2in")%>%
+   # kableExtra::kable_styling(full_width = FALSE) %>%
+  kableExtra::add_header_above(c("", "", "Annual Fish catches" = 2))%>% 
+  kable_styling(font_size = ifelse(knitr:::is_latex_output(), 10, 16), 
+                latex_options = c("hold_position"))
+
+
+```
+
+### *Octopus cyanea*
+
+```{r}
+
+
+catch.pooled.sf = catch.clean.join.spatial %>%
+  filter(!is.na(District_C))%>%
+  st_transform(4326) %>%
+  group_by(Districts, Zone, group) %>%
+  summarise(catch = mean(catch)) %>%
+  ungroup() %>%
+  mutate(class = cut(catch, breaks = seq(0,400,75),
+                     labels = c("Below 75", "75-150", "150-225", "225-300", "above 300")))
+
+
+# catch.summarized %>% filter(group == "Octopus" & Zone == "RUMAKI") %>% pull(standardized.catch)
+# catch.summarized %>% filter(group == "Octopus" & Zone != "RUMAKI") %>% pull(standardized.catch)
+```
+
+
+@guard reported that in Tanzania there were only one species of octopus in Tanzania. The average catch rate for the octopus fishery in RUMAKI was `r catch.summarized %>% filter(group == "Octopus" & Zone == "RUMAKI") %>% pull(standardized.catch)` tones per year and for Non--RUMAKI was `r catch.summarized %>% filter(group == "Octopus" & Zone != "RUMAKI") %>% pull(standardized.catch)` tones per year (Table \@ref(tab:tab32)). The spatial maps indicate the district of Ilala  had the highest catches in the non-RUMAKI, whereas districts of Kilwa and Lindi revealed the highest catch landings   for  RUMAKI areas (Figure \@ref(fig:fig31)). The possible explanation for Ilala to have the highest catch could be the country's main marine fisheries market (The Ferry Market) is located in Ilala, Dar es Salaam. It receives landings from other parts of the country, particularly from the southern coast regions. Therefore, apart from  Ilala being a landing site it also serves as the main market for fishers and fish traders from other parts of the country. On the other hand, the lowest catches noted at Temeke and Mtwara could be related to the limited seascape for these districts and close proximity to the main ferry market for the case of Temeke. Rufiji is exceptional, the large part of its fishing ground is dominated by mudflats and continuous influx of riverine waters from the delta. This habitat is known to be favourable for prawn fishing. Kilwa is well known for octopus fisheries particularly Songosongo archipelago (Gaurd, ..). Surprisingly Mafia districts have not surfaced as an area with higher Octopus landings, but other studies (Muhaji xx, Guard xx and Kishe et xx, WWF xx ) reported  higher landings of octopus from Mafia. The possible explanation was weakness in CAS data collection in Mafia. 
+
+
+```{r fig31, fig.cap = "Average annual catch for Octopus in (a) RUMAKI and (b) Non-RUMAKI coastal districts", fig.width=7, fig.height=3.5}
+
+# "Octopus"       "Reef fish"     "Tuna fishery"     "Small pelagic"
+
+rumaki = ggplot() +
+  layer_spatial(data = tz, fill = "grey90", col = "ivory", size = 0.2)+
+  layer_spatial(data = catch.pooled.sf %>% 
+                  filter(Zone == "RUMAKI" & group == "Octopus"),
+          aes(fill = class), col = "ivory", size = 0.2) +
+  ggrepel::geom_text_repel(data = coordinates %>% filter(lat <= -7.6 & group == "Octopus") %>% distinct(Districts, lon,lat),
+                            aes(x = lon, y = lat, label = Districts),point.padding = 2.2, size = 3.4) +
+ coord_sf(xlim = c(37.5,40.5), ylim = c(-11.1,-7.5), crs = 4326)+
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_y_continuous(breaks = c(-10.5,-8.25)) +
+  scale_x_continuous(breaks = c(38.2,39.85))+
+  theme_bw() +
+  theme(panel.grid = element_line(linetype = 3), 
+        axis.text = element_text(size = 10), 
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 10), 
+        legend.position = "none",
+        panel.background = element_rect(fill = NA, colour = "black"))+
+  # ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .75)+
+  labs(x = "", y = "")+
+  annotate(geom = "text", x = 37.6, y = -7.6, label = "A)")
+
+non.rumaki = ggplot() +
+  layer_spatial(data = tz, fill = "grey90", col = "ivory", size = 0.2)+
+  layer_spatial(data = catch.pooled.sf %>% 
+                  filter(Zone != "RUMAKI" & group == "Octopus") ,
+          aes(fill = class), col = "ivory", size = 0.2) +
+  ggrepel::geom_text_repel(data = coordinates %>% filter(lat >= -7.6 & group == "Octopus") %>% distinct(Districts, lon,lat),
+                            aes(x = lon, y = lat, label = Districts),point.padding = 2.2, size = 3.4) +
+  coord_sf(xlim = c(37.8,40.3), ylim = c(-7.6,-4.5), crs = 4326)+
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_x_continuous(breaks = c(38.1,39.7))+
+  scale_y_continuous(breaks = c(-7.25,-4.75)) +
+  theme_bw() +
+  theme(panel.grid = element_line(linetype = 3), 
+        axis.text = element_text(size = 10), 
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 10),
+        panel.background = element_rect(fill = NA, colour = "black"))+
+  # ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .75)+
+  labs(x = "", y = "") +
+  annotate(geom = "text", x = 40.1, y = -4.6, label = "B)")
+
+rumaki + non.rumaki
+
+# ggsave("front.pdf")
+```
+
+
+
+### *Tuna and tuna-like species *
+The average catch rate for the octopus fishery in RUMAKI was `r catch.summarized %>% filter(group == "Tuna fish" & Zone == "RUMAKI") %>% pull(standardized.catch)` tones per year and for Non--RUMAKI was `r catch.summarized %>% filter(group == "Tuna fish" & Zone != "RUMAKI") %>% pull(standardized.catch)` tones per year (Table \@ref(tab:tab32)). The spatial maps indicate the districts of Ilala have highest catches while Muheza, Pangani and Mkuranga and xx have lowest catches in the non-RUMAKI and RUMAKI areas respectively (Figure \@ref(fig:fig32)). Description of the output from statistical analysis of the CAS data of tuna and tuna like species reveals Ilala district to be healthier ecologically than other coastal districts. However, this may be misleading information. The route cause could be the existing weak statistical data collection system. Ilala is a market center for tuna and tuna like fish species . Good prices are found in Dar es salaam because of high demand from restaurants and hotels. The purchasing power of the residents of Dar es salaam  is relatively higher compared to other districts along the coast of Tanzania. Therefore, most fishermen from other coastal districts  depend on the ferry market for the high value of their catch. Information on tuna and tuna like  fisheries in Tanzania  is limited Mshana et al (XX) and the recent preliminary SwioFish priority tuna and tuna like fisheries study findings suggest Tanga city and Mtwara municipal are leading in landing of tuna and tuna like species. It is advised that more effort is needed to improve the data collection system particularly at the marketing center, making sure the catch information of the original district where the catch is from is captured (improvement in traceability). The priority representatives species for each fishery are well captured based on fisheries experts.  However, data related to artisanal tuna and tuna-like species is hardly known, the current data eCAS collection systems in Tanzania is an initiative addressing this challenge. The initiative has managed to separate tuna from other fish species but the effort is needed to collect error-free data at species level as required by the Indian Ocean Tuna Commission (IOTC).
+
+
+
+```{r fig32, fig.cap="Average annual catch for Tuna fishery in (a) RUMAKI and (b) Non-RUMAKI coastal districts", fig.width=7, fig.height=3.5}
+
+
+rumaki = ggplot() +
+  layer_spatial(data = tz, fill = "grey90", col = "ivory", size = 0.2)+
+  layer_spatial(data = catch.pooled.sf %>% 
+                  filter(Zone == "RUMAKI" & group == "Tuna fish"),
+          aes(fill = class), col = "ivory", size = 0.2) +
+  ggrepel::geom_text_repel(data = coordinates %>% filter(lat <= -7.6 & group == "Tuna fish") %>% distinct(Districts, lon,lat),
+                            aes(x = lon, y = lat, label = Districts),point.padding = 2.2, size = 3.4) +
+ coord_sf(xlim = c(37.5,40.5), ylim = c(-11.1,-7.5), crs = 4326)+
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_y_continuous(breaks = c(-10.5,-8.25)) +
+  scale_x_continuous(breaks = c(38.2,39.85))+
+  theme_bw() +
+  theme(panel.grid = element_line(linetype = 3), 
+        axis.text = element_text(size = 10), 
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 10), 
+        legend.position = "none",
+        panel.background = element_rect(fill = NA, colour = "black"))+
+  # ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .75)+
+  labs(x = "", y = "")+
+  annotate(geom = "text", x = 37.6, y = -7.6, label = "A)")
+
+non.rumaki = ggplot() +
+  layer_spatial(data = tz, fill = "grey90", col = "ivory", size = 0.2)+
+  layer_spatial(data = catch.pooled.sf %>% 
+                  filter(Zone != "RUMAKI" & group == "Tuna fish") ,
+          aes(fill = class), col = "ivory", size = 0.2) +
+  ggrepel::geom_text_repel(data = coordinates %>% filter(lat >= -7.6 & group == "Tuna fish") %>% distinct(Districts, lon,lat),
+                            aes(x = lon, y = lat, label = Districts),point.padding = 2.2, size = 3.4) +
+  coord_sf(xlim = c(37.8,40.3), ylim = c(-7.6,-4.5), crs = 4326)+
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_x_continuous(breaks = c(38.1,39.7))+
+  scale_y_continuous(breaks = c(-7.25,-4.75)) +
+  theme_bw() +
+  theme(panel.grid = element_line(linetype = 3), 
+        axis.text = element_text(size = 10), 
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 10),
+        panel.background = element_rect(fill = NA, colour = "black"))+
+  # ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .75)+
+  labs(x = "", y = "") +
+  annotate(geom = "text", x = 40.1, y = -4.6, label = "B)")
+
+rumaki + non.rumaki
+```
+
+### *Small pelagics*
+The average catch rate for the octopus fishery in RUMAKI was `r catch.summarized %>% filter(group == "Small pelagic" & Zone == "RUMAKI") %>% pull(standardized.catch)` tones per year and for Non--RUMAKI was `r catch.summarized %>% filter(group == "Small pelagic" & Zone != "RUMAKI") %>% pull(standardized.catch)` tones per year (Table \@ref(tab:tab32)). The spatial maps indicate the districts of Kindondoni and Mkuranga have highest catch, this is true for Kilwa and Mtwara in the RUMAKI area. Pangani and Temeke and Rufiji have lowest catch in the non-RUMAKI and RUMAKI areas respectively (Figure  \@ref(fig:fig33)). A quick interpretation of these results is that most landings of small pelagic fish are in Dar es salaam but in the actual sense Dar es salaam is a marketing center and most fishermen from the northern coastal district as well as southern coastal districts bring fish to the market.  Pangani and particularly Kipumbwi is known to be among the best landing sites for small pelagic fisheries in Tanzania coastal districts, however the analysis of CAS data reveals the opposite. The general conclusion there was a weakness in the data collection system.  Data related to small pelagic is scarce and in most cases underestimated. This is due to the nature of the fishery itself, landing is usually packed in boxes or buckets and sold in bulk, makes the estimation difficult. A dedicated effort is needed to make sure data related to small pelagic is accurately collected, more important during the peak season in NEM (calm sea with favourable temperature and nutrients (Abdellaoui et al 2017). 
+
+
+```{r fig33, fig.cap="Average annual catch for small pelagic in (a) RUMAKI and (b) Non-RUMAKI coastal districts", fig.width=7, fig.height=3.5}
+
+
+rumaki = ggplot() +
+  layer_spatial(data = tz, fill = "grey90", col = "ivory", size = 0.2)+
+  layer_spatial(data = catch.pooled.sf %>% 
+                  filter(Zone == "RUMAKI" & group == "Small pelagic"),
+          aes(fill = class), col = "ivory", size = 0.2) +
+  ggrepel::geom_text_repel(data = coordinates %>% filter(lat <= -7.6 & group == "Small pelagic") %>% distinct(Districts, lon,lat),
+                            aes(x = lon, y = lat, label = Districts),point.padding = 2.2, size = 3.4) +
+ coord_sf(xlim = c(37.5,40.5), ylim = c(-11.1,-7.5), crs = 4326)+
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_y_continuous(breaks = c(-10.5,-8.25)) +
+  scale_x_continuous(breaks = c(38.2,39.85))+
+  theme_bw() +
+  theme(panel.grid = element_line(linetype = 3), 
+        axis.text = element_text(size = 10), 
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 10), 
+        legend.position = "none",
+        panel.background = element_rect(fill = NA, colour = "black"))+
+  # ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .75)+
+  labs(x = "", y = "")+
+  annotate(geom = "text", x = 37.6, y = -7.6, label = "A)")
+
+non.rumaki = ggplot() +
+  layer_spatial(data = tz, fill = "grey90", col = "ivory", size = 0.2)+
+  layer_spatial(data = catch.pooled.sf %>% 
+                  filter(Zone != "RUMAKI" & group == "Small pelagic") ,
+          aes(fill = class), col = "ivory", size = 0.2) +
+  ggrepel::geom_text_repel(data = coordinates %>% filter(lat >= -7.6 & group == "Small pelagic") %>% distinct(Districts, lon,lat),
+                            aes(x = lon, y = lat, label = Districts),point.padding = 2.2, size = 3.4) +
+  coord_sf(xlim = c(37.8,40.3), ylim = c(-7.6,-4.5), crs = 4326)+
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_x_continuous(breaks = c(38.1,39.7))+
+  scale_y_continuous(breaks = c(-7.25,-4.75)) +
+  theme_bw() +
+  theme(panel.grid = element_line(linetype = 3), 
+        axis.text = element_text(size = 10), 
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 10),
+        panel.background = element_rect(fill = NA, colour = "black"))+
+  # ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .75)+
+  labs(x = "", y = "") +
+  annotate(geom = "text", x = 40.1, y = -4.6, label = "B)")
+
+rumaki + non.rumaki
+```
+
+
+### *Reef species*
+Reef fisheries contributes to over 90% of total fish landings. The average catch rate for the octopus fishery in RUMAKI was `r catch.summarized %>% filter(group == "Reef fish" & Zone == "RUMAKI") %>% pull(standardized.catch)` tones per year and for Non--RUMAKI was `r catch.summarized %>% filter(group == "Reef fish" & Zone != "RUMAKI") %>% pull(standardized.catch)` tones per year (Table \@ref(tab:tab32)). The spatial map indicates catch (MT) variation for reef fishery among the non-RUMAKI area (Figure \@ref(fig:fig34)), the districts of Pangani ranked highest (catches above 225 tonnes/year), followed by Mkinga and Kinondoni. Muheza and Bagamoyo ranked least with catches below 75 tonnes/yr. 
+
+
+```{r fig34, fig.cap="Average annual catch for reef fish in (a) RUMAKI and (b) Non-RUMAKI coastal districts", fig.width=7, fig.height=3.5}
+
+rumaki = ggplot() +
+  layer_spatial(data = tz, fill = "grey90", col = "ivory", size = 0.2)+
+  layer_spatial(data = catch.pooled.sf %>% 
+                  filter(Zone == "RUMAKI" & group == "Reef fish"),
+          aes(fill = class), col = "ivory", size = 0.2) +
+  ggrepel::geom_text_repel(data = coordinates %>% filter(lat <= -7.6 & group == "Reef fish") %>% distinct(Districts, lon,lat),
+                            aes(x = lon, y = lat, label = Districts),point.padding = 2.2, size = 3.4) +
+ coord_sf(xlim = c(37.5,40.5), ylim = c(-11.1,-7.5), crs = 4326)+
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_y_continuous(breaks = c(-10.5,-8.25)) +
+  scale_x_continuous(breaks = c(38.2,39.85))+
+  theme_bw() +
+  theme(panel.grid = element_line(linetype = 3), 
+        axis.text = element_text(size = 10), 
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 10), 
+        legend.position = "none",
+        panel.background = element_rect(fill = NA, colour = "black"))+
+  # ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .75)+
+  labs(x = "", y = "")+
+  annotate(geom = "text", x = 37.6, y = -7.6, label = "A)")
+
+non.rumaki = ggplot() +
+  layer_spatial(data = tz, fill = "grey90", col = "ivory", size = 0.2)+
+  layer_spatial(data = catch.pooled.sf %>% 
+                  filter(Zone != "RUMAKI" & group == "Reef fish") ,
+          aes(fill = class), col = "ivory", size = 0.2) +
+  ggrepel::geom_text_repel(data = coordinates %>% filter(lat >= -7.6 & group == "Reef fish") %>% distinct(Districts, lon,lat),
+                            aes(x = lon, y = lat, label = Districts),point.padding = 2.2, size = 3.4) +
+  coord_sf(xlim = c(37.8,40.3), ylim = c(-7.6,-4.5), crs = 4326)+
+  ggsci::scale_fill_locuszoom(name = "Catch \n(Tonnes)") +
+  scale_x_continuous(breaks = c(38.1,39.7))+
+  scale_y_continuous(breaks = c(-7.25,-4.75)) +
+  theme_bw() +
+  theme(panel.grid = element_line(linetype = 3), 
+        axis.text = element_text(size = 10), 
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 10),
+        panel.background = element_rect(fill = NA, colour = "black"))+
+  # ggspatial::annotation_scale(position = "bl", bar_cols = c("grey", "ivory"), text_cex = .75)+
+  labs(x = "", y = "") +
+  annotate(geom = "text", x = 40.1, y = -4.6, label = "B)")
+
+rumaki + non.rumaki
+```
+
+## Catch trend comparison of stock healthiness between FISHCOM area and the rest of the district
+The annual average fish catch and catch rate in the RUMAKI  and Non-RUMAKI between 2014 and 2018 are shown in appendix \@ref(tab:07). The catch rate in RUMAKI was relatively higher compared to other areas for all species except small pelagic (Figure \@ref(fig:fig35)). This trend in catch rate was computed based on number of district per zone and the intepretation of this result should be treated with caution as the number of fishers, vessels, fishing areas and other parameters are not the same. Despite that drawback in this result, the standardized catch rate in RUMAKI \index{RUMAKI} is doing better compared to other districts. The good performance of fisheries in RUMAKI area is contributed with the effective fisheries co-management initiative supported with WWF-Tanzania\index{Institutions!WWF}.
+
+
+```{r fig35, fig.cap="Mean Catches and standard error for the four common fish group in Rumaki and Non-Rumaki area", fig.width=8, fig.height=6}
+catch.stats = catch.clean.group.outlierfree %>% 
+  group_by(Year,Zone, group) %>% 
+  summarise(n = n(),
+            catch.mean = mean(catch, na.rm = TRUE),
+            catch.median = median(catch, na.rm = TRUE),
+            catch.sd = sd(catch, na.rm = TRUE),
+            catch.se = catch.sd/sqrt(n),
+            catch.rate = catch.median/n,
+            catch.rate.se = catch.se/n) %>%
+  ungroup() 
+
+
+catch.stats %>% 
+  ggplot(aes(x = Year, y = catch.rate, col = Zone)) +
+  geom_line() +
+  geom_errorbar(aes(ymin = catch.rate - catch.rate.se, 
+                    ymax = catch.rate + catch.rate.se), width = 0.075)+  
+  geom_point(size = 3)+
+  facet_wrap(~group, strip.position = "top" , scales = "free_y")+
+  cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        legend.position = "right", 
+        legend.key.width = unit(2,"cm"))+
+  labs(x = "", y = "Catch rates (Tonnes)")+
+   ggsci::scale_color_d3(name = "")+
+  scale_x_continuous(breaks = 2014:2017)
+
+```
+
+
+
+
+## Status of stock healthiness in the RUMAKI districts
+The status of fish stock healthiness in the RUMAKI districts was assessed based on the data obtained from the eCAS for the year 2016 to 2019 . The use of mobile application in fisheries data collection was firstly implemented as a pilot project in the three districts of Mafia, Kilwa and Rufiji/Kibiti. Therefore, during this period data from Kigamboni and Mtwara rural is missing in the system. Part of the next analysis (Figure 6-8) excluded data collected in the year 2014-2015 as districts of Kigamboni and Kibiti were not part of the pilot project. 
+
+## Catch Trends for priority fisheries stock in the RUMAKI 
+The current findings indicate there is a decrease in total catch from artisanal fishers in the RUMAKI districts for all major fisheries groups with the exception of small pelagic (Figure \@ref(fig:fig320)). This is based on the data collected by BMUs members at different landing sites from 2016-2019. The direct reasons linked to this trend could not be established, as environment data, catch and effort and other parameters are not part of the general fisheries data collection. Potential reasons could be due to the environmental variability and specifically increased in sea surface temperature (SST).  TAFIRI is independently monitoring change in environmental conditions for the entire coast, findings suggest from 2016 to 2019 there has been a change in sea surface water temperature annual anomaly of 1.7oC and particularly in 2017 (Fig. 5a and b). The other reason could be anthropogenic,  specifically dynamite fishing, but this is yet to be linked/confirmed. However, Pandu (2014) suggested, increasing demand from the hotel sector is leading to overfishing as well as  the escalating use of destructive fishing methods.
+
+
+```{r fig320, fig.cap="Catches pooled for the five common fish group in Rumaki area", fig.width=8, fig.height=4}
+catch.zone = catch.clean.group.outlierfree %>% group_by(Year, group) %>% 
+  summarise(n = n(),
+            catch.mean = mean(catch, na.rm = TRUE),
+            catch.median = median(catch, na.rm = TRUE),
+            catch.sd = sd(catch, na.rm = TRUE),
+            catch.se = catch.sd/sqrt(n)) %>%
+  ungroup() 
+
+catch.zone %>% 
+  ggplot(aes(x = Year, y = catch.median,col = group)) +
+  geom_line() +
+  geom_errorbar(aes(ymin = catch.median - catch.se, 
+                    ymax = catch.median + catch.se), width = 0.075)+
+  geom_point(size = 3)+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        panel.background = element_rect(fill = "white", colour = "black"),
+        legend.position = "right", 
+        legend.text = element_text(size = 9), 
+        axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 11),
+        strip.background = element_blank(),
+        legend.key = element_blank(),
+        legend.key.width = unit(.85,"cm"))+
+  labs(x = "", y = "Total Catch (Tonnes)")+
+   ggsci::scale_color_d3(name = "Fish\nGroup")+
+  facet_wrap(~group, scales = "free_y")+
+  scale_y_continuous(trans = scales::log10_trans())
+
+
+
+```
+
+## Comparison of the total catch for priority fisheries groups among RUMAKI districts 
+Catch trends of the major fishery groups in the RUMAKI area are shown in Figure 6.  Despite the general trend of decreased fish catch in the RUMAKI districts, a detailed analysis for each district indicates some fisheries categories seem to be doing better in some places between 2016 to 2019. For instance, octopus and tuna species catches show an increase in Kigamboni, likewise, reef fish and octopus in Mtwara rural. More importantly, there is some consistency in the data collection for Kibiti, Kigamboni, Kilwa and Mafia districts (Fig 6a&b). This is good news. Though this is not yet to the standard that will assist a full stocks assessment it is a good starting point. The data points gaps in Mtwara and Kibiti indicate the inconsistency in the data collection. Both Kigamboni and Mtwara picked up a year later after the piloting phase, but Kigamboni has kept the consistency. 
+
+
+
+
+
+```{r fig36, fig.cap="District in Rumaki areas with relatively decline annual catches", fig.width=6.5, fig.height=4.5}
+
+load("data/fish_catch_statistics.RData")
+
+formula1 = "y~poly(x,1)"
+
+ggplot(data = catch.clean.group.outlierfree %>% 
+         filter(Zone == "RUMAKI" & !Districts %in% c("Rufiji", "Mtwara", "Mtwara Urban")) , 
+       aes(x = Year, y = catch, col = Districts, fill = Districts))+
+  geom_point()+
+  geom_smooth(se = TRUE, alpha = .1, method = "lm", formula = formula1)+
+  # ggpmisc::stat_fit_tb(method = "lm",
+  #             method.args = list(formula = formula1),
+  #             tb.vars = c(Parameter = "term", 
+  #                         Estimate = "estimate", 
+  #                         "s.e." = "std.error", 
+  #                         "italic(t)" = "statistic", 
+  #                         "italic(P)" = "p.value"),
+  #             label.y = "top", label.x = "right",
+  #             parse = TRUE)+
+  ggpmisc::stat_poly_eq(aes(label = paste0("atop(", ",", ..rr.label.., ")")), 
+               formula = formula1, rr.digits = 2,
+               parse = TRUE) +
+  # ggrepel::geom_text_repel(data = now, aes(x = date, y = catch, label = label)) +
+  scale_x_continuous(breaks = 2015:2017) +
+  # scale_y_continuous(trans = scales::log10_trans())+
+  # cowplot::theme_minimal_grid()+
+  # theme(panel.grid = element_line(linetype = "dotted"), legend.position = "none")+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        panel.background = element_rect(fill = "NA", colour = "black"),
+        legend.position = "none", 
+        legend.text = element_text(size = 9), 
+        axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 11),
+        strip.background = element_blank(),
+        legend.key.width = unit(.5,"cm"))+
+  facet_wrap(~Districts, scales = "free")+
+  labs(x = "", y = "Fish catch (Tonnes)")+
+  scale_fill_brewer(palette = "Dark2", name = "Dominant \nSpecies")+
+  scale_colour_brewer(palette = "Dark2", name = "Dominant \nSpecies")+
+  scale_y_continuous(trans = scales::log10_trans())+
+  coord_cartesian()
+```
+
+## Catch composition of major priority fisheries groups in RUMAKI districts
+The current findings suggest reef fishes are the dominant landing in almost all districts, with the exception of Kilwa and Mtwara districts (Figure \@ref(fig:fig37) and \@ref(fig:fig38).  Octopus is also common in the four districts except for Rufiji. Interestingly there is more elasmobranch caught in Mtwara rural than any other area (Figure \@ref(fig:fig38)a), likewise, more small pelagic group in Kilwa than any other area (Figure \@ref(fig:fig38)b) . Rufiji in this context seems to be catching reef fishes and elasmobranch only, however, this is not true, the main fishery in this area is the prawn, catch related to prawn is documented from the industrial fishery. In general, in terms of catch composition, Kilwa and KIgamboni have all five fisheries (Figure \@ref(fig:fig37)); Mafia and Mtwara four fisheries Figure \@ref(fig:fig38); and Kibiti two fisheries (Table \@ref(tab:tab31). 
+
+
+```{r fig37, fig.cap="Catch composition of major priority fisheries groups in a) Kigamboni and b) Kilwa Districts", fig.width=8, fig.height=4}
+
+load("data/rumaki_fish_catch_statistics.RData")
+require(RColorBrewer)
+
+species.groups = dominant.group %>% 
+  group_by(group, Location) %>% 
+  summarise(weight = mean(catch, na.rm = TRUE)) %>% 
+  ungroup() 
+
+
+
+  temeke = species.groups %>%
+  filter(Location == "Kigamboni")%>%
+  mutate(percentage = (weight/sum(weight)*100) %>% round(digits = 1),
+         labs = paste(percentage, "%"))%>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "percentage",
+                       fill = "group", color = "white", lab.pos = "in")+
+  theme(legend.position = "none",
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 11))+
+  ggsci::scale_fill_jama(name = "Dominant\nFish Groups") +  
+  labs(subtitle = "a)")
+  
+  kilwa = species.groups %>%
+  filter(Location == "Kilwa")%>%
+  mutate(percentage = (weight/sum(weight)*100) %>% round(digits = 1),
+         labs = paste(percentage))%>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "percentage",
+                       fill = "group", color = "white", lab.pos = "in")+
+  theme(legend.position = "right",
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 11))+
+  ggsci::scale_fill_jama(name = "Dominant\nFish Groups") +  
+  labs(subtitle = "b)")
+  
+ 
+temeke + kilwa 
+```
+
+
+```{r fig38, fig.cap="Catch composition of major priority fisheries groups in a) Mtwara Rural and b) Mafia Districts", fig.height=4,fig.width=8}
+
+ mtwara.rural = species.groups %>%
+  filter(Location == "Mtwara Rural")%>%
+  mutate(percentage = (weight/sum(weight)*100) %>% round(digits = 1),
+         labs = paste(percentage, "%"))%>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "percentage",
+                       fill = "group", color = "white", lab.pos = "in")+
+  theme(legend.position = "none",
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 11))+
+  # scale_fill_viridis_d()+
+  ggsci::scale_fill_jama(name = "Dominant\nFish Groups") +  
+  labs(subtitle = "a)")
+  
+  
+   mafia = species.groups %>%
+  filter(Location == "Mafia")%>%
+  mutate(percentage = (weight/sum(weight)*100) %>% round(digits = 1),
+         labs = paste(percentage, "%"))%>%
+  ggpubr::ggdonutchart(x = "percentage", 
+                       label = "percentage",
+                       fill = "group", color = "white", lab.pos = "in")+
+  theme(legend.position = "right", 
+        legend.text = element_text(size = 10), 
+        legend.title = element_text(size = 11))+
+  # scale_fill_viridis_d()+
+  ggsci::scale_fill_jama(name = "Dominant\nFish Groups") +  
+  labs(subtitle = "b)")
+   
+mtwara.rural + mafia
+```
+
+
+##  Seasonal variation of the total catch for priority fisheries in RUMAKI 
+The use of eCAS helped analysis of the seasonal/ monthly fisheries catch variation of the major fisheries among Rumaki (Figure 7). Analysis of the monthly catch variation did not produce good results necessitating pooling data into the seasonal, North East (NE) and South East (SE)Monsoon. Yet no clear differences in catch variation could be observed in all fisheries categories.  The possible explanation is that the dataset was not enough to show such variation. More data needs to be collected for such an analysis to run. In the previous database in the CAS  such seasonal comparison in catch variation among sites could not be performed. 
+
+```{r fig39, fig.width=8, fig.height=4, fig.cap="Seasonal (NE and South East SE Monsoon) variation in catch (Mt) composition of dominant priority fisheries groups among RUMAKI sites from 2016-2019"}
+
+
+
+catch.clean.group.season = catch.clean.group.outlierfree %>%
+mutate(season = Month,
+       season = replace(season, season %in% c(10,11,12,1,2,3), "NE"),
+       season = replace(season, season %in% c(4,5,6,7,8,9), "SE"))
+
+catch.clean.group.season %>%
+  ggplot(aes(x = season, y = catch , fill = group))+
+  geom_boxplot(outlier.colour = "red") +
+  facet_wrap(~Districts, scales = "free_y")+
+  # cowplot::theme_minimal_grid()+
+  theme(panel.grid = element_line(linetype = "dotted"), 
+        panel.background = element_rect(fill = "white", colour = "black"),
+        legend.position = "right", 
+        legend.text = element_text(size = 9), 
+        axis.text = element_text(size = 10), 
+        axis.title = element_text(size = 11),
+        strip.background = element_blank(),
+        legend.key.width = unit(.5,"cm"))+
+  scale_y_continuous(trans = scales::log10_trans())+
+  labs(x = "", y = "Fish catches (Tonnes)")+
+  # ggsci::scale_fill_jama(name = "Dominant \nSpecies")+
+  scale_fill_brewer(palette = "Accent", name = "Dominant \nSpecies")
+```
+
+
+
+## Assessment of re-appearances of fish species  in the study area and its linkage to conservation
+Previous information recorded on the CAS forms was able to record fish species to the family level. The new version of eCAS has room to record fish species catches to a species level. This is a major improvement, it does not only facilitate mandatory reporting to national and regional fisheries organizations but further allows the analysis of appearance/disappearance of endangered and other species of ecological importance. During the current analysis, we have noted re-appearance of the elasmobranch group in the database with a relatively good resolution. Interestingly Some species of shark and rays are captured in the database to the genus level,  though more effort for identification of the elasmobranch to species level is needed.  
+
+
+<!--chapter:end:04-results.Rmd-->
+
+# Recommendation and Conclusion {-}
+
+## Recommendation on the quality of fisheries data. {-}
+For the purpose of improving fisheries data collection system, the following are sets of recommendations that this report suggests will improve the process and hence facilitate the management of the artisanal fisheries: 
+
++ The Department of Fisheries (DoF) in collaboration with TAFIRI should consider identifying representative species for all priority (major) fisheries groups and consistency follow up the data collection on the identified species.
++ The DoF should consider adapting and upscaling the e--CAS as the main data collection tool. Promote timely preparation of fishery statistics through the application of the databases. This should go along with the timely sharing of the statistics with relevant stakeholders.  
++ Promote capacity development to all levels in the area of data collection, processing, analysis, interpretation and reporting.
++ Periodic strategic planning/system review of marine fisheries, data collection should be in a position to answer some of the management questions at any time.
++ Promotion and adoption of statistical systems for small-scale coastal fisheries. 
++ The DoF in collaboration with other stakeholders should explore ways to develop and implement multi-sectoral indicators analysis as an approach to monitor the stock, such indicators could include socioeconomics and livelihood data, this can be incorporated in the current data collection and analysis. 
++ There is a need for improvement on data collection related to data fish species diversity, effort, trade and market value of individual species. This can be integrated into the current system or collected separately.
+
+## Conclusion {-}
+The collection and analysis of fishery data and information is a costly and timely exercise. To be relevant and cost-effective, fishery data and information collection systems must have a clear set of objectives and appropriate strategies to collect data, which should be based on priorities and requirements of data users. However, chronic problems of insufficient human and financial resources allocated for data collection often resulted in the poor quality of information that further led to non- or limited use of statistics for fishery management and policy development. Consequently only dwindling support was given to the systematic improvement of national fishery data and information collection systems.   There is an urgent need to terminate this vicious cycle of problems. The previous budget allocated by the Government for data collection during CAS should be more than enough if re-allocated to the used in the improved eCAS data collection system.  
+
+<!--chapter:end:05-summary.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:06-references.Rmd-->
+
+\cleardoublepage
+
+```{r echo=FALSE, results='asis'}
+if(!knitr::is_latex_output()){
+  cat("# (APPENDIX) Appendix {-}")
+} else {
+  cat("\\appendix")
+}
+```
+
+
+```{r setup7, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, comment = "")
+
+require(tidyverse)
+require(ggpubr)
+require(sf)
+require(ggspatial)
+require(magrittr)
+library(kableExtra)
+require(cartography)
+library(sp)
+require(patchwork)
+```
+
+# Statistical Background {#appendixA}
+
+We computed the total landings for the five major groups as shown in appendix \@ref(tab:tab07)
+
+```{r tab07}
+
+load("data/fish_catch_statistics.RData")
+
+catch.stats = catch.clean.group.outlierfree %>% 
+  group_by(Year,Zone, group) %>% 
+  summarise(n = n(),
+            catch.mean = mean(catch, na.rm = TRUE),
+            catch.median = median(catch, na.rm = TRUE),
+            catch.sd = sd(catch, na.rm = TRUE),
+            catch.se = catch.sd/sqrt(n),
+            catch.rate = catch.median/n,
+            catch.rate.se = catch.se/n) %>%
+  ungroup() 
+
+catch.stats %>%
+  select(-c(n)) %>%
+  mutate_if(is.numeric, round, digits = 2) %>%
+  kableExtra::kable(format = "latex",booktabs = TRUE,
+                    caption = "Total Annual fish catch and catch rate for priority species in RUMAKI and Non--RUMAKI Areas",col.names = c("Year", "Zone", "Group", "Mean", "Median", "SD", "SE", "Median", "SE")) %>%
+  kableExtra::add_header_above(c("","","","Total Fish Catch (Tones)" = 4, "Catch Rate" = 2)) %>%
+  kableExtra::column_spec(column = 1:9, width = ".85in")%>%
+  kableExtra::collapse_rows(columns = 1:2, latex_hline = "major", valign = "middle")%>% 
+  kable_styling(font_size = ifelse(knitr:::is_latex_output(), 10, 16), 
+                latex_options = c("hold_position"))
+```
+
+
+```{r}
+require(kableExtra)
+```
+
+
+```{r setup_appA, include=FALSE}
+chap <- "A"
+lc <- 0
+rq <- 0
+# **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`**
+# **`r paste0("(RQ", chap, ".", (rq <- rq + 1), ")")`**
+
+knitr::opts_chunk$set(
+  tidy = FALSE, 
+  out.width = '\\textwidth', 
+  fig.height = 4,
+  warning = FALSE
+)
+
+options(scipen = 99, digits = 3)
+
+# Set random number generator see value for replicable pseudorandomness.
+set.seed(76)
+```
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+# Packages needed internally, but not in text.
+library(scales)
+library(tidyverse)
+```
+
+
+## Basic statistical terms {#appendix-stat-terms}
+
+Note that all the following statistical terms apply only to *numerical* variables, except the *distribution* which can exist for both numerical and categorical variables. 
+
+### Mean
+
+The *mean* is the most commonly reported measure of center.  It is commonly called the *average* though this term can be a little ambiguous.  The mean is the sum of all of the data elements divided by how many elements there are. If we have $n$ data points, the mean is given by: 
+
+$$Mean = \frac{x_1 + x_2 + \cdots + x_n}{n}$$
+
+### Median
+
+The median is calculated by first sorting a variable's data from smallest to largest.  After sorting the data, the middle element in the list is the *median*.  If the middle falls between two values, then the median is the mean of those two middle values.
+
+### Standard deviation
+
+We will next discuss the *standard deviation* ($sd$) of a variable.  The formula can be a little intimidating at first but it is important to remember that it is essentially a measure of how far we expect a given data value will be from its mean:
+
+$$sd = \sqrt{\frac{(x_1 - Mean)^2 + (x_2 - Mean)^2 + \cdots + (x_n - Mean)^2}{n - 1}}$$
+
+### Five-number summary
+
+The *five-number summary* consists of five summary statistics: the minimum, the first quantile AKA 25th percentile, the second quantile AKA median or 50th percentile, the third quantile AKA 75th, and the maximum. The five-number summary of a variable is used when constructing boxplots, as seen in Section \@ref(method).
+
+The quantiles are calculated as
+
+- first quantile ($Q_1$): the median of the first half of the sorted data
+- third quantile ($Q_3$): the median of the second half of the sorted data
+
+The *interquartile range (IQR)*\index{interquartile range (IQR)} is defined as $Q_3 - Q_1$ and is a measure of how spread out the middle 50% of values are. The IQR corresponds to the length of the box in a boxplot.
+
+The median and the IQR are not influenced by the presence of outliers in the ways that the mean and standard deviation are. They are, thus, recommended for skewed datasets. We say in this case that the median and IQR are more *robust to outliers*.
+
+### Distribution
+
+The *distribution* of a variable shows how frequently different values of a variable occur. Looking at the visualization of a distribution can show where the values are centered, show how the values vary, and give some information about where a typical value might fall.  It can also alert you to the presence of outliers. 
+
+Recall from Chapter \@ref(intro) that we can visualize the distribution of a numerical variable using binning in a histogram and that we can visualize the distribution of a categorical variable using a barplot.
+
+
+### Outliers
+
+*Outliers* correspond to values in the dataset that fall far outside the range of "ordinary" values.  In the context of a boxplot, by default they correspond to values below $Q_1 - (1.5 \cdot IQR)$ or above $Q_3 + (1.5 \cdot IQR)$.
+
+
+
+
+## Normal distribution {#appendix-normal-curve}
+
+Let's next discuss one particular kind of distribution: \index{distribution!normal} *normal distributions*. Such bell-shaped distributions are defined by two values: (1) the *mean* $\mu$ ("mu") which locates the center of the distribution and (2) the *standard deviation* $\sigma$ ("sigma") which determines the variation of the distribution. In Figure \@ref(fig:normal-curves), we plot three normal distributions where:
+
+1. The solid normal curve has mean $\mu = 5$ \& standard deviation $\sigma = 2$.
+1. The dotted normal curve has mean $\mu = 5$ \& standard deviation $\sigma = 5$.
+1. The dashed normal curve has mean $\mu = 15$ \& standard deviation $\sigma = 2$.
+
+```{r normal-curves, echo=FALSE, fig.cap="Three normal distributions.", purl=FALSE, out.width="90%"}
+all_points <- tibble(
+  domain = seq(from = -10, to = 25, by = 0.01),
+  `mu = 5, sigma = 2` = dnorm(x = domain, mean = 5, sd = 2),
+  `mu = 5, sigma = 5` = dnorm(x = domain, mean = 5, sd = 5),
+  `mu = 15, sigma = 2` = dnorm(x = domain, mean = 15, sd = 2)
+)  %>% 
+  gather(key = "Distribution", value = "value", - domain) %>% 
+  mutate(
+    Distribution = factor(
+      Distribution, 
+      levels = c("mu = 5, sigma = 2", 
+                 "mu = 5, sigma = 5", 
+                 "mu = 15, sigma = 2")
+    )
+  )
+
+for_labels <- all_points %>% 
+  filter(between(domain, 3.795, 3.805) & Distribution == "mu = 5, sigma = 2" |
+           between(domain, 0.005, 0.0105) & Distribution == "mu = 5, sigma = 5" |
+           between(domain, 16.005, 16.015) & Distribution == "mu = 15, sigma = 2")
+
+all_points %>% 
+  ggplot(aes(x = domain, y = value, linetype = Distribution)) +
+  geom_line() +
+  ggrepel::geom_label_repel(data = for_labels, aes(label = Distribution),
+                            nudge_x = c(-1, -2.1, 1)) +
+  theme_light() +
+  scale_linetype_manual(values=c("solid", "dotted", "longdash")) + 
+  theme(
+    axis.title.y = element_blank(),
+    axis.title.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    legend.position = "none"
+  )
+```
+
+Notice how the solid and dotted line normal curves have the same center due to their common mean $\mu$ = 5. However, the dotted line normal curve is wider due to its larger standard deviation of $\sigma$ = 5. On the other hand, the solid and dashed line normal curves have the same variation due to their common standard deviation $\sigma$ = 2. However, they are centered at different locations. 
+
+When the mean $\mu$ = 0 and the standard deviation $\sigma$ = 1, the normal distribution has a special name. It's called the *standard normal distribution* or the *$z$-curve*\index{distribution!standard normal}.
+
+Furthermore, if a variable follows a normal curve, there are *three rules of thumb* we can use:
+
+1. 68% of values will lie within $\pm$ 1 standard deviation of the mean.
+1. 95% of values will lie within $\pm$ 1.96 $\approx$ 2 standard deviations of the mean.
+1. 99.7% of values will lie within $\pm$ 3 standard deviations of the mean.
+
+Let's illustrate this on a standard normal curve in Figure \@ref(fig:normal-rule-of-thumb). The dashed lines are at -3, -1.96, -1, 0, 1, 1.96, and 3. These 7 lines cut up the x-axis into 8 segments. The areas under the normal curve for each of the 8 segments are marked and add up to 100%. For example:
+
+1. The middle two segments represent the interval -1 to 1. The shaded area above this interval represents 34% + 34% = 68% of the area under the curve. In other words, 68% of values. 
+1. The middle four segments represent the interval -1.96 to 1.96. The shaded area above this interval represents 13.5% + 34% + 34% + 13.5% = 95% of the area under the curve. In other words, 95% of values. 
+1. The middle six segments represent the interval -3 to 3. The shaded area above this interval represents 2.35% + 13.5% + 34% + 34% + 13.5% + 2.35% = 99.7% of the area under the curve. In other words, 99.7% of values. 
+
+```{r normal-rule-of-thumb, echo=FALSE, fig.cap="Rules of thumb about areas under normal curves.", purl=FALSE, out.width = "80%"}
+shade_3_sd <- function(x) {
+  y <- dnorm(x, mean = 0, sd = 1)
+  y[x <= -3 | x >= 3] <- NA
+  return(y)
+}
+shade_2_sd <- function(x) {
+  y <- dnorm(x, mean = 0, sd = 1)
+  y[x <= -1.96 | x >= 1.96] <- NA
+  return(y)
+}
+shade_1_sd <- function(x) {
+  y <- dnorm(x, mean = 0, sd = 1)
+  y[x <= -1 | x >= 1] <- NA
+  return(y)
+}
+
+labels <- tibble(
+  x = c(-3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5),
+  label = c("0.15%", "2.35%", "13.5%", "34%", "34%", "13.5%", "2.35%", "0.15%")
+) %>% 
+  mutate(y = rep(0.3, times = n()))
+
+ggplot(data = tibble(x = c(-4, 4)), aes(x)) +
+  geom_text(data = labels, aes(y=y, label = label)) + 
+  # Trace normal curve
+  stat_function(fun = dnorm, args = list(mean = 0, sd = 1), n = 1000) + 
+  # Shade and delineate +/- 3 SD
+  stat_function(fun = shade_3_sd, geom = "area", fill = "black", alpha = 0.25, n = 1000) +
+  # annotate(geom = "segment", x = c(3, -3), xend = c(3, -3), y = 0, yend = dnorm(3, mean = 0, sd = 1)) +
+  # Shade and delineate +/- 2 SD
+  stat_function(fun = shade_2_sd, geom = "area", fill = "black", alpha = 0.25, n = 1000) +
+  # annotate(geom = "segment", x = c(1.96, -1.96), xend = c(1.96, -1.96), y = 0, yend = dnorm(1.96, mean = 0, sd = 1)) +
+  # Shade and delineate +/- 1 SD
+  stat_function(fun = shade_1_sd, geom = "area", fill = "black", alpha = 0.25, n = 1000) +
+  # annotate(geom = "segment", x = c(1, -1), xend = c(1, -1), y = 0, yend = dnorm(1, mean = 0, sd = 1)) + 
+  geom_vline(xintercept = c(-3, -1.96, -1, 0, 1, 1.96, 3), linetype = "dashed", alpha = 0.5) +
+  # Axes
+  scale_x_continuous(breaks = seq(from = -3, to = 3, by = 1)) +
+  labs(x = "z", y = "") +
+  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank())
+```
+
+
+## log10 transformations {#appendix-log10-transformations}
+
+At its simplest, log10 transformations return base 10 *logarithms*. For example, since $1000 = 10^3$, running `log10(1000)` returns `3` in R. To undo a log10 transformation, we raise 10 to this value. For example, to undo the previous log10 transformation and return the original value of 1000, we raise 10 to the power of 3 by running `10^(3) = 1000` in R. \index{log transformations}
+
+Log transformations allow us to focus on changes in *orders of magnitude*. In other words, they allow us to focus on *multiplicative changes* instead of *additive ones*. Let's illustrate this idea in Table \@ref(tab:logten) with examples of prices of consumer goods in 2019 US dollars. 
+
+<!--
+We can also frame such changes as being relative percentage increases/decreases instead of absolute increases/decreases. 
+-->
+
+```{r logten, echo=FALSE}
+tibble(Price = c(1,10,100,1000,10000,100000,1000000)) %>% 
+  mutate(
+    `log10(Price)` = log10(Price),
+    Price = dollar(Price),
+    `Order of magnitude` = c("Singles", "Tens", "Hundreds", "Thousands", "Tens of thousands", "Hundreds of thousands", "Millions"),
+    `Examples` = c("Cups of coffee", "Books", "Mobile phones", "High definition TVs", "Cars", "Luxury cars and houses", "Luxury houses")
+  ) %>% 
+  knitr::kable(
+    digits = 3, 
+    caption = "log10 transformed prices, orders of magnitude, and examples", 
+    booktabs = TRUE,
+    linesep = ""
+  ) %>% 
+  kable_styling(font_size = ifelse(knitr:::is_latex_output(), 10, 16), 
+                latex_options = c("hold_position"))
+```
+
+Let's make some remarks about log10 transformations based on Table \@ref(tab:logten):
+
+1. When purchasing a cup of coffee, we tend to think of prices ranging in single dollars, such as \$2 or \$3. However, when purchasing a mobile phone, we don't tend to think of their prices in units of single dollars such as \$313 or \$727. Instead, we tend to think of their prices in units of hundreds of dollars like \$300 or \$700. Thus, cups of coffee and mobile phones are of different *orders of magnitude* in price.
+1. Let's say we want to know the log10 transformed value of \$76. This would be hard to compute exactly without a calculator. However, since \$76 is between \$10 and \$100 and since log10(10) = 1 and log10(100) = 2, we know log10(76) will be between 1 and 2. In fact, log10(76) is 1.880814.
+1. log10 transformations are *monotonic*, meaning they preserve orders. So if Price A is lower than Price B, then log10(Price A) will also be lower than log10(Price B).
+1. Most importantly, increments of one in log10-scale correspond to *relative multiplicative changes* in the original scale and not *absolute additive changes*. For example, increasing a log10(Price) from 3 to 4 corresponds to a multiplicative increase by a factor of 10: \$100 to \$1000.
+
+
+
+
+
+
+<!--chapter:end:07-appendix.Rmd-->
+

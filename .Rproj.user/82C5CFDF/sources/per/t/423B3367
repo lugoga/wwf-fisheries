@@ -1,0 +1,27 @@
+{
+    "id": "423B3367",
+    "path": "E:/Data Manipulation/wwf_kuguru_mathias/graphics.Rmd",
+    "project_path": "graphics.Rmd",
+    "type": "r_markdown",
+    "hash": "160164260",
+    "contents": "",
+    "dirty": false,
+    "created": 1579591285717.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "chunk_output_type": "inline",
+        "cursorPosition": "39,0",
+        "last_setup_crc32": "3909B0239d0e4d57",
+        "scrollLine": "28",
+        "tempName": "Untitled1"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1591890103,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1591890103211,
+    "read_only": false,
+    "read_only_alternatives": []
+}

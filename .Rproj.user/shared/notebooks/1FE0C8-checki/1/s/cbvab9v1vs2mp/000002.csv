@@ -1,0 +1,8 @@
+"0","catch.stats %>% select(year = Year, zone = Zone, group, catch.median) %>% "
+"0","  spread(key = group, value = catch.median) %>%"
+"0","  kableExtra::kable(format = ""latex"", caption = ""Annual mean averages of common fish groups"","
+"0","                    digits = 2, align = ""c"", booktabs = TRUE,"
+"0","                    col.names = c(""Year"", ""Area"", ""Octopus"", ""Reef"", ""Pelagic"", ""Tuna"")) %>%"
+"0","  kableExtra::column_spec(column = 1, width = ""2cm"") %>% "
+"0","  kableExtra::column_spec(column = 2:6, width = ""2.5cm"") %>%"
+"0","  kableExtra::add_header_above(c("""", """", ""Fish catches (Tonnes)"" = 4))"

@@ -1,0 +1,7 @@
+"0","autoplot(object = temperature.ts)+"
+"0","  scale_y_continuous(limits = c(24.3,30.7),breaks = seq(24.5,31,1))+"
+"0","  scale_x_continuous(breaks = seq(1996,2018,2))+"
+"0","  # coord_cartesian(expand = FALSE)+"
+"0","  labs( y = expression(Temperature~(degree*C)))"
+"2","Scale for 'x' is already present. Adding another scale for 'x', which will replace the existing scale.
+"

@@ -1,0 +1,7 @@
+"0","rumaki.districts = catch.clean.group.outlierfree %>% distinct(Districts) %>% pull()"
+"0","rumaki.districts[3] = ""Tanga Urban"""
+"0","rumaki.districts[16] = ""Lindi"""
+"0",""
+"0","coastal = tz %>% filter(District_N %in% rumaki.districts)"
+"0",""
+"0","coastal %>% mapview::mapview()"

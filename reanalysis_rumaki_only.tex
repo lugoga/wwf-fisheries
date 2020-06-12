@@ -1,0 +1,699 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{titling}
+\posttitle{\end{center}}
+\usepackage{float}
+\floatplacement{figure}{H}
+\usepackage{fontspec}
+\setmainfont{Adobe Caslon Pro}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+title: ``Fisheries performance in Rumaki and Non-Rumaki Areas''
+author:
+- Baraka Kuguru
+- Mathias Igulu
+- Masumbuko Semba
+\# date: ``3/16/2020''
+header-includes:
+-
+
+\usepackage{titling}
+
+\begin{itemize}
+\item
+  \posttitle{\end{center}}
+
+  \begin{itemize}
+  \item
+    \usepackage{float}
+  \item
+    \floatplacement{figure}{H} \#\#make every figure with caption = h, this was the fix
+  \item
+    \usepackage{fontspec}
+  \item
+    \setmainfont{Adobe Caslon Pro} \#\# set fornt to Time New Roman
+    \# -
+
+    \usepackage{draftwatermark}
+
+    \#\#add watermark to pdf output document
+    output:
+    bookdown::pdf\_document2:
+    latex\_engine: xelatex
+    \# includes:
+    \# in\_header: preamble.tex
+    \# before\_body: frontpage.tex
+    \# after\_body: endpage.tex
+    toc: true
+    toc\_depth: 2
+    \# number\_sections: true
+    \# fig\_caption: yes
+    \# keep\_tex: yes
+    indent: false
+    \# toc: false
+    lof: true
+    lot: true
+    fontsize: 12pt
+    linestretch: 1.2
+    \# geometry: ``left=4cm, right=2.5cm, top=2.5cm, bottom=2.5cm''
+    \# bibliography: mahale.bib
+    \# csl: elsevier.csl
+    \# link-citations: yes
+    \# fig\_width: 2.0
+    \# fig\_height: 2.0
+    css: report\_style.css
+    colorlinks: yes
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{fisheries-in-rumaki-areas}{%
+\section{Fisheries in Rumaki Areas}\label{fisheries-in-rumaki-areas}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{species =}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"./data_update/rumakitu.csv"}\NormalTok{) }
+
+\NormalTok{species =}\StringTok{ }\NormalTok{species }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+
+\CommentTok{# species = species %>% }
+  \CommentTok{# separate(Species, c("Genus", "Species"), sep = " ", remove = FALSE)}
+
+\CommentTok{# species %>% distinct(Species) %>% arrange(Species)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dominant.group =}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(}
+\NormalTok{      species}\OperatorTok{%>%}
+\StringTok{        }\KeywordTok{filter}\NormalTok{(Species }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Serranidae spp( CEW )"}\NormalTok{,}\StringTok{"Lutjanus spp( LDW )"}\NormalTok{, }\StringTok{"Lutjanus ssp( LTJ )"}\NormalTok{,}\StringTok{"Red snapper( RDS )"}\NormalTok{,}\StringTok{"Changu( CHN )"}\NormalTok{, }\StringTok{"Carrotomus carolinus( ULG )"}\NormalTok{,}\StringTok{"Lethrinus borbonicus( LHB )"}\NormalTok{, }\StringTok{"Lethrinus harak( LHH )"}\NormalTok{, }\StringTok{"Lethrinus lentjan( LHL )"}\NormalTok{, }\StringTok{"Lethrinus nebulosus( LHN )"}\NormalTok{, }\StringTok{"Lethrinus rubrioperculatus( LHR )"}\NormalTok{, }\StringTok{"Lethrinus spp( LH )"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{group =} \StringTok{"Reef fish"}\NormalTok{),}
+      
+\NormalTok{      species}\OperatorTok{%>%}
+\StringTok{        }\KeywordTok{filter}\NormalTok{(Species }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Auxis thazard( FRI )"}\NormalTok{, }\StringTok{"Euthynnus affinis( KAW )"}\NormalTok{, }\StringTok{"Istiophorus platypterus( SFA )"}\NormalTok{, }\StringTok{"Katsuwonus pelamis( SKJ )"}\NormalTok{, }\StringTok{"Other tuna( JDR )"}\NormalTok{, }\StringTok{"Scomberomorus commerson( COM )"}\NormalTok{, }\StringTok{"Scomberomorus guttatus( GUT )"}\NormalTok{, }\StringTok{"Scomberomorus plurilineatus( KAK )"}\NormalTok{, }\StringTok{"Thunnus albacares( YFT )"}\NormalTok{, }\StringTok{"Thunnus obesus( BET )"}\NormalTok{, }\StringTok{"Tuna( NGR )"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{group =} \StringTok{"Tuna fish"}\NormalTok{),}
+      
+\NormalTok{      species}\OperatorTok{%>%}
+\StringTok{        }\KeywordTok{filter}\NormalTok{(Species }\OperatorTok{==}\StringTok{ "Octopus cyanea( OCC )"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{group =} \StringTok{"Octopus"}\NormalTok{),}
+\NormalTok{      species }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(Species }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Aetobatus ocellatus( MAE )"}\NormalTok{, }\StringTok{"Carcharhinus albimarginatus( ALS )"}\NormalTok{, }\StringTok{"Carcharhinus plumbeus( CCP )"}\NormalTok{, }\StringTok{"Carcharhinus sorrah( CCQ )"}\NormalTok{, }\StringTok{"Himantura uarnak( DHV )"}\NormalTok{, }\StringTok{"Maculabatis ambigua( RAJ )"}\NormalTok{, }\StringTok{"Manta alfredi( TNG )"}\NormalTok{, }\StringTok{"Rhynchobatus sp.( RCD )"}\NormalTok{, }\StringTok{"Taa( NYG )"}\NormalTok{, }\StringTok{"Taa( NYG )"}\NormalTok{, }\StringTok{"Papa mavongoroa( PMV )"}\NormalTok{, }\StringTok{"Papa( PP )"}\NormalTok{))}\OperatorTok{%>%}
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{group =} \StringTok{"Elasmobranch"}\NormalTok{),}
+      
+\NormalTok{      species}\OperatorTok{%>%}
+\StringTok{        }\KeywordTok{filter}\NormalTok{(Species }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Mackerel(scomber)( KB )"}\NormalTok{, }\StringTok{"Mackerel(scomber)( VB )"}\NormalTok{, }\StringTok{"Sardine( DA )"}\NormalTok{,}\StringTok{"Sardine( DA )"}\NormalTok{ ,}\StringTok{"Dagaa ( DPP )"}\NormalTok{,}\StringTok{"Dagaa ( DPP )"}\NormalTok{, }\StringTok{"Amblygaster sirm( AMS )"}\NormalTok{, }\StringTok{"Decapterus russelli( RUS )"}\NormalTok{, }\StringTok{"Dussumieria acuta( DSA )"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{        }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{group =} \StringTok{"Small pelagic"}\NormalTok{)}
+\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{catch =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{catch.clean.group.outlierfree =}\StringTok{ }\KeywordTok{list}\NormalTok{()}
+\NormalTok{sites =}\StringTok{ }\NormalTok{dominant.group }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{(Location) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{pull}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(sites))\{}
+  
+\NormalTok{  dummy =}\StringTok{ }\NormalTok{dominant.group }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Location }\OperatorTok{==}\StringTok{ }\NormalTok{sites[i])}
+\NormalTok{    q =}\StringTok{ }\KeywordTok{quantile}\NormalTok{(dummy}\OperatorTok{$}\NormalTok{catch, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{    iqr =}\StringTok{ }\KeywordTok{IQR}\NormalTok{(dummy}\OperatorTok{$}\NormalTok{catch, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{) }\CommentTok{# alternative: iqr = q[4]-q[2]}
+    
+\NormalTok{    lower =}\StringTok{ }\NormalTok{q[}\DecValTok{2}\NormalTok{] }\OperatorTok{-}\StringTok{ }\NormalTok{(}\FloatTok{1.5} \OperatorTok{*}\StringTok{ }\NormalTok{iqr)}
+\NormalTok{    upper =}\StringTok{ }\NormalTok{q[}\DecValTok{4}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{(}\FloatTok{1.5} \OperatorTok{*}\StringTok{ }\NormalTok{iqr)}
+    
+\NormalTok{ catch.clean.group.outlierfree[[i]] =}\StringTok{ }\NormalTok{dummy }\OperatorTok{%>%}\StringTok{ }
+\StringTok{   }\KeywordTok{filter}\NormalTok{(catch }\OperatorTok{>}\StringTok{ }\NormalTok{lower }\OperatorTok{&}\StringTok{ }\NormalTok{catch }\OperatorTok{<=}\StringTok{ }\NormalTok{upper)}
+  
+\NormalTok{\}}
+
+\NormalTok{catch.clean.group.outlierfree =}\StringTok{ }\NormalTok{catch.clean.group.outlierfree }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{bind_rows}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tz =}\StringTok{ }\KeywordTok{st_read}\NormalTok{(}\StringTok{"e:/GIS/tanzania-latest.shp/nbs/Districts.shp"}\NormalTok{, }\DataTypeTok{quiet =} \OtherTok{TRUE}\NormalTok{ )}
+
+\CommentTok{# tz %>% arrange(District_N) %>% pull(District_N)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{catch.clean.join =}\StringTok{ }\NormalTok{catch.clean.group.outlierfree }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\CommentTok{# filter(group == "Reef fish") %>% }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Location =} \KeywordTok{replace}\NormalTok{(Location, Location }\OperatorTok{==}\StringTok{ "Kigamboni"}\NormalTok{, }\StringTok{"Temeke"}\NormalTok{),}
+         \DataTypeTok{Location =} \KeywordTok{replace}\NormalTok{(Location, Location }\OperatorTok{==}\StringTok{ "Kibiti"}\NormalTok{, }\StringTok{"Mafia"}\NormalTok{), }
+         \DataTypeTok{Location =} \KeywordTok{replace}\NormalTok{(Location, Location }\OperatorTok{==}\StringTok{ "Lindi Rural"}\NormalTok{, }\StringTok{"Lindi"}\NormalTok{),}
+         \DataTypeTok{Location =} \KeywordTok{replace}\NormalTok{(Location, Location }\OperatorTok{==}\StringTok{ "Mtwara Rural"}\NormalTok{, }\StringTok{"Mtwara"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(Location, group) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{catch =} \KeywordTok{mean}\NormalTok{(catch, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{District =}\NormalTok{ Location)}
+
+
+\NormalTok{rumaki.districts =}\StringTok{ }\NormalTok{catch.clean.join }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{(District) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{pull}\NormalTok{()}
+
+
+\NormalTok{coastal =}\StringTok{ }\NormalTok{tz }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(District_N }\OperatorTok{%in%}\StringTok{ }\NormalTok{rumaki.districts)}
+
+\CommentTok{# coastal %>% mapview::mapview()}
+
+
+
+\NormalTok{catch.clean.join.spatial =}\StringTok{ }\NormalTok{coastal }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{District =}\NormalTok{ District_N)  }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{full_join}\NormalTok{(catch.clean.join, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"District"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{catch =} \KeywordTok{round}\NormalTok{(catch, }\DataTypeTok{digits =} \DecValTok{2}\NormalTok{),}\DataTypeTok{class =} \KeywordTok{cut}\NormalTok{(catch, }\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{400}\NormalTok{,}\DecValTok{75}\NormalTok{), }
+                     \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Below 75"}\NormalTok{, }\StringTok{"75-150"}\NormalTok{, }\StringTok{"150-225"}\NormalTok{, }\StringTok{"225-300"}\NormalTok{, }\StringTok{"above 300"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{coordinates =}\StringTok{ }\NormalTok{catch.clean.join.spatial }\OperatorTok{%>%}\StringTok{ }
+\StringTok{                  }\CommentTok{# filter(Zone == "OTHER" & group == "Tuna fish") %>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(District, group) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{st_centroid}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{st_coordinates}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{as_tibble}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{lon =} \DecValTok{1}\NormalTok{, }\DataTypeTok{lat =} \DecValTok{2}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{bind_cols}\NormalTok{(}
+\NormalTok{    catch.clean.join.spatial }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\CommentTok{# filter(Zone == "OTHER" & group == "Tuna fish") %>%}
+\StringTok{      }\KeywordTok{select}\NormalTok{(District, group) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_drop_geometry}\NormalTok{()}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{layer_spatial}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ catch.clean.join.spatial }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(Zone }\OperatorTok{==}\StringTok{ "OTHER"}\NormalTok{)}\OperatorTok{%>%}\StringTok{ }
+\StringTok{                  }\KeywordTok{st_simplify}\NormalTok{(}\DataTypeTok{dTolerance =} \FloatTok{.015}\NormalTok{),}
+                \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ class), }\DataTypeTok{col =} \OtherTok{NA}\NormalTok{)}\OperatorTok{+}
+\StringTok{   }\CommentTok{# ggrepel::geom_label_repel(data = coordinates %>% filter(lat >= -7.6), }
+\StringTok{   }\CommentTok{#                          aes(x = lon, y = lat, label = Districts),point.padding = 2.2) +}
+\StringTok{  }\KeywordTok{coord_sf}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\FloatTok{37.5}\NormalTok{,}\DecValTok{40}\NormalTok{), }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{7.6}\NormalTok{,}\OperatorTok{-}\FloatTok{4.5}\NormalTok{), }\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{group, }\DataTypeTok{nrow =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\NormalTok{ggsci}\OperatorTok{::}\KeywordTok{scale_fill_locuszoom}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\FloatTok{38.1}\NormalTok{,}\FloatTok{39.7}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{7.25}\NormalTok{,}\OperatorTok{-}\FloatTok{4.75}\NormalTok{)) }\OperatorTok{+}
+\StringTok{   }\NormalTok{cowplot}\OperatorTok{::}\KeywordTok{theme_minimal_grid}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{linetype =} \StringTok{"dotted"}\NormalTok{), }
+        \DataTypeTok{legend.position =} \StringTok{"right"}\NormalTok{, }
+        \DataTypeTok{legend.key.width =} \KeywordTok{unit}\NormalTok{(.}\DecValTok{5}\NormalTok{,}\StringTok{"cm"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{spatial-catch-variation-in-rumaki}{%
+\subsection{Spatial catch variation in Rumaki}\label{spatial-catch-variation-in-rumaki}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{layer_spatial}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ catch.clean.join.spatial }\OperatorTok{%>%}\StringTok{ }
+\StringTok{                  }\KeywordTok{drop_na}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(group }\OperatorTok{==}\StringTok{ "Octopus"}\NormalTok{),}
+          \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ catch }\OperatorTok{%>%}\KeywordTok{as.factor}\NormalTok{()), }\DataTypeTok{col =} \StringTok{"ivory"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\NormalTok{ggrepel}\OperatorTok{::}\KeywordTok{geom_label_repel}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ coordinates }\OperatorTok{%>%}\StringTok{ }
+\StringTok{                              }\KeywordTok{filter}\NormalTok{(lat }\OperatorTok{<=}\StringTok{ }\FloatTok{-6.0} \OperatorTok{&}\StringTok{ }\NormalTok{group }\OperatorTok{==}\StringTok{ "Octopus"}\NormalTok{), }
+                            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lon, }\DataTypeTok{y =}\NormalTok{ lat, }\DataTypeTok{label =}\NormalTok{ District),}
+                            \DataTypeTok{point.padding =} \FloatTok{2.2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_sf}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\FloatTok{37.5}\NormalTok{,}\FloatTok{40.5}\NormalTok{), }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{11.1}\NormalTok{,}\OperatorTok{-}\FloatTok{6.0}\NormalTok{), }\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\CommentTok{# ggsci::scale_fill_locuszoom() +}
+\StringTok{  }\NormalTok{ggsci}\OperatorTok{::}\KeywordTok{scale_fill_locuszoom}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Catch }\CharTok{\textbackslash{}n}\StringTok{(Tonnes)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{10.5}\NormalTok{,}\OperatorTok{-}\FloatTok{8.25}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\FloatTok{38.2}\NormalTok{,}\FloatTok{39.85}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\NormalTok{cowplot}\OperatorTok{::}\KeywordTok{theme_minimal_grid}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{linetype =} \DecValTok{3}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\NormalTok{ggspatial}\OperatorTok{::}\KeywordTok{annotation_scale}\NormalTok{(}\DataTypeTok{position =} \StringTok{"bl"}\NormalTok{, }\DataTypeTok{bar_cols =} \KeywordTok{c}\NormalTok{(}\StringTok{"grey"}\NormalTok{, }\StringTok{"ivory"}\NormalTok{), }\DataTypeTok{text_cex =} \FloatTok{.85}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{reanalysis_rumaki_only_files/figure-latex/fig1-1.pdf}
+\caption{\label{fig:fig1}Octopus catch variation accross Rumaki Area}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{# ggsave("fig5.png", dpi = 650)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{layer_spatial}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ catch.clean.join.spatial }\OperatorTok{%>%}\StringTok{ }
+\StringTok{                  }\KeywordTok{drop_na}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(group }\OperatorTok{==}\StringTok{ "Reef fish"}\NormalTok{),}
+          \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ catch }\OperatorTok{%>%}\KeywordTok{as.factor}\NormalTok{()), }\DataTypeTok{col =} \StringTok{"ivory"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\NormalTok{ggrepel}\OperatorTok{::}\KeywordTok{geom_label_repel}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ coordinates }\OperatorTok{%>%}\StringTok{ }
+\StringTok{                              }\KeywordTok{filter}\NormalTok{(lat }\OperatorTok{<=}\StringTok{ }\DecValTok{-6} \OperatorTok{&}\StringTok{ }\NormalTok{group }\OperatorTok{==}\StringTok{ "Octopus"}\NormalTok{), }
+                            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lon, }\DataTypeTok{y =}\NormalTok{ lat, }\DataTypeTok{label =}\NormalTok{ District),}
+                            \DataTypeTok{point.padding =} \FloatTok{2.2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_sf}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\FloatTok{37.5}\NormalTok{,}\FloatTok{40.5}\NormalTok{), }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{11.1}\NormalTok{,}\OperatorTok{-}\FloatTok{7.0}\NormalTok{), }\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\CommentTok{# ggsci::scale_fill_locuszoom() +}
+\StringTok{  }\NormalTok{ggsci}\OperatorTok{::}\KeywordTok{scale_fill_locuszoom}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Catch }\CharTok{\textbackslash{}n}\StringTok{(Tonnes)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{10.5}\NormalTok{,}\OperatorTok{-}\FloatTok{8.25}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\FloatTok{38.2}\NormalTok{,}\FloatTok{39.85}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\NormalTok{cowplot}\OperatorTok{::}\KeywordTok{theme_minimal_grid}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{linetype =} \DecValTok{3}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\NormalTok{ggspatial}\OperatorTok{::}\KeywordTok{annotation_scale}\NormalTok{(}\DataTypeTok{position =} \StringTok{"bl"}\NormalTok{, }\DataTypeTok{bar_cols =} \KeywordTok{c}\NormalTok{(}\StringTok{"grey"}\NormalTok{, }\StringTok{"ivory"}\NormalTok{), }\DataTypeTok{text_cex =} \FloatTok{.85}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{reanalysis_rumaki_only_files/figure-latex/fig2-1.pdf}
+\caption{\label{fig:fig2}Reef fish catch variation accross Rumaki Area}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{# ggsave("fig5.png", dpi = 650)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{layer_spatial}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ catch.clean.join.spatial }\OperatorTok{%>%}\StringTok{ }
+\StringTok{                  }\KeywordTok{drop_na}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(group }\OperatorTok{==}\StringTok{ "Elasmobranch"}\NormalTok{),}
+          \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ catch }\OperatorTok{%>%}\KeywordTok{as.factor}\NormalTok{()), }\DataTypeTok{col =} \StringTok{"ivory"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\NormalTok{ggrepel}\OperatorTok{::}\KeywordTok{geom_label_repel}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ coordinates }\OperatorTok{%>%}\StringTok{ }
+\StringTok{                              }\KeywordTok{filter}\NormalTok{(lat }\OperatorTok{<=}\StringTok{ }\DecValTok{-6} \OperatorTok{&}\StringTok{ }\NormalTok{group }\OperatorTok{==}\StringTok{ "Octopus"}\NormalTok{), }
+                            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lon, }\DataTypeTok{y =}\NormalTok{ lat, }\DataTypeTok{label =}\NormalTok{ District),}
+                            \DataTypeTok{point.padding =} \FloatTok{2.2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_sf}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\FloatTok{37.5}\NormalTok{,}\FloatTok{40.5}\NormalTok{), }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{11.1}\NormalTok{,}\OperatorTok{-}\FloatTok{7.5}\NormalTok{), }\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\CommentTok{# ggsci::scale_fill_locuszoom() +}
+\StringTok{  }\NormalTok{ggsci}\OperatorTok{::}\KeywordTok{scale_fill_locuszoom}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Catch }\CharTok{\textbackslash{}n}\StringTok{(Tonnes)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{10.5}\NormalTok{,}\OperatorTok{-}\FloatTok{8.25}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\FloatTok{38.2}\NormalTok{,}\FloatTok{39.85}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\NormalTok{cowplot}\OperatorTok{::}\KeywordTok{theme_minimal_grid}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{linetype =} \DecValTok{3}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\NormalTok{ggspatial}\OperatorTok{::}\KeywordTok{annotation_scale}\NormalTok{(}\DataTypeTok{position =} \StringTok{"bl"}\NormalTok{, }\DataTypeTok{bar_cols =} \KeywordTok{c}\NormalTok{(}\StringTok{"grey"}\NormalTok{, }\StringTok{"ivory"}\NormalTok{), }\DataTypeTok{text_cex =} \FloatTok{.85}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{reanalysis_rumaki_only_files/figure-latex/fig3-1.pdf}
+\caption{\label{fig:fig3}Elasmobrach catch variation accross Rumaki Area}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{# ggsave("fig5.png", dpi = 650)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{layer_spatial}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ catch.clean.join.spatial }\OperatorTok{%>%}\StringTok{ }
+\StringTok{                  }\KeywordTok{drop_na}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(group }\OperatorTok{==}\StringTok{ "Small pelagic"}\NormalTok{),}
+          \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ catch }\OperatorTok{%>%}\KeywordTok{as.factor}\NormalTok{()), }\DataTypeTok{col =} \StringTok{"ivory"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\NormalTok{ggrepel}\OperatorTok{::}\KeywordTok{geom_label_repel}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ coordinates }\OperatorTok{%>%}\StringTok{ }
+\StringTok{                              }\KeywordTok{filter}\NormalTok{(lat }\OperatorTok{<=}\StringTok{ }\DecValTok{-6} \OperatorTok{&}\StringTok{ }\NormalTok{group }\OperatorTok{==}\StringTok{ "Octopus"}\NormalTok{), }
+                            \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ lon, }\DataTypeTok{y =}\NormalTok{ lat, }\DataTypeTok{label =}\NormalTok{ District),}
+                            \DataTypeTok{point.padding =} \FloatTok{2.2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_sf}\NormalTok{(}\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\FloatTok{37.5}\NormalTok{,}\FloatTok{40.5}\NormalTok{), }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{11.1}\NormalTok{,}\OperatorTok{-}\DecValTok{7}\NormalTok{), }\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\CommentTok{# ggsci::scale_fill_locuszoom() +}
+\StringTok{  }\NormalTok{ggsci}\OperatorTok{::}\KeywordTok{scale_fill_locuszoom}\NormalTok{(}\DataTypeTok{name =} \StringTok{"Catch }\CharTok{\textbackslash{}n}\StringTok{(Tonnes)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{10.5}\NormalTok{,}\OperatorTok{-}\FloatTok{8.25}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\FloatTok{38.2}\NormalTok{,}\FloatTok{39.85}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\NormalTok{cowplot}\OperatorTok{::}\KeywordTok{theme_minimal_grid}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{linetype =} \DecValTok{3}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\NormalTok{ggspatial}\OperatorTok{::}\KeywordTok{annotation_scale}\NormalTok{(}\DataTypeTok{position =} \StringTok{"bl"}\NormalTok{, }\DataTypeTok{bar_cols =} \KeywordTok{c}\NormalTok{(}\StringTok{"grey"}\NormalTok{, }\StringTok{"ivory"}\NormalTok{), }\DataTypeTok{text_cex =} \FloatTok{.85}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{reanalysis_rumaki_only_files/figure-latex/fig104-1.pdf}
+\caption{\label{fig:fig104}Small pelagic catch variation accross Rumaki Area}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{# ggsave("fig5.png", dpi = 650)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{catch.clean.group.outlierfree =}\StringTok{ }\NormalTok{catch.clean.group.outlierfree }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{Districts =}\NormalTok{ Location)}
+
+\NormalTok{catch.clean.group.outlierfree =}\StringTok{ }\NormalTok{catch.clean.group.outlierfree }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "January"}\NormalTok{,}\DecValTok{1}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "February"}\NormalTok{,}\DecValTok{2}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "March"}\NormalTok{,}\DecValTok{3}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "April"}\NormalTok{,}\DecValTok{4}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "May"}\NormalTok{,}\DecValTok{5}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "June"}\NormalTok{,}\DecValTok{6}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "July"}\NormalTok{,}\DecValTok{7}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "August"}\NormalTok{,}\DecValTok{8}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "Augast"}\NormalTok{,}\DecValTok{8}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "September"}\NormalTok{,}\DecValTok{9}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "september"}\NormalTok{,}\DecValTok{9}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "October"}\NormalTok{,}\DecValTok{10}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "November"}\NormalTok{,}\DecValTok{11}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "December"}\NormalTok{,}\DecValTok{12}\NormalTok{),}
+         \DataTypeTok{Month =} \KeywordTok{replace}\NormalTok{(Month, Month}\OperatorTok{==}\StringTok{ "december"}\NormalTok{,}\DecValTok{12}\NormalTok{),}
+         \DataTypeTok{Month =}\NormalTok{ Month }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.integer}\NormalTok{(),}
+         \DataTypeTok{Day =} \DecValTok{14}\NormalTok{, }
+         \DataTypeTok{date =}\NormalTok{ lubridate}\OperatorTok{::}\KeywordTok{make_date}\NormalTok{(}\DataTypeTok{year =}\NormalTok{ Year, }\DataTypeTok{month =}\NormalTok{ Month, }\DataTypeTok{day =}\NormalTok{ Day))}
+
+\CommentTok{# catch.clean.group.outlierfree %>% distinct(Month)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{regression-and-correlation-of-annual-fish-catches-over-study-period}{%
+\subsection{Regression and correlation of annual fish catches over study period}\label{regression-and-correlation-of-annual-fish-catches-over-study-period}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{formula1 <-}\StringTok{ }\NormalTok{y }\OperatorTok{~}\StringTok{ }\NormalTok{x}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ catch.clean.group.outlierfree , }
+       \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ date }\OperatorTok{%>%}\KeywordTok{as.numeric}\NormalTok{() , }\DataTypeTok{y =}\NormalTok{ catch, }\DataTypeTok{col =}\NormalTok{ Districts, }\DataTypeTok{fill =}\NormalTok{ Districts))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{se =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{.2}\NormalTok{, }\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{, }\DataTypeTok{formula =}\NormalTok{ formula1)}\OperatorTok{+}
+\StringTok{  }\CommentTok{# ggpmisc::stat_fit_tb(method = "lm",}
+\StringTok{  }\CommentTok{#             method.args = list(formula = formula1),}
+\StringTok{  }\CommentTok{#             tb.vars = c(Parameter = "term", }
+\StringTok{  }\CommentTok{#                         Estimate = "estimate", }
+\StringTok{  }\CommentTok{#                         "s.e." = "std.error", }
+\StringTok{  }\CommentTok{#                         "italic(t)" = "statistic", }
+\StringTok{  }\CommentTok{#                         "italic(P)" = "p.value"),}
+\StringTok{  }\CommentTok{#             label.y = "top", label.x = "right",}
+\StringTok{  }\CommentTok{#             parse = TRUE)+}
+\StringTok{  }\NormalTok{ggpmisc}\OperatorTok{::}\KeywordTok{stat_poly_eq}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"atop("}\NormalTok{, ..eq.label.., }\StringTok{","}\NormalTok{, ..rr.label.., }\StringTok{")"}\NormalTok{)), }
+               \DataTypeTok{formula =}\NormalTok{ formula1, }\DataTypeTok{rr.digits =} \DecValTok{2}\NormalTok{,}
+               \DataTypeTok{parse =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\CommentTok{# ggrepel::geom_text_repel(data = now, aes(x = date, y = catch, label = label)) +}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\DecValTok{17200}\NormalTok{,}\DecValTok{17600}\NormalTok{,}\DecValTok{18000}\NormalTok{),}\DataTypeTok{labels =}  \KeywordTok{c}\NormalTok{(}\DecValTok{2017}\NormalTok{,}\DecValTok{2018}\NormalTok{,}\DecValTok{2019}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\CommentTok{# scale_y_continuous(breaks = seq(100,600,100))+}
+\StringTok{  }\NormalTok{cowplot}\OperatorTok{::}\KeywordTok{theme_minimal_grid}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{linetype =} \StringTok{"dotted"}\NormalTok{), }\DataTypeTok{legend.position =} \StringTok{"none"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{Districts)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Fish catch (Tonnes)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{reanalysis_rumaki_only_files/figure-latex/fig11-1.pdf}
+\caption{\label{fig:fig11}District in Rumaki areas with relatively stable annual catches}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ggsave("fig9.png", dpi = 650)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{catches-of-common-fish-groups}{%
+\subsection{Catches of common fish groups}\label{catches-of-common-fish-groups}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{catch.clean.group.outlierfree }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Year }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as_factor}\NormalTok{(), }\DataTypeTok{y =}\NormalTok{ catch, }\DataTypeTok{fill =}\NormalTok{ Districts, }\DataTypeTok{col =}\NormalTok{ Districts))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.4}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{group, }\DataTypeTok{scales =} \StringTok{"free_y"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\NormalTok{cowplot}\OperatorTok{::}\KeywordTok{theme_minimal_grid}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{linetype =} \StringTok{"dotted"}\NormalTok{), }\DataTypeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Fish catch (Tonnes)"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_fill_discrete}\NormalTok{(}\DataTypeTok{name =} \StringTok{""}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_discrete}\NormalTok{(}\DataTypeTok{name =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{reanalysis_rumaki_only_files/figure-latex/fig15-1.pdf}
+\caption{\label{fig:fig15}Catches of four common fish group in Rumaki area}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ggsave("fig13.png", dpi = 650)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{catch.zone =}\StringTok{ }\NormalTok{catch.clean.group.outlierfree }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Year, group) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{catch.mean =} \KeywordTok{mean}\NormalTok{(catch, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+            \DataTypeTok{catch.median =} \KeywordTok{median}\NormalTok{(catch, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+            \DataTypeTok{catch.sd =} \KeywordTok{sd}\NormalTok{(catch, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+            \DataTypeTok{catch.se =}\NormalTok{ catch.sd}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }
+
+\NormalTok{catch.zone }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Year, }\DataTypeTok{y =}\NormalTok{ catch.median,}\DataTypeTok{col =}\NormalTok{ group)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_errorbar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{ymin =}\NormalTok{ catch.median }\OperatorTok{-}\StringTok{ }\NormalTok{catch.se, }
+                    \DataTypeTok{ymax =}\NormalTok{ catch.median }\OperatorTok{+}\StringTok{ }\NormalTok{catch.se), }\DataTypeTok{width =} \FloatTok{0.075}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{3}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\CommentTok{# facet_wrap(~group, strip.position = "top" )+}
+\StringTok{  }\NormalTok{cowplot}\OperatorTok{::}\KeywordTok{theme_minimal_grid}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{linetype =} \StringTok{"dotted"}\NormalTok{), }
+        \DataTypeTok{legend.position =} \StringTok{"none"}\NormalTok{, }
+        \DataTypeTok{legend.key.width =} \KeywordTok{unit}\NormalTok{(}\DecValTok{2}\NormalTok{,}\StringTok{"cm"}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Total Catch (Tonnes)"}\NormalTok{)}\OperatorTok{+}
+\StringTok{   }\NormalTok{ggsci}\OperatorTok{::}\KeywordTok{scale_color_d3}\NormalTok{(}\DataTypeTok{name =} \StringTok{""}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{group, }\DataTypeTok{scales =} \StringTok{"free_y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{reanalysis_rumaki_only_files/figure-latex/fig16-1.pdf}
+\caption{\label{fig:fig16}Catches pooled for the four common fish group in Rumaki area}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ggsave("fig14.png", dpi = 650)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{catch.stats =}\StringTok{ }\NormalTok{catch.clean.group.outlierfree }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(Year,Districts, group) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{n =} \KeywordTok{n}\NormalTok{(),}
+            \DataTypeTok{catch.mean =} \KeywordTok{mean}\NormalTok{(catch, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+            \DataTypeTok{catch.median =} \KeywordTok{median}\NormalTok{(catch, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+            \DataTypeTok{catch.sd =} \KeywordTok{sd}\NormalTok{(catch, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+            \DataTypeTok{catch.se =}\NormalTok{ catch.sd}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }
+
+
+\NormalTok{catch.stats }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Year, }\DataTypeTok{y =}\NormalTok{ catch.median, }\DataTypeTok{col =}\NormalTok{ group)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_errorbar}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{ymin =}\NormalTok{ catch.median }\OperatorTok{-}\StringTok{ }\NormalTok{catch.se, }
+                    \DataTypeTok{ymax =}\NormalTok{ catch.median }\OperatorTok{+}\StringTok{ }\NormalTok{catch.se), }\DataTypeTok{width =} \FloatTok{0.075}\NormalTok{)}\OperatorTok{+}\StringTok{  }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{3}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{Districts, }\DataTypeTok{strip.position =} \StringTok{"top"}\NormalTok{, }\DataTypeTok{scales =} \StringTok{"free_y"}\NormalTok{ )}\OperatorTok{+}
+\StringTok{  }\NormalTok{cowplot}\OperatorTok{::}\KeywordTok{theme_minimal_grid}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{linetype =} \StringTok{"dotted"}\NormalTok{), }
+        \DataTypeTok{legend.position =} \StringTok{"right"}\NormalTok{, }
+        \DataTypeTok{legend.key.width =} \KeywordTok{unit}\NormalTok{(}\FloatTok{1.2}\NormalTok{,}\StringTok{"cm"}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Total Catch (Tonnes)"}\NormalTok{)}\OperatorTok{+}
+\StringTok{   }\NormalTok{ggsci}\OperatorTok{::}\KeywordTok{scale_color_d3}\NormalTok{(}\DataTypeTok{name =} \StringTok{""}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \DecValTok{2016}\OperatorTok{:}\DecValTok{2020}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{reanalysis_rumaki_only_files/figure-latex/fig17-1.pdf}
+\caption{\label{fig:fig17}Mean Catches and standard error for the four common fish group in Rumaki area}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ggsave("fig15.png", dpi = 650)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{percentage.rumaki =}\StringTok{ }\NormalTok{catch.stats }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\DataTypeTok{year =}\NormalTok{ Year, Districts, group, catch.median) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{day =} \DecValTok{15}\NormalTok{, }\DataTypeTok{month =} \DecValTok{6}\NormalTok{, }\DataTypeTok{date =}\NormalTok{ lubridate}\OperatorTok{::}\KeywordTok{make_date}\NormalTok{(year, month, day)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{spread}\NormalTok{(}\DataTypeTok{key =}\NormalTok{ group, }\DataTypeTok{value =}\NormalTok{ catch.median) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(date) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\KeywordTok{c}\NormalTok{(day, month)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(date, }\KeywordTok{everything}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# filter(zone == "RUMAKI")%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{octopus.lead =}\NormalTok{ Octopus}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(Octopus, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}\OperatorTok{*}\DecValTok{100}\NormalTok{,}
+         \DataTypeTok{reef.lead =} \StringTok{`}\DataTypeTok{Reef fish}\StringTok{`}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(}\StringTok{`}\DataTypeTok{Reef fish}\StringTok{`}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}\OperatorTok{*}\DecValTok{100}\NormalTok{,}
+         \DataTypeTok{pelagic.lead =} \StringTok{`}\DataTypeTok{Small pelagic}\StringTok{`}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(}\StringTok{`}\DataTypeTok{Small pelagic}\StringTok{`}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}\OperatorTok{*}\DecValTok{100}\NormalTok{,}
+         \DataTypeTok{tuna.lead =} \StringTok{`}\DataTypeTok{Tuna fish}\StringTok{`}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(}\StringTok{`}\DataTypeTok{Tuna fish}\StringTok{`}\NormalTok{, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}\OperatorTok{*}\DecValTok{100}\NormalTok{,}
+         \DataTypeTok{elasmobranch =}\NormalTok{ Elasmobranch}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(Elasmobranch, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}\OperatorTok{*}\DecValTok{100}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(date, year, Districts, }\DataTypeTok{Octopus =}\NormalTok{ octopus.lead, }\DataTypeTok{Reef =}\NormalTok{ reef.lead, }
+         \DataTypeTok{Pelagic =}\NormalTok{ pelagic.lead, }\DataTypeTok{Tuna =}\NormalTok{ tuna.lead, }\DataTypeTok{Elasmobranch =}\NormalTok{ elasmobranch) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{pivot_longer}\NormalTok{(}\DataTypeTok{cols =} \DecValTok{4}\OperatorTok{:}\DecValTok{8}\NormalTok{, }\DataTypeTok{names_to =} \StringTok{"group"}\NormalTok{)}
+
+
+
+\NormalTok{percentage.rumaki }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ year, }\DataTypeTok{y =}\NormalTok{ value, }\DataTypeTok{col =}\NormalTok{ group)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{3}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{Districts, }\DataTypeTok{strip.position =} \OtherTok{NULL}\NormalTok{, }\DataTypeTok{scales =} \StringTok{"free_y"}\NormalTok{ )}\OperatorTok{+}
+\StringTok{  }\NormalTok{cowplot}\OperatorTok{::}\KeywordTok{theme_minimal_grid}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_line}\NormalTok{(}\DataTypeTok{linetype =} \StringTok{"dotted"}\NormalTok{), }
+        \DataTypeTok{legend.position =} \StringTok{"right"}\NormalTok{, }
+        \DataTypeTok{legend.key.width =} \KeywordTok{unit}\NormalTok{(}\FloatTok{1.2}\NormalTok{,}\StringTok{"cm"}\NormalTok{))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Catch Rate (%)"}\NormalTok{)}\OperatorTok{+}
+\StringTok{   }\NormalTok{ggsci}\OperatorTok{::}\KeywordTok{scale_color_d3}\NormalTok{(}\DataTypeTok{name =} \StringTok{""}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \DecValTok{2014}\OperatorTok{:}\DecValTok{2020}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{reanalysis_rumaki_only_files/figure-latex/fig20-1.pdf}
+\caption{\label{fig:fig20}Rate of change of catches in percentage for Rumaki area}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# ggsave("fig18.png", dpi = 650)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{references}{%
+\subsection{references}\label{references}}
+
+\end{document}

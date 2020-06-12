@@ -1,0 +1,4 @@
+"0","catch.clean.group = catch.clean %>% "
+"0","  group_by(Location, date) %>% "
+"0","  summarise(catch = median(catch, na.rm = TRUE)) %>%"
+"0","  ungroup() "

@@ -1,0 +1,25 @@
+"0","tz = st_read(""e:/GIS/tanzania-latest.shp/nbs/Districts.shp"")"
+"1","Reading layer `"
+"1","Districts"
+"1","' from data source `"
+"1","e:\GIS\tanzania-latest.shp\nbs\Districts.shp"
+"1","' using driver `"
+"1","ESRI Shapefile"
+"1","'"
+"1","
+"
+"1","Simple feature collection with 169 features and 2 fields"
+"1","
+"
+"1","geometry type:  MULTIPOLYGON
+"
+"1","dimension:      XY
+"
+"1","bbox:           "
+"1","xmin: 29.3794 ymin: -11.76073 xmax: 40.44382 ymax: -0.9805261"
+"1","
+"
+"1","epsg (SRID):    NA
+"
+"1","proj4string:    +proj=longlat +ellps=clrk80 +no_defs
+"

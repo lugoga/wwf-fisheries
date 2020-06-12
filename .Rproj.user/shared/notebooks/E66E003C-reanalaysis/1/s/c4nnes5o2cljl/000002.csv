@@ -1,0 +1,19 @@
+"0","species = read_csv(""./data_update/All data combined_cleaned.csv"")"
+"2","Parsed with column specification:
+cols(
+  Year = [32mcol_double()[39m,
+  Family = [31mcol_character()[39m,
+  Eng_name = [31mcol_character()[39m,
+  `Swahil-_name` = [31mcol_character()[39m,
+  Districts = [31mcol_character()[39m,
+  `Catch(t)` = [31mcol_character()[39m,
+  Zone = [31mcol_character()[39m
+)
+"
+"2","1 parsing failure.
+ row  col               expected      actual                                          file
+1968 Year no trailing characters +O31J3:O130 './data_update/All data combined_cleaned.csv'
+"
+"0","species = species %>% separate(Eng_name, c(""Genus"", ""Species""), sep = "" "", remove = FALSE)"
+"2","Expected 2 pieces. Missing pieces filled with `NA` in 78 rows [6, 36, 67, 125, 157, 189, 220, 251, 282, 312, 343, 374, 405, 438, 471, 502, 533, 562, 594, 626, ...]."
+"0","species %>% distinct(Genus) %>% arrange(Genus)"
